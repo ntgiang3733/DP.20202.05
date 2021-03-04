@@ -51,7 +51,7 @@ public class MediaDAO {
         return null;
     }
 
-
+    //stamp coupling: truyen tham so Object
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){

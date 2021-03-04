@@ -8,7 +8,7 @@ public class OrderItem {
     private int price;
     private int quantity;
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // stamp coupling: truyen doi tuong Media
     public OrderItem(Media media, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -28,6 +28,7 @@ public class OrderItem {
         return this.media;
     }
 
+    // stamp coupling: truyen doi tuong Media
     public void setMedia(Media media) {
         this.media = media;
     }

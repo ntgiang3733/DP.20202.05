@@ -18,7 +18,7 @@ public class BaseController {
      * @return CartMedia or null
      */
     public CartItem checkMediaInCart(Media media){
-        return SessionInformation.cartInstance.checkMediaInCart(media);
+        return SessionInformation.cartInstance.checkMediaInCart(media); //common coupling: dung bien toan cuc cartInstance
     }
 
     /**
@@ -26,6 +26,6 @@ public class BaseController {
      * @return List[CartMedia]
      */
     public List getListCartMedia(){
-        return SessionInformation.cartInstance.getListMedia();
+        return SessionInformation.cartInstance.getListMedia();//common coupling: dung bien toan cuc cartInstance
     }
 }

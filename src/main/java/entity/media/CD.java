@@ -60,6 +60,7 @@ public class CD extends Media {
         return this.releasedDate;
     }
 
+    //stamp coupling: truyen doi tuong Date
     public CD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;

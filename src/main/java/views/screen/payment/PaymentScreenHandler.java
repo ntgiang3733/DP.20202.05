@@ -44,6 +44,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	@FXML
 	private TextField securityCode;
 
+	 // stamp coupling: truyen doi tuong Stage, Invoice
 	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -58,6 +59,7 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 		}
 	}
 
+	 // stamp coupling: truyen doi tuong Object
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
 	}

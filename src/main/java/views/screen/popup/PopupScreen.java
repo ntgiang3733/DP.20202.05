@@ -21,6 +21,7 @@ public class PopupScreen extends BaseScreenHandler {
     @FXML
     Label message;
 
+    // stamp coupling: truyen doi tuong Stage
     public PopupScreen(Stage stage) throws IOException{
         super(stage, ViewsConfig.POPUP_PATH);
     }
@@ -74,6 +75,7 @@ public class PopupScreen extends BaseScreenHandler {
         delay.play();
     }
 
+    // stamp coupling: truyen doi tuong Object
     protected void setupData(Object dto) throws Exception {
     }
 

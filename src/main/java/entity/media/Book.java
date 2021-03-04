@@ -75,6 +75,7 @@ public class Book extends Media {
         return this.publishDate;
     }
 
+    //stamp coupling: truyen doi tuong Date
     public Book setPublishDate(Date publishDate) {
         this.publishDate = publishDate;
         return this;

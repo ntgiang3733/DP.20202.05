@@ -53,6 +53,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Button btnPlaceOrder;
 
+	 // stamp coupling: truyen doi tuong Stage
 	public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -95,6 +96,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		return (ViewCartController) super.getBController();
 	}
 
+	 // stamp coupling: truyen doi tuong BaseScreenHandler
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
 		setPreviousScreen(prevScreen);
 		setScreenTitle("Cart Screen");

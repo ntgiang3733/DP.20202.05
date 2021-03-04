@@ -22,6 +22,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
+	 // stamp coupling: truyen doi tuong CreditCard
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
@@ -48,8 +49,8 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
-    // coupling: control -> phụ thuộc vào thuộc tính 'errorCode' của tham số responseText sau khi đc convert về json
+    // coupling: data -> chá»‰ phá»¥ thuá»™c vÃ o má»™t sá»‘ tham sá»‘
+    // coupling: control -> phá»¥ thuá»™c vÃ o thuá»™c tÃ­nh 'errorCode' cá»§a tham sá»‘ responseText sau khi Ä‘c convert vá»� json
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -99,7 +100,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chá»‰ phá»¥ thuá»™c vÃ o má»™t sá»‘ tham sá»‘
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

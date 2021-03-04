@@ -60,12 +60,14 @@ public class MediaHandler extends FXMLScreenHandler {
 	private Spinner<Integer> spinner;
 	private CartScreenHandler cartScreen;
 
+	 // stamp coupling: truyen doi tuong CartScreenHandler
 	public MediaHandler(String screenPath, CartScreenHandler cartScreen) throws IOException {
 		super(screenPath);
 		this.cartScreen = cartScreen;
 		hboxMedia.setAlignment(Pos.CENTER);
 	}
 	
+	 // stamp coupling: truyen doi tuong CartItem
 	public void setCartItem(CartItem cartItem) {
 		this.cartItem = cartItem;
 		setMediaInfo();

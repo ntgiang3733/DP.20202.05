@@ -12,6 +12,7 @@ public class CartItem {
 
     }
 
+    //stamp coupling: truyen doi tuong Media, Cart
     public CartItem(Media media, Cart cart, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -21,7 +22,8 @@ public class CartItem {
     public Media getMedia() {
         return this.media;
     }
-
+    
+    //stamp coupling: truyen doi tuong Media
     public void setMedia(Media media) {
         this.media = media;
     }
