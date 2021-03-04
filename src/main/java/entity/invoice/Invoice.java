@@ -22,7 +22,7 @@ public class Invoice {
 
     public void setAmount(int amount) {
         this.amount = amount;
-    }
+    } //data
 
     public int getAmount() {
         return amount;

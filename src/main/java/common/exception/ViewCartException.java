@@ -16,6 +16,6 @@ public class ViewCartException extends AimsException {
 
 	public ViewCartException(String message) {
 		super(message);
-	}
+	}//data
 
 }
