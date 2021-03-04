@@ -86,6 +86,7 @@ public class DVD extends Media {
         return this.releasedDate;
     }
 
+  //stamp coupling: truyen doi tuong Date
     public DVD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
