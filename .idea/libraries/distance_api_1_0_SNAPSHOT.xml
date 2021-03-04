@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="distance-api-1.0-SNAPSHOT">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/distance-api-1.0-SNAPSHOT.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/sqlite-jdbc-3.7.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/sqlite-jdbc-3.7.2.jar!/" />
+    </SOURCES>
+  </library>
+</component>
