@@ -48,7 +48,8 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // data - control
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: control -> phụ thuộc vào thuộc tính 'errorCode' của tham số responseText sau khi đc convert về json
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -98,7 +99,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // data
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

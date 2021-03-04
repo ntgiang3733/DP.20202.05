@@ -14,8 +14,9 @@ public class MediaNotAvailableException extends AimsException {
 
 	}
 
+	// coupling: data -> chỉ phụ thuộc vào 1 tham số
 	public MediaNotAvailableException(String message) {
 		super(message);
-	} //data
+	}
 
 }

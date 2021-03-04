@@ -8,7 +8,7 @@ public class PaymentTransaction {
 	private int amount;
 	private String createdAt;
 
-	// data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();

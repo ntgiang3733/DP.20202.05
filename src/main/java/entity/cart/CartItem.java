@@ -30,7 +30,7 @@ public class CartItem {
         return this.quantity;
     }
 
-    // data
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -39,7 +39,7 @@ public class CartItem {
         return this.price;
     }
 
-    // data
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     public void setPrice(int price) {
         this.price = price;
     }

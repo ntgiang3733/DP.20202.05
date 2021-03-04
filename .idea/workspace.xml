@@ -5,9 +5,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="d5cdb911-4881-4355-9a1d-29aac69e3944" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/lib/linux/javafx-sdk-15/javafx-sdk-15.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/InvalidDeliveryInfoException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/InvalidDeliveryInfoException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/MediaNotAvailableException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/MediaNotAvailableException.java" afterDir="false" />
@@ -15,13 +12,19 @@
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/PaymentException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/PaymentException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/PlaceOrderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/PlaceOrderException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/PlaceRushOrderException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/PlaceRushOrderException.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/ProcessInvoiceException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/ProcessInvoiceException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/common/exception/ViewCartException.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/common/exception/ViewCartException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/controller/PaymentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/controller/PaymentController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/media/BookDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/media/BookDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/media/CDDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/media/CDDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/media/DVDDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/media/DVDDAO.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/dao/media/MediaDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/dao/media/MediaDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/cart/CartItem.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/cart/CartItem.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/media/Book.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/media/Book.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/media/CD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/media/CD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/media/DVD.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/media/DVD.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/media/Media.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/media/Media.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/entity/payment/CreditCard.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/entity/payment/CreditCard.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/views/screen/cart/CartScreenHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/views/screen/cart/CartScreenHandler.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +92,7 @@
       <workItem from="1614856129385" duration="281000" />
       <workItem from="1614856419313" duration="12000" />
       <workItem from="1614856625794" duration="5000" />
-      <workItem from="1614864034605" duration="2603000" />
+      <workItem from="1614864034605" duration="4919000" />
     </task>
     <servers />
   </component>

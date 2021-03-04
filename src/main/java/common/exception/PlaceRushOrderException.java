@@ -14,8 +14,9 @@ public class PlaceRushOrderException extends AimsException {
 
 	}
 
+	// coupling: data -> phụ thuộc vào 1 tham số
 	public PlaceRushOrderException(String message) {
 		super(message);
-	} //data
+	}
 
 }

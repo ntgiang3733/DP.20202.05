@@ -19,7 +19,7 @@ public class DVD extends Media {
 
     }
 
-    // data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
             String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -36,7 +36,7 @@ public class DVD extends Media {
         return this.discType;
     }
 
-    // data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setDiscType(String discType) {
         this.discType = discType;
         return this;
@@ -46,7 +46,7 @@ public class DVD extends Media {
         return this.director;
     }
 
-    // data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setDirector(String director) {
         this.director = director;
         return this;
@@ -56,7 +56,7 @@ public class DVD extends Media {
         return this.runtime;
     }
 
-    // data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setRuntime(int runtime) {
         this.runtime = runtime;
         return this;
@@ -66,7 +66,7 @@ public class DVD extends Media {
         return this.studio;
     }
 
-    // data
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setStudio(String studio) {
         this.studio = studio;
         return this;
@@ -75,8 +75,8 @@ public class DVD extends Media {
     public String getSubtitles() {
         return this.subtitles;
     }
-
-    // data
+    
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setSubtitles(String subtitles) {
         this.subtitles = subtitles;
         return this;
@@ -95,7 +95,8 @@ public class DVD extends Media {
         return this.filmType;
     }
 
-    // data
+    
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setFilmType(String filmType) {
         this.filmType = filmType;
         return this;

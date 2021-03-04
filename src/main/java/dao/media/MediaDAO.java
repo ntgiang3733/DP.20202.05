@@ -32,7 +32,7 @@ public class MediaDAO {
         return medium;
     }
 
-    // data
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();

@@ -14,8 +14,9 @@ public class ViewCartException extends AimsException {
 
 	}
 
+	// coupling: data -> chỉ phụ thuộc vào 1 tham số
 	public ViewCartException(String message) {
 		super(message);
-	}  //data
+	}
 
 }

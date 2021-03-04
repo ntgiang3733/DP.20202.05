@@ -14,8 +14,9 @@ public class InvalidDeliveryInfoException extends AimsException {
 
 	}
 
+	// coupling: data -> chỉ phụ thuộc vào 1 tham số
 	public InvalidDeliveryInfoException(String message) {
 		super(message);
-	} // data
+	}
 
 }
