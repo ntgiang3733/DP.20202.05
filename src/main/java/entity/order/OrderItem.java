@@ -1,0 +1,53 @@
+package entity.order;
+
+import entity.media.Media;
+
+public class OrderItem {
+    
+    private Media media;
+    private int price;
+    private int quantity;
+
+    // data
+    public OrderItem(Media media, int quantity, int price) {
+        this.media = media;
+        this.quantity = quantity;
+        this.price = price;
+    }
+    
+    @Override
+    public String toString() {
+        return "{" +
+            "  media='" + media + "'" +
+            ", quantity='" + quantity + "'" +
+            ", price='" + price + "'" +
+            "}";
+    }
+    
+    public Media getMedia() {
+        return this.media;
+    }
+
+    public void setMedia(Media media) {
+        this.media = media;
+    }
+
+    public int getQuantity() {
+        return this.quantity;
+    }
+
+    // data
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public int getPrice() {
+        return this.price;
+    }
+
+    // data
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+}
