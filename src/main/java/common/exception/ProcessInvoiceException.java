@@ -16,6 +16,6 @@ public class ProcessInvoiceException extends AimsException {
 
 	public ProcessInvoiceException(String message) {
 		super(message);
-	}
+	}  //data
 
 }

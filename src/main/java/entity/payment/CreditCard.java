@@ -10,6 +10,7 @@ public class CreditCard {
     private String dateExpired;
     protected int cvvCode;
 
+    // data
     public CreditCard(String cardCode, String owner, String dateExpired, int cvvCode) {
         this.cardCode = cardCode;
         this.owner = owner;

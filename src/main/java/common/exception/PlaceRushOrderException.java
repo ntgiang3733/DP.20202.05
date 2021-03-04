@@ -16,6 +16,6 @@ public class PlaceRushOrderException extends AimsException {
 
 	public PlaceRushOrderException(String message) {
 		super(message);
-	}
+	} //data
 
 }

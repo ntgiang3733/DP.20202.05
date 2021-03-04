@@ -16,6 +16,6 @@ public class MediaNotAvailableException extends AimsException {
 
 	public MediaNotAvailableException(String message) {
 		super(message);
-	}
+	} //data
 
 }

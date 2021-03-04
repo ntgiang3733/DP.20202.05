@@ -16,6 +16,7 @@ public class CD extends Media {
 
     }
 
+    // data
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
             String recordLabel, String musicType, Date releasedDate) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -29,6 +30,7 @@ public class CD extends Media {
         return this.artist;
     }
 
+    // data
     public CD setArtist(String artist) {
         this.artist = artist;
         return this;
@@ -38,6 +40,7 @@ public class CD extends Media {
         return this.recordLabel;
     }
 
+    // data
     public CD setRecordLabel(String recordLabel) {
         this.recordLabel = recordLabel;
         return this;
@@ -47,6 +50,7 @@ public class CD extends Media {
         return this.musicType;
     }
 
+    // data
     public CD setMusicType(String musicType) {
         this.musicType = musicType;
         return this;

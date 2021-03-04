@@ -8,6 +8,7 @@ public class OrderItem {
     private int price;
     private int quantity;
 
+    // data
     public OrderItem(Media media, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -35,6 +36,7 @@ public class OrderItem {
         return this.quantity;
     }
 
+    // data
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -43,6 +45,7 @@ public class OrderItem {
         return this.price;
     }
 
+    // data
     public void setPrice(int price) {
         this.price = price;
     }

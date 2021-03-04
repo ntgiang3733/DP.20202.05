@@ -22,6 +22,7 @@ public class Book extends Media {
 
     }
 
+    // data
     public Book(int id, String title, String category, int price, int quantity, String type, String author,
             String coverType, String publisher, Date publishDate, int numOfPages, String language,
             String bookCategory) throws SQLException{
@@ -44,6 +45,7 @@ public class Book extends Media {
         return this.author;
     }
 
+    // data
     public Book setAuthor(String author) {
         this.author = author;
         return this;
@@ -53,6 +55,7 @@ public class Book extends Media {
         return this.coverType;
     }
 
+    // data
     public Book setCoverType(String coverType) {
         this.coverType = coverType;
         return this;
@@ -62,6 +65,7 @@ public class Book extends Media {
         return this.publisher;
     }
 
+    // data
     public Book setPublisher(String publisher) {
         this.publisher = publisher;
         return this;
@@ -80,6 +84,7 @@ public class Book extends Media {
         return this.numOfPages;
     }
 
+    // data
     public Book setNumOfPages(int numOfPages) {
         this.numOfPages = numOfPages;
         return this;
@@ -89,6 +94,7 @@ public class Book extends Media {
         return this.language;
     }
 
+    // data
     public Book setLanguage(String language) {
         this.language = language;
         return this;
@@ -98,6 +104,7 @@ public class Book extends Media {
         return this.bookCategory;
     }
 
+    // data
     public Book setBookCategory(String bookCategory) {
         this.bookCategory = bookCategory;
         return this;

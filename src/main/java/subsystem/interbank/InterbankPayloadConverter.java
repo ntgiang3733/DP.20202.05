@@ -48,6 +48,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // data - control
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -97,6 +98,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // data
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

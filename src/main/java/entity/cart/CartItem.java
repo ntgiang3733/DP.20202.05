@@ -30,6 +30,7 @@ public class CartItem {
         return this.quantity;
     }
 
+    // data
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -38,6 +39,7 @@ public class CartItem {
         return this.price;
     }
 
+    // data
     public void setPrice(int price) {
         this.price = price;
     }

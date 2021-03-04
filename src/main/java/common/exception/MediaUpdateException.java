@@ -16,6 +16,6 @@ public class MediaUpdateException extends AimsException {
 
 	public MediaUpdateException(String message) {
 		super(message);
-	}
+	} //data
 
 }

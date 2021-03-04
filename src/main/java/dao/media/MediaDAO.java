@@ -32,6 +32,7 @@ public class MediaDAO {
         return medium;
     }
 
+    // data
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
