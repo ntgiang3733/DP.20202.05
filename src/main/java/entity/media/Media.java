@@ -31,7 +31,7 @@ public class Media {
         stm = AIMSDB.getConnection().createStatement();
     }
     
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
         this.id = id;
         this.title = title;
@@ -41,7 +41,7 @@ public class Media {
         this.type = type;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media(int id, String title, int quantity, String category, String imageUrl, int price, String type) throws SQLException {
         this(id, title, category, price, quantity, type);
         this.imageURL = imageUrl;
@@ -58,7 +58,7 @@ public class Media {
         return this.id;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     private Media setId(int id){
         this.id = id;
         return this;
@@ -68,7 +68,7 @@ public class Media {
         return this.title;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setTitle(String title) {
         this.title = title;
         return this;
@@ -78,7 +78,7 @@ public class Media {
         return this.category;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setCategory(String category) {
         this.category = category;
         return this;
@@ -88,7 +88,7 @@ public class Media {
         return this.price;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setPrice(int price) {
         this.price = price;
         return this;
@@ -98,13 +98,13 @@ public class Media {
         return this.imageURL;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setMediaURL(String url){
         this.imageURL = url;
         return this;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setQuantity(int quantity) {
         this.quantity = quantity;
         return this;
@@ -114,7 +114,7 @@ public class Media {
         return this.type;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Media setType(String type) {
         this.type = type;
         return this;

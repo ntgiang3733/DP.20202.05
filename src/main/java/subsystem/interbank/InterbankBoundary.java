@@ -5,7 +5,7 @@ import utils.ApplicationProgrammingInterface;
 
 public class InterbankBoundary {
 
-	// coupling: data -> chỉ phụ thuộc vào một số tham số
+	// coupling: data -> chi phu thuoc mot so tham so
 	String query(String url, String data) {
 		String response = null;
 		try {

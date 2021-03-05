@@ -37,6 +37,7 @@ public class AuthenticationController extends BaseController {
         } else return SessionInformation.mainUser.cloneInformation();//common coupling: dung bien toan cuc mainUser
     }
 
+    // data coupling
     public void login(String email, String password) throws Exception {
         try {
             User user = new UserDAO().authenticate(email, md5(password));

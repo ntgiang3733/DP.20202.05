@@ -16,7 +16,7 @@ public class CD extends Media {
 
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
             String recordLabel, String musicType, Date releasedDate) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -30,7 +30,7 @@ public class CD extends Media {
         return this.artist;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public CD setArtist(String artist) {
         this.artist = artist;
         return this;
@@ -40,7 +40,7 @@ public class CD extends Media {
         return this.recordLabel;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public CD setRecordLabel(String recordLabel) {
         this.recordLabel = recordLabel;
         return this;
@@ -50,7 +50,7 @@ public class CD extends Media {
         return this.musicType;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public CD setMusicType(String musicType) {
         this.musicType = musicType;
         return this;

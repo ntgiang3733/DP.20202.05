@@ -15,10 +15,12 @@ public class Cart {
         lstCartItem = new ArrayList<>();
     }
 
+    // stamp coupling
     public void addCartMedia(CartItem cm){
         lstCartItem.add(cm);
     }
 
+    // stamp coupling
     public void removeCartMedia(CartItem cm){
         lstCartItem.remove(cm);
     }

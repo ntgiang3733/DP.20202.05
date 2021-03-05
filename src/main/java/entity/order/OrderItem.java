@@ -37,7 +37,7 @@ public class OrderItem {
         return this.quantity;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -46,7 +46,7 @@ public class OrderItem {
         return this.price;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public void setPrice(int price) {
         this.price = price;
     }

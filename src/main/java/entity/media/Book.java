@@ -22,7 +22,7 @@ public class Book extends Media {
 
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book(int id, String title, String category, int price, int quantity, String type, String author,
             String coverType, String publisher, Date publishDate, int numOfPages, String language,
             String bookCategory) throws SQLException{
@@ -45,7 +45,7 @@ public class Book extends Media {
         return this.author;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setAuthor(String author) {
         this.author = author;
         return this;
@@ -55,7 +55,7 @@ public class Book extends Media {
         return this.coverType;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setCoverType(String coverType) {
         this.coverType = coverType;
         return this;
@@ -65,7 +65,7 @@ public class Book extends Media {
         return this.publisher;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setPublisher(String publisher) {
         this.publisher = publisher;
         return this;
@@ -85,7 +85,7 @@ public class Book extends Media {
         return this.numOfPages;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setNumOfPages(int numOfPages) {
         this.numOfPages = numOfPages;
         return this;
@@ -95,7 +95,7 @@ public class Book extends Media {
         return this.language;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setLanguage(String language) {
         this.language = language;
         return this;
@@ -105,7 +105,7 @@ public class Book extends Media {
         return this.bookCategory;
     }
 
-    // coupling: data -> chỉ phụ thuộc vào một số tham số
+    // coupling: data -> chi phu thuoc mot so tham so
     public Book setBookCategory(String bookCategory) {
         this.bookCategory = bookCategory;
         return this;
