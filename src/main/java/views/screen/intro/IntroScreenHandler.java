@@ -38,7 +38,7 @@ public class IntroScreenHandler extends BaseScreenHandler {
         }
     }
 
-
+    //stamp coupling: truyen doi tuong Object
     protected void setupData(Object dto) throws Exception {
         return;
     }

@@ -71,6 +71,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 		}
 	}
 
+	//stamp coupling: truyen doi tuong Object
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
 		Order order = invoice.getOrder();

@@ -44,6 +44,7 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
         super(screenPath);
     }
 
+    //stamp coupling: truyen doi tuong OrderItem
     public void setOrderItem(OrderItem orderItem) throws SQLException{
         this.orderItem = orderItem;
         setMediaInfo();
