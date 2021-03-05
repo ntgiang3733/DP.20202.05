@@ -1,2 +1,5 @@
 05-Programming.iml
-.idea
+.idea/
+.build
+target
+/bin/

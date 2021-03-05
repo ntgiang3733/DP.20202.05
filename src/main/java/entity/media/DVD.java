@@ -19,6 +19,7 @@ public class DVD extends Media {
 
     }
 
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
             String director, int runtime, String studio, String subtitles, Date releasedDate, String filmType) throws SQLException{
         super(id, title, category, price, quantity, type);
@@ -35,6 +36,7 @@ public class DVD extends Media {
         return this.discType;
     }
 
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setDiscType(String discType) {
         this.discType = discType;
         return this;
@@ -44,6 +46,7 @@ public class DVD extends Media {
         return this.director;
     }
 
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setDirector(String director) {
         this.director = director;
         return this;
@@ -53,6 +56,7 @@ public class DVD extends Media {
         return this.runtime;
     }
 
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setRuntime(int runtime) {
         this.runtime = runtime;
         return this;
@@ -62,6 +66,7 @@ public class DVD extends Media {
         return this.studio;
     }
 
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setStudio(String studio) {
         this.studio = studio;
         return this;
@@ -70,7 +75,8 @@ public class DVD extends Media {
     public String getSubtitles() {
         return this.subtitles;
     }
-
+    
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setSubtitles(String subtitles) {
         this.subtitles = subtitles;
         return this;
@@ -80,6 +86,7 @@ public class DVD extends Media {
         return this.releasedDate;
     }
 
+  //stamp coupling: truyen doi tuong Date
     public DVD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
@@ -89,6 +96,8 @@ public class DVD extends Media {
         return this.filmType;
     }
 
+    
+	// coupling: data -> chỉ phụ thuộc vào một số tham số
     public DVD setFilmType(String filmType) {
         this.filmType = filmType;
         return this;

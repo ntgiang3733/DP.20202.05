@@ -7,7 +7,8 @@ public class PaymentTransaction {
 	private String transactionContent;
 	private int amount;
 	private String createdAt;
-	
+
+	 // stamp coupling: truyen doi tuong CreditCard
 	public PaymentTransaction(String errorCode, CreditCard card, String transactionId, String transactionContent,
                               int amount, String createdAt) {
 		super();

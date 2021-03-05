@@ -12,6 +12,7 @@ public class CartItem {
 
     }
 
+    //stamp coupling: truyen doi tuong Media, Cart
     public CartItem(Media media, Cart cart, int quantity, int price) {
         this.media = media;
         this.quantity = quantity;
@@ -21,7 +22,8 @@ public class CartItem {
     public Media getMedia() {
         return this.media;
     }
-
+    
+    //stamp coupling: truyen doi tuong Media
     public void setMedia(Media media) {
         this.media = media;
     }
@@ -30,6 +32,7 @@ public class CartItem {
         return this.quantity;
     }
 
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     public void setQuantity(int quantity) {
         this.quantity = quantity;
     }
@@ -38,6 +41,7 @@ public class CartItem {
         return this.price;
     }
 
+    // coupling: data -> chỉ phụ thuộc vào một số tham số
     public void setPrice(int price) {
         this.price = price;
     }

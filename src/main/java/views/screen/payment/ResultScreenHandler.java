@@ -23,6 +23,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	private String result;
 	private String message;
 
+	 // stamp coupling: truyen doi tuong Stage, cau truc Map<String, String>
 	public ResultScreenHandler(Stage stage, String screenPath, Map<String, String> response) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -38,6 +39,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	}
 
 
+	 // stamp coupling: truyen doi tuong Object
 	protected void setupData(Object dto) throws Exception {
 		Map<String, String> response = (Map<String, String>) dto;
 		resultLabel.setText(response.get("RESULT"));
@@ -60,8 +62,9 @@ public class ResultScreenHandler extends BaseScreenHandler {
 	@FXML
 	private Label messageLabel;
 
+	
 	@FXML
-	void confirmPayment(MouseEvent event) throws IOException {
+	void confirmPayment(MouseEvent event) throws IOException { // stamp coupling: truyen doi tuong MouseEvent
 		homeScreenHandler.show();
 	}
 }

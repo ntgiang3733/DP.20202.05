@@ -24,6 +24,7 @@ public class Order {
         this.tax = 0;
     }
 
+  //stamp coupling: truyen doi tuong Cart
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (Object object : SessionInformation.cartInstance.getListMedia()) {
@@ -51,6 +52,7 @@ public class Order {
         return deliveryInfo;
     }
 
+  //stamp coupling: truyen doi tuong DeliveryInfo
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);

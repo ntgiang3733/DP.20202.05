@@ -14,6 +14,7 @@ public class PlaceOrderException extends AimsException {
 
 	}
 
+	// coupling: data -> chỉ phụ thuộc vào 1 tham số
 	public PlaceOrderException(String message) {
 		super(message);
 	}//data

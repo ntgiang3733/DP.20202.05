@@ -14,6 +14,7 @@ public class MediaUpdateException extends AimsException {
 
 	}
 
+	// coupling: data -> chỉ phụ thuộc vào 1 tham số
 	public MediaUpdateException(String message) {
 		super(message);
 	}//data
