@@ -16,6 +16,6 @@ public class PlaceOrderException extends AimsException {
 
 	public PlaceOrderException(String message) {
 		super(message);
-	}
+	}//data
 
 }

@@ -16,6 +16,6 @@ public class InvalidDeliveryInfoException extends AimsException {
 
 	public InvalidDeliveryInfoException(String message) {
 		super(message);
-	}
+	}//data
 
 }

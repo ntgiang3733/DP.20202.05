@@ -50,6 +50,7 @@ public class PlaceOrderController extends BaseController {
      * @param order
      * @return Invoice
      */
+    // stamp coupling
     public Invoice createInvoice(Order order) {
         return new Invoice(order);
     }
@@ -87,7 +88,7 @@ public class PlaceOrderController extends BaseController {
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
-    
+    // data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
         if (!phoneNumber.startsWith("0")) return false;
@@ -98,7 +99,7 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
-    
+    // data coupling
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -106,7 +107,7 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
-    
+    // data coupling
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";

@@ -14,5 +14,5 @@ public class AimsException extends RuntimeException {
 
 	public AimsException(String message) {
 		super(message);
-	}
+	}//data
 }

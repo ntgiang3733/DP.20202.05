@@ -69,7 +69,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     private List homeItems;
     private AuthenticationController authenticationController;
-
+    //stamp coupling
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
         super(stage, screenPath);
         try {
@@ -91,7 +91,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
-
+    // stamp coupling
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
         this.authenticationController = new AuthenticationController();
@@ -158,7 +158,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         Image img2 = new Image(file2.toURI().toString());
         cartImage.setImage(img2);
     }
-
+    //stamp coupling
     public void addMediaHome(List items){
         ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
@@ -209,10 +209,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     }
 
     @Override
+    //stamp coupling
     public void update(Observable observable) {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
     }
-
+  //stamp coupling
     private void update(MediaHandler mediaHandler) {
         int requestQuantity = mediaHandler.getRequestQuantity();
         Media media = mediaHandler.getMedia();

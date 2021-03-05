@@ -63,6 +63,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		this.messages = messages;
 	}
 
+	//stamp coupling: truyen doi tuong HomeScreenHandler
 	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
 		this.homeScreenHandler = HomeScreenHandler;
 	}

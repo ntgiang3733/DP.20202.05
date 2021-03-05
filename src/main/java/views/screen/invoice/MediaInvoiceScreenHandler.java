@@ -39,11 +39,11 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     private Label price;
 
     private OrderItem orderItem;
-
+    //data coupling
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
     }
-
+    //stamp coupling    
     public void setOrderItem(OrderItem orderItem) throws SQLException{
         this.orderItem = orderItem;
         setMediaInfo();
