@@ -10,12 +10,12 @@ public class InterbankSubsystemController {
 
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		return null;
-	}
+	}//stamp coupling
 
 	public PaymentTransaction payOrder(CreditCard card, int amount, String contents) {
 		String requestPayload = interbankPayloadConverter.convertToRequestPayload(card, amount, contents);
 		String responseText = interbankBoundary.query(InterbankConfigs.PROCESS_TRANSACTION_URL, requestPayload);
 		return interbankPayloadConverter.extractPaymentTransaction(responseText);
-	}
+	}//stamp coupling
 
 }

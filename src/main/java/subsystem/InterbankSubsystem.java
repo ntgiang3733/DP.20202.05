@@ -39,6 +39,7 @@ public class InterbankSubsystem implements InterbankInterface {
 	 * @see InterbankInterface#refund(CreditCard, int,
 	 *      String)
 	 */
+	//stamp coupling
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
 		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
 		return transaction;

@@ -22,6 +22,7 @@ public class InterbankPayloadConverter {
      * @param contents
      * @return
      */
+    // stamp coupling
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
@@ -48,6 +49,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // data coupling
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -97,6 +99,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    // data coupling
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

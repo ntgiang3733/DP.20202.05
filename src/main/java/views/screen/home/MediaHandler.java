@@ -85,11 +85,13 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     }
 
     @Override
+    //stamp coupling
     public void attach(Observer observer) {
         observerList.add(observer);
     }
 
     @Override
+    //stamp coupling
     public void remove(Observer observer) {
         observerList.remove(observer);
     }

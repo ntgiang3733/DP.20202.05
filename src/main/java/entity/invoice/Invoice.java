@@ -10,7 +10,7 @@ public class Invoice {
     public Invoice(){
 
     }
-
+    // stamp coupling
     public Invoice(Order order){
         this.order = order;
         this.amount = order.getTotal();
@@ -19,7 +19,7 @@ public class Invoice {
     public Order getOrder() {
         return order;
     }
-
+    // data coupling
     public void setAmount(int amount) {
         this.amount = amount;
     } //data
