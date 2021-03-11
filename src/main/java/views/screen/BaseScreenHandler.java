@@ -59,6 +59,7 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		return this.bController;
 	}
 
+
 	public void forward(Hashtable messages) {
 		this.messages = messages;
 	}
