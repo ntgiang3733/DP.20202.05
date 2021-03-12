@@ -45,6 +45,8 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	private TextField securityCode;
 
 	 // stamp coupling: truyen doi tuong Stage, Invoice
+	/**
+	 * <h3><i>Temporal cohesion: 2 phuong thuc setupData() va setupFunctionality() chi lien quan toi thu tu thuc hien  </i></h3>*/
 	public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 		super(stage, screenPath);
 		try {
@@ -75,6 +77,8 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 		});
 	}
 
+	/**
+	 * <h3><i>Communication cohesion</i></h3>*/
 	void confirmToPayOrder() throws IOException{
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();

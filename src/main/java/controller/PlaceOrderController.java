@@ -76,7 +76,10 @@ public class PlaceOrderController extends BaseController {
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }
-    
+
+    /**
+     *  Coincidental cohesion:  phuong thuc validate nen dat o lop khac
+     */
     /**
    * The method validates the info
    * @param info

@@ -42,6 +42,9 @@ public class Cart {
         return total;
     }
 
+    /**
+     * Communication cohesion: phuong thuc getPrice va getQuantity co lien quan toi cm
+     * */
     public int calSubtotal(){
         int total = 0;
         for (Object obj : lstCartItem) {

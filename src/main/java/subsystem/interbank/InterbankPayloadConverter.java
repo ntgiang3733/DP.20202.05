@@ -16,11 +16,12 @@ import java.util.Map;
 public class InterbankPayloadConverter {
 
     /**
+     * <h3><i>coincidental cohesion: phuong thuc getToday() khong lien quan toi class nay</i></h3>
      * Convert from native entity into interbank required format
      * @param card
      * @param amount
      * @param contents
-     * @return
+     * @return {@link Map}
      */
 	 // stamp coupling: truyen doi tuong CreditCard
     String convertToRequestPayload(CreditCard card, int amount, String contents) {
@@ -45,12 +46,11 @@ public class InterbankPayloadConverter {
     }
 
     /**
+     * coupling: data
      * Read the response from interbank server
      * @param responseText
      * @return
      */
-    // coupling: data -> chá»‰ phá»¥ thuá»™c vÃ o má»™t sá»‘ tham sá»‘
-    // coupling: control -> phá»¥ thuá»™c vÃ o thuá»™c tÃ­nh 'errorCode' cá»§a tham sá»‘ responseText sau khi Ä‘c convert vá»� json
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 
@@ -113,8 +113,8 @@ public class InterbankPayloadConverter {
     }
 
     /**
+     * <h3><i>Coincidental cohesion: phuong thuc getToday() khong lien quan toi class nay</i></h3>
      * Return a {@link String String} that represents the current time in the format of yyyy-MM-dd HH:mm:ss.
-     *
      * @author hieudm
      * @return the current time as {@link String String}.
      */
