@@ -119,4 +119,6 @@ public class PlaceOrderController extends BaseController {
     }
      //logical cohesion: validate function in name and address is similar but written in 2 
     //different function -> abstract class validate 
+    
+    // coincidental cohesion: validate nen dat trong lop khac 
 }
