@@ -13,7 +13,7 @@ import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.home.*;
 import views.screen.intro.IntroScreenHandler;
-
+//temporal cohesion:
 public class App extends Application {
 
 	@FXML
