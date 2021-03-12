@@ -12,7 +12,7 @@ import views.screen.ViewsConfig;
 
 import java.io.IOException;
 
-
+// Temporal cohesion : class vừa chứa các hàm chỉ trạng thái thông báo, vừa chứa các hàm thực hiện các hành động như : close, show, setData...
 public class PopupScreen extends BaseScreenHandler {
 
     @FXML

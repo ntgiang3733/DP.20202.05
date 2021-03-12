@@ -88,6 +88,8 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     // stamp coupling
+
+    //Coincidental Cohesion: các hàm validate và các hàm phía trên nên tách riêng
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))

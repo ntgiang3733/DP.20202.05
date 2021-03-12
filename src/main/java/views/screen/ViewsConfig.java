@@ -31,7 +31,8 @@ public class ViewsConfig {
 
     public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
 
-    public static String getCurrencyFormat(int num) {
+    //Coincidental cohesion : class này vừa chứa các hằng số vừa chứa hàm getCurrencyFormat
+     public static String getCurrencyFormat(int num) {
         Locale vietnam = new Locale("vi", "VN");
         NumberFormat defaultFormat = NumberFormat.getCurrencyInstance(vietnam);
         return defaultFormat.format(num);
