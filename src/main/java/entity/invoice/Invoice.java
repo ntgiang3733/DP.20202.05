@@ -28,6 +28,7 @@ public class Invoice {
         return amount;
     }
 
+    // coincidental cohesion: saveInvoice() khong lien quan toi nghiep vu cua class
     public void saveInvoice(){
         
     }
