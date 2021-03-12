@@ -79,6 +79,7 @@ public class LoginScreenHandler extends BaseScreenHandler{
         }
     }
 
+    //Coincidental Cohesion: hàm này đc gọi nhiều lần nên để ra class Util
     @FXML
     void backToHomeScreen(MouseEvent event) throws IOException, InterruptedException, SQLException {
         this.homeScreenHandler.show();
