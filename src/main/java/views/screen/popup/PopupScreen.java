@@ -12,7 +12,7 @@ import views.screen.ViewsConfig;
 
 import java.io.IOException;
 
-
+// Temporal cohesion : class vừa chứa các hàm chỉ trạng thái thông báo, vừa chứa các hàm thực hiện các hành động như : close, show, setData...
 public class PopupScreen extends BaseScreenHandler {
 
     @FXML
@@ -27,6 +27,10 @@ public class PopupScreen extends BaseScreenHandler {
     }
 
     // coupling: data -> chi phu thuoc mot so tham so
+    /**
+     * <h3><i>Communication cohesion : khai bao doi tuong popup va su dung</i></h3>
+     * <h3><i>Logical cohesion : success() va error(); show() </i></h3>
+     * */
     private static PopupScreen popup(String message, String imagePath, Boolean undecorated) throws IOException{
         PopupScreen popup = new PopupScreen(new Stage());
         if (undecorated) popup.stage.initStyle(StageStyle.UNDECORATED);

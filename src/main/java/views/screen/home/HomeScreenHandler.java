@@ -35,7 +35,7 @@ import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
-
+//Temporal cohesion: class chứa quá nhiều hàm thực hiện các chức năng khác nhau
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());

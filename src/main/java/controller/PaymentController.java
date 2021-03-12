@@ -105,6 +105,9 @@ public class PaymentController extends BaseController {
 		return result;
 	}
 
+	/**
+	 * coincidental cohesion: phuong thuc empty card khong lien quan toi lop PaymentController
+	 */
 	public void emptyCart(){
         SessionInformation.cartInstance.emptyCart();//common coupling: dung bien toan cuc cartInstance
     }

@@ -66,7 +66,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 			PopupScreen.error(ex.getMessage());
 		}
 	}
-
+	/**
+	 * <h3><i>Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</i></h3>
+	 * */
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
 		File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
@@ -105,6 +107,8 @@ public class CartScreenHandler extends BaseScreenHandler {
 		show();
 	}
 
+	/**
+	 * <h3><i>Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</i></h3>*/
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order

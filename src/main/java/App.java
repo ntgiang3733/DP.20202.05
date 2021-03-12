@@ -13,7 +13,9 @@ import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.home.*;
 import views.screen.intro.IntroScreenHandler;
-//temporal cohesion:
+
+//temporal cohesion: can goi fadeOut.setOnFinished truoc khi goi fadeOut.play()
+ 
 public class App extends Application {
 
 	@FXML

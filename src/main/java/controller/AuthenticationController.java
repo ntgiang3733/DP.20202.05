@@ -49,6 +49,8 @@ public class AuthenticationController extends BaseController {
         }
     }
 
+    
+    
     public void logout() {
         SessionInformation.mainUser = null;//common coupling: dung bien toan cuc mainUser
         SessionInformation.expiredTime = null;//common coupling: dung bien toan cuc expiredTime
