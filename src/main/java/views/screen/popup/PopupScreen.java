@@ -29,6 +29,7 @@ public class PopupScreen extends BaseScreenHandler {
     // coupling: data -> chi phu thuoc mot so tham so
     /**
      * <h3><i>Communication cohesion : khai bao doi tuong popup va su dung</i></h3>
+     * <h3><i>Logical cohesion : success() va error(); show() </i></h3>
      * */
     private static PopupScreen popup(String message, String imagePath, Boolean undecorated) throws IOException{
         PopupScreen popup = new PopupScreen(new Stage());

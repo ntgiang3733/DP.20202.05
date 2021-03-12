@@ -79,6 +79,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      *  Coincidental cohesion:  phuong thuc validate nen dat o lop khac
+     *  logical cohesion: cac method validate khac nhau cung xuat hien trong class
      */
     /**
    * The method validates the info
@@ -87,7 +88,6 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     // stamp coupling
-	// logical cohesion: cac method validate khác nhau cung xuat hien trong class
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))
