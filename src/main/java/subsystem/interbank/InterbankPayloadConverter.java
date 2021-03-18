@@ -117,8 +117,9 @@ public class InterbankPayloadConverter {
      * Return a {@link String String} that represents the current time in the format of yyyy-MM-dd HH:mm:ss.
      * @author hieudm
      * @return the current time as {@link String String}.
+     *
+     * <br> SOLID: SRP chuc nang getToday khong lien quan toi class nay
      */
-    // Coincidental Cohesion: vì hàm getToday() không quá liên quan trong class này, nên đặt nó trong Util 
     private String getToday() {
         DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         Date date = new Date();

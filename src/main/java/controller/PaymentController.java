@@ -81,6 +81,8 @@ public class PaymentController extends BaseController {
 	 * @param securityCode   - the cvv/cvc code of the credit card
 	 * @return {@link Map Map} represent the payment result with a
 	 *         message.
+	 *  <br>
+	 *      SOLID: DIP vi interbank phu thuoc truc tiep vao lop InterbankSubsystem ma khong phu thuoc vao interface
 	 */
 	// coupling: data -> chi phu thuoc mot so tham so
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
@@ -93,6 +95,7 @@ public class PaymentController extends BaseController {
 					cardHolderName,
 					getExpirationDate(expirationDate),
 					Integer.parseInt(securityCode));
+
 
 			this.interbank = new InterbankSubsystem();
 			PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
