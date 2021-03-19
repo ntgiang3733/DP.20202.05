@@ -33,9 +33,6 @@ public class MediaDAO {
     }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    /**
-     * SOLID: LSP vi neu cac doi tuong BookDAO, CDDAO, DVDDAO dung chuc nang getMediaById se bi loi
-     * */
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM Media ;";
         Statement stm = AIMSDB.getConnection().createStatement();
