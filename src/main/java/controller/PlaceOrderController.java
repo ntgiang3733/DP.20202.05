@@ -90,6 +90,7 @@ public class PlaceOrderController extends BaseController {
     // stamp coupling
 
     //Coincidental Cohesion: các hàm validate và các hàm phía trên nên tách riêng
+    //SOLID: vi pham nguyen li OCP vi phu thuoc vao info
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
         || validateName(info.get("name"))

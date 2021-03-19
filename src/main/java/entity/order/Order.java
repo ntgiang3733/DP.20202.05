@@ -55,6 +55,7 @@ public class Order {
   //stamp coupling: truyen doi tuong DeliveryInfo
     /**
      * Communication cohesion: viec tinh shippingFees khong lien quan toi phuong thuc setDeliveryInfo, chung chi lien quan toi du lieu
+     * SOLID: SRP vi chuc nang setDeliveryInfo khong nen thay doi shippingFees
      * */
     public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;

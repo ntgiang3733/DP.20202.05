@@ -210,6 +210,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     @Override
     //stamp coupling
+    /**
+     * SOLID: OCP vi observable phu thuoc truc tiep vao kieu MediaHandler
+     * */
     public void update(Observable observable) {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
     }
