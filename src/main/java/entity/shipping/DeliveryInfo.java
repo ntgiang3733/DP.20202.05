@@ -10,7 +10,7 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;
+    protected DistanceCalculator distanceCalculator;//SOLID: Vi phạm nguyên lý LSP vì sau này cần thay đổi thư viện tính khoảng cách
 
     public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculator distanceCalculator) {
         this.name = name;
@@ -20,11 +20,11 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
         this.distanceCalculator = distanceCalculator;
     }
-
     /**
      * SOLID: OCP vi: khi thay doi thu vien DistanceCalculator, thì phuong thuc calculateDistance cung bi thay doi theo, do vay can viet lai phuong thuc calculateShippingFee <br>
      * */
     //SOLID: vi pham nguyen li OCP vi phu thuoc truc tiep vao DistanceCalculator
+
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
