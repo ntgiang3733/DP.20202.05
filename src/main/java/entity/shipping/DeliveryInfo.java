@@ -20,7 +20,11 @@ public class DeliveryInfo {
         this.shippingInstructions = shippingInstructions;
         this.distanceCalculator = distanceCalculator;
     }
-    //SOLID: Vi phạm nguyên lý OCP vì cần phát triển thêm các hình thức thanh toán khác nhau
+    /**
+     * SOLID: OCP vi: khi thay doi thu vien DistanceCalculator, thì phuong thuc calculateDistance cung bi thay doi theo, do vay can viet lai phuong thuc calculateShippingFee <br>
+     * */
+    //SOLID: vi pham nguyen li OCP vi phu thuoc truc tiep vao DistanceCalculator
+
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
         return (int) (distance * 1.2);
