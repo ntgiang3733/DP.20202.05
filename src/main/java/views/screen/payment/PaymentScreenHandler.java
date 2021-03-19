@@ -78,7 +78,8 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 	}
 
 	/**
-	 * <h3><i>Communication cohesion</i></h3>*/
+	 * <h3><i>Communication cohesion</i></h3>
+	 * */
 	void confirmToPayOrder() throws IOException{
 		String contents = "pay order";
 		PaymentController ctrl = (PaymentController) getBController();

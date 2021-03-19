@@ -16,7 +16,9 @@ import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.logging.Logger;
-
+/**
+ * SOLID: DIP vi ApplicationProgrammingInterface cai dat truc tiep cac chuc nang ma ko qua interface hay abstract
+ * */
 public class ApplicationProgrammingInterface {
 
 	public static DateFormat DATE_FORMATTER = new SimpleDateFormat("yyyy/MM/dd HH:mm:ss");

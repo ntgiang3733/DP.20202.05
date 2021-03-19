@@ -52,6 +52,10 @@ public class MediaDAO {
     }
 
     //stamp coupling: truyen tham so Object
+    /**
+     * SOLID: LSP vi neu cac doi tuong BookDAO, CDDAO, DVDDAO dung chuc nang updateMediaFieldById se bi loi
+     * SOLID: OCP neu value khong phai la mot Stirng, thi phuong thuc toString() cua value se duoc goi. Neu khong muon dung phuong thuc toString mac dinh thi can phai sua code o phan nay de co the chay dung
+     * */
     public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){
