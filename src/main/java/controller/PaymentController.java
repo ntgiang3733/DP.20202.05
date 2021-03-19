@@ -83,6 +83,7 @@ public class PaymentController extends BaseController {
 	 *         message.
 	 */
 	// coupling: data -> chi phu thuoc mot so tham so
+	//SOLID: vi pham nguyen ly OCP vi them phuong thuc thanh toan phai sua payOrder
 	public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
 			String expirationDate, String securityCode) {
 		Map<String, String> result = new Hashtable<String, String>();

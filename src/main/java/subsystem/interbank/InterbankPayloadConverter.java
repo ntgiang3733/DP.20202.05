@@ -51,6 +51,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
+    //SOLID: vi pham nguyen li OCP vi phu thuoc vao responseText, neu thay doi se phai sua trong code
     PaymentTransaction extractPaymentTransaction(String responseText) {
         MyMap response = convertJSONResponse(responseText);
 

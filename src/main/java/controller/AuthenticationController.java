@@ -18,6 +18,7 @@ import java.util.Objects;
 /**
  * @author
  */
+//SOLID: vi pham nguyen li LSP vi class nay khong dung den cac method trong BaseController
 public class AuthenticationController extends BaseController {
 
     public boolean isAnonymousSession() {
