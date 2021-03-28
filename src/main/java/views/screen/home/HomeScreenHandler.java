@@ -35,7 +35,7 @@ import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
-//Temporal cohesion: class chứa quá nhiều hàm thực hiện các chức năng khác nhau
+//Temporal cohesion: class chá»©a quÃ¡ nhiá»�u hÃ m thá»±c hiá»‡n cÃ¡c chá»©c nÄƒng khÃ¡c nhau
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -144,7 +144,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnLogin.setOnMouseClicked(event -> {});
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.cartInstance.getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListMedia().size()) + " media");
         super.show();
     }
 
@@ -223,7 +223,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
         try {
             if (requestQuantity > media.getQuantity()) throw new MediaNotAvailableException();
-            Cart cart = SessionInformation.cartInstance;
+            Cart cart = SessionInformation.getInstance().getCartInstance();
             // if media already in cart then we will increase the quantity by 1 instead of create the new cartMedia
             CartItem mediaInCart = getBController().checkMediaInCart(media);
             if (mediaInCart != null) {
