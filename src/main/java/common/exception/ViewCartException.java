@@ -5,7 +5,7 @@ package common.exception;;
  * exception to inform
  * 
  * @author nguyenlm
- */
+ *///LSP : khong su dung cac phuong thuc cua AimsException
 public class ViewCartException extends AimsException {
 
 	private static final long serialVersionUID = 1091337136123906298L;
