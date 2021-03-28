@@ -19,6 +19,17 @@ import java.util.Objects;
 //SOLID: vi pham nguyen li LSP vi class nay khong dung den cac method trong BaseController
 public class AuthenticationController extends BaseController {
 
+
+    private static AuthenticationController instance;
+
+    public static AuthenticationController getInstance() {
+        if(instance == null) {
+            instance = new AuthenticationController();
+        }
+        return instance;
+    }
+
+
 	public boolean isAnonymousSession() {
 		try {
 			getMainUser();

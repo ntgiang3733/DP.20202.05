@@ -94,7 +94,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     // stamp coupling
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
-        this.authenticationController = new AuthenticationController();
+        this.authenticationController = AuthenticationController.getInstance();
         try{
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
