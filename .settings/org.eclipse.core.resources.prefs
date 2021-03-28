@@ -1,2 +1,4 @@
 eclipse.preferences.version=1
+encoding//src/main/java/controller/PlaceOrderController.java=UTF-8
 encoding//src/main/java/subsystem/interbank/InterbankPayloadConverter.java=UTF-8
+encoding//src/main/java/views/screen/home/HomeScreenHandler.java=UTF-8

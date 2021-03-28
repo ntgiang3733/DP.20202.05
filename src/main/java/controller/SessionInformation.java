@@ -2,7 +2,6 @@ package controller;
 
 import entity.cart.Cart;
 import entity.user.User;
-import subsystem.interbank.InterbankPayloadConverter;
 
 import java.time.LocalDateTime;
 
@@ -10,9 +9,10 @@ import java.time.LocalDateTime;
  * @author
  * singleton: can phuong thuc private constructor de dam bao SessionInformation chi truy cap cac bien static
  */
+//Singleton: SessionInformation chi nen duoc tao mot the hien trong qua trinh chay, vi no khong thay doi trong mot phien lam viec
 public class SessionInformation {
 
-    private User mainUser; // 
+    private User mainUser; //
     private Cart cartInstance;
     private LocalDateTime expiredTime;
 
