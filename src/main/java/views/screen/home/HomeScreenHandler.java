@@ -35,7 +35,7 @@ import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
 
-//Temporal cohesion: class chá»©a quÃ¡ nhiá»�u hÃ m thá»±c hiá»‡n cÃ¡c chá»©c nÄƒng khÃ¡c nhau
+//Temporal cohesion: class chứa quá nhiều hàm thực hiện các chức năng khác nhau
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
@@ -94,7 +94,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     // stamp coupling
     protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
-        this.authenticationController = new AuthenticationController();
+        this.authenticationController = AuthenticationController.getInstance();
         try{
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
