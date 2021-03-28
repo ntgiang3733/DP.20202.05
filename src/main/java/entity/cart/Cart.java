@@ -6,21 +6,15 @@ import java.util.List;
 
 import common.exception.MediaNotAvailableException;
 import entity.media.Media;
-//Singleton : can singleton cho cart de chac chan chi co duy nhat 1 cart cho nguoi dung
+
 public class Cart {
     
     private List<CartItem> lstCartItem;
-    private static Cart instance;
 
-    public static Cart getInstance(){
-        if(instance == null){
-            instance = new Cart();
-        }
-        return instance;
-    }
-    private Cart() {
+    public Cart() {
         lstCartItem = new ArrayList<>();
     }
+
     // stamp coupling
     public void addCartMedia(CartItem cm){
         lstCartItem.add(cm);
