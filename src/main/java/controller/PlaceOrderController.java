@@ -35,7 +35,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public void placeOrder() throws SQLException {
-        SessionInformation.cartInstance.checkAvailabilityOfProduct();//common coupling: dung bien toan cuc cartInstance
+        SessionInformation.getInstance().getCartInstance().checkAvailabilityOfProduct();//common coupling: dung bien toan cuc cartInstance
     }
 
     /**
@@ -44,7 +44,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order(SessionInformation.cartInstance);//common coupling: dung bien toan cuc cartInstance
+        return new Order(SessionInformation.getInstance().getCartInstance());//common coupling: dung bien toan cuc cartInstance
     }
 
     /**
