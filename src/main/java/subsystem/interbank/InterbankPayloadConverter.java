@@ -1,6 +1,7 @@
 package subsystem.interbank;
 
 import common.exception.*;
+import entity.cart.Cart;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import utils.MyMap;
@@ -12,8 +13,21 @@ import java.util.Map;
 
 /**
  * @author
+ * singleton: day la mot class chi co cac method ho tro, nen dung singleton de toi uu bo nho
  */
 public class InterbankPayloadConverter {
+
+
+    private static InterbankPayloadConverter instance;
+
+    public static InterbankPayloadConverter getInstance(){
+        if(instance == null){
+            instance = new InterbankPayloadConverter();
+        }
+        return instance;
+    }
+
+    private InterbankPayloadConverter(){}
 
     /**
      * <h3><i>coincidental cohesion: phuong thuc getToday() khong lien quan toi class nay</i></h3>
