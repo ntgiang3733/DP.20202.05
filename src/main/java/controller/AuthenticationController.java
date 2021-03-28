@@ -32,10 +32,10 @@ public class AuthenticationController extends BaseController {
 
     public User getMainUser() throws ExpiredSessionException {
     	//common coupling: dung bien toan cuc mainUser, expiredTime
-        if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
+        if (SessionInformation.getInstance().getMainUser() == null || SessionInformation.getInstance().getExpiredTime() == null || SessionInformation.getInstance().getExpiredTime().isBefore(LocalDateTime.now())) {
             logout();
             throw new ExpiredSessionException();
-        } else return SessionInformation.mainUser.cloneInformation();//common coupling: dung bien toan cuc mainUser
+        } else return SessionInformation.getInstance().getMainUser().cloneInformation();//common coupling: dung bien toan cuc mainUser
     }
 
     // data coupling
@@ -43,8 +43,8 @@ public class AuthenticationController extends BaseController {
         try {
             User user = new UserDAO().authenticate(email, md5(password));
             if (Objects.isNull(user)) throw new FailLoginException();
-            SessionInformation.mainUser = user;//common coupling: dung bien toan cuc mainUser
-            SessionInformation.expiredTime = LocalDateTime.now().plusHours(24); //common coupling: dung bien toan cuc expiredTime
+            SessionInformation.getInstance().setMainUser(user);//common coupling: dung bien toan cuc mainUser
+            SessionInformation.getInstance().setExpiredTime(LocalDateTime.now().plusHours(24)); //common coupling: dung bien toan cuc expiredTime
         } catch (SQLException ex) {
             throw new FailLoginException();
         }
@@ -53,8 +53,8 @@ public class AuthenticationController extends BaseController {
     
     
     public void logout() {
-        SessionInformation.mainUser = null;//common coupling: dung bien toan cuc mainUser
-        SessionInformation.expiredTime = null;//common coupling: dung bien toan cuc expiredTime
+        SessionInformation.getInstance().setMainUser(null);//common coupling: dung bien toan cuc mainUser
+        SessionInformation.getInstance().setExpiredTime(null);//common coupling: dung bien toan cuc expiredTime
     }
 
     /**
