@@ -5,8 +5,8 @@ import entity.payment.PaymentTransaction;
 
 public class InterbankSubsystemController {
 
-	private static InterbankPayloadConverter interbankPayloadConverter = new InterbankPayloadConverter();
-	private static InterbankBoundary interbankBoundary = new InterbankBoundary();
+	private static InterbankPayloadConverter interbankPayloadConverter = InterbankPayloadConverter.getInstance();
+	private static InterbankBoundary interbankBoundary = InterbankBoundary.getInstance();
 
 	 // stamp coupling: truyen doi tuong CreditCard
 	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
