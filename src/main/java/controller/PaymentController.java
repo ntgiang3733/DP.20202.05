@@ -21,6 +21,7 @@ import subsystem.InterbankSubsystem;
  * @author hieud
  *
  */
+// SOLID: Vi pham nguyen li LSP vi class khong dung den cac phuong thuc cua BaseController
 public class PaymentController extends BaseController {
 
 	/**
