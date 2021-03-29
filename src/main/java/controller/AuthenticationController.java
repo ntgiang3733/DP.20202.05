@@ -13,48 +13,64 @@ import java.sql.SQLException;
 import java.time.LocalDateTime;
 import java.util.Objects;
 
-
-
 /**
  * @author
  */
 //SOLID: vi pham nguyen li LSP vi class nay khong dung den cac method trong BaseController
 public class AuthenticationController extends BaseController {
 
-    public boolean isAnonymousSession() {
-        try {
-            getMainUser();
-            return false;
-        } catch (Exception ex) {
-            return true;
+
+    private static AuthenticationController instance;
+
+    public static AuthenticationController getInstance() {
+        if(instance == null) {
+            instance = new AuthenticationController();
         }
+        return instance;
     }
 
-    public User getMainUser() throws ExpiredSessionException {
-    	//common coupling: dung bien toan cuc mainUser, expiredTime
-        if (SessionInformation.mainUser == null || SessionInformation.expiredTime == null || SessionInformation.expiredTime.isBefore(LocalDateTime.now())) {
-            logout();
-            throw new ExpiredSessionException();
-        } else return SessionInformation.mainUser.cloneInformation();//common coupling: dung bien toan cuc mainUser
-    }
 
-    // data coupling
-    public void login(String email, String password) throws Exception {
-        try {
-            User user = new UserDAO().authenticate(email, md5(password));
-            if (Objects.isNull(user)) throw new FailLoginException();
-            SessionInformation.mainUser = user;//common coupling: dung bien toan cuc mainUser
-            SessionInformation.expiredTime = LocalDateTime.now().plusHours(24); //common coupling: dung bien toan cuc expiredTime
-        } catch (SQLException ex) {
-            throw new FailLoginException();
-        }
-    }
+	public boolean isAnonymousSession() {
+		try {
+			getMainUser();
+			return false;
+		} catch (Exception ex) {
+			return true;
+		}
+	}
+
+	public User getMainUser() throws ExpiredSessionException {
+		// common coupling: dung bien toan cuc mainUser, expiredTime
+		if (SessionInformation.getInstance().getMainUser() == null
+				|| SessionInformation.getInstance().getExpiredTime() == null
+				|| SessionInformation.getInstance().getExpiredTime().isBefore(LocalDateTime.now())) {
+			logout();
+			throw new ExpiredSessionException();
+		} else
+			return SessionInformation.getInstance().getMainUser().cloneInformation();// common coupling: dung bien toan
+																						// cuc mainUser
+	}
+
+	// data coupling
+	public void login(String email, String password) throws Exception {
+		try {
+			User user = new UserDAO().authenticate(email, md5(password));
+			if (Objects.isNull(user))
+				throw new FailLoginException();
+			SessionInformation.getInstance().setMainUser(user);
+			// common coupling: dung bien toan cuc mainUser
+			SessionInformation.getInstance().setExpiredTime(LocalDateTime.now().plusHours(24));
+			// common coupling: dung bien toan cuc expiredTime
+		} catch (SQLException ex) {
+			throw new FailLoginException();
+		}
+	}
 
     
     
     public void logout() {
-        SessionInformation.mainUser = null;//common coupling: dung bien toan cuc mainUser
-        SessionInformation.expiredTime = null;//common coupling: dung bien toan cuc expiredTime
+        SessionInformation.getInstance().setMainUser(null);//common coupling: dung bien toan cuc mainUser
+        SessionInformation.getInstance().setExpiredTime(null);//common coupling: dung bien toan cuc expiredTime
     }
 
     /**
