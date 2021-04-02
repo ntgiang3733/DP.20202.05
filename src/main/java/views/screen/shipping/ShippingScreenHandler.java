@@ -4,6 +4,7 @@ import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
+import entity.shipping.ADeliveryInfo;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
 import javafx.beans.property.BooleanProperty;
@@ -82,7 +83,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		});
 
 	}
-	
+
 	/**
      * <h3><i>Procedural cohesion : submitDeliveryInfo() sau do den preprocessDeliveryInfo() </i></h3>
      * */
@@ -92,7 +93,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 
 		// validate delivery info and prepare order info
 		preprocessDeliveryInfo();
-		
+
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
 		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
@@ -111,7 +112,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		messages.put("address", address.getText());
 		messages.put("instructions", instructions.getText());
 		messages.put("province", province.getValue());
-		DeliveryInfo deliveryInfo;
+		ADeliveryInfo deliveryInfo;
 		try {
 			// process and validate delivery info
 			deliveryInfo = getBController().processDeliveryInfo(messages);

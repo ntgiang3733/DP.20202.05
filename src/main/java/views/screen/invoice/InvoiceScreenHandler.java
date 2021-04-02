@@ -4,6 +4,7 @@ import common.exception.ProcessInvoiceException;
 import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.Order;
+import entity.shipping.ADeliveryInfo;
 import entity.shipping.DeliveryInfo;
 import entity.order.OrderItem;
 import javafx.fxml.FXML;
@@ -74,7 +75,7 @@ public class InvoiceScreenHandler extends BaseScreenHandler {
 	protected void setupData(Object dto) throws Exception {
 		this.invoice = (Invoice) dto;
 		Order order = invoice.getOrder();
-		DeliveryInfo deliveryInfo = order.getDeliveryInfo();
+		ADeliveryInfo deliveryInfo = order.getDeliveryInfo();
 
 		name.setText(deliveryInfo.getName());
 		phone.setText(deliveryInfo.getPhone());

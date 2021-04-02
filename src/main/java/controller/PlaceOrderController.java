@@ -1,14 +1,13 @@
 package controller;
 
 import common.exception.InvalidDeliveryInfoException;
-import entity.cart.Cart;
-import entity.cart.CartItem;
 import entity.invoice.Invoice;
+import entity.order.OderEnum;
+import entity.order.OderFactory;
 import entity.order.Order;
-import entity.order.OrderItem;
+import entity.shipping.ADeliveryInfo;
+import entity.shipping.DistanceCalculatorFactory;
 import entity.shipping.DeliveryInfo;
-import entity.shipping.ShippingConfigs;
-import org.example.DistanceCalculator;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -44,7 +43,7 @@ public class PlaceOrderController extends BaseController {
      * @throws SQLException
      */
     public Order createOrder() throws SQLException {
-        return new Order(SessionInformation.getInstance().getCartInstance());//common coupling: dung bien toan cuc cartInstance
+        return OderFactory.getOder(OderEnum.normalOder, SessionInformation.getInstance().getCartInstance());//common coupling: dung bien toan cuc cartInstance
     }
 
     /**
@@ -64,17 +63,17 @@ public class PlaceOrderController extends BaseController {
      * @throws IOException
      */
     // stamp coupling
-    public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+    public ADeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
         validateDeliveryInfo(info);
-        DeliveryInfo deliveryInfo = new DeliveryInfo(
+        ADeliveryInfo deliveryInfo = new DeliveryInfo(
                 String.valueOf(info.get("name")),
                 String.valueOf(info.get("phone")),
                 String.valueOf(info.get("province")),
                 String.valueOf(info.get("address")),
                 String.valueOf(info.get("instructions")),
-                new DistanceCalculator());
+                new DistanceCalculatorFactory());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }
@@ -90,7 +89,6 @@ public class PlaceOrderController extends BaseController {
    * @throws IOException
    */
     // stamp coupling
-
     //Coincidental Cohesion: các hàm validate và các hàm phía trên nên tách riêng
     //SOLID: vi pham nguyen li OCP vi phu thuoc vao info
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
@@ -99,6 +97,7 @@ public class PlaceOrderController extends BaseController {
         || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
+
     // data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
         if (phoneNumber.length() != 10) return false;
@@ -110,7 +109,17 @@ public class PlaceOrderController extends BaseController {
         }
         return true;
     }
+
     // data coupling
+    // template method: ko nen tao mot doi tuong Pattern trung gian, nguoi dung se cam thay phuc tap
+     /*
+    *
+    public boolean validateName(String name) {
+        if (Objects.isNull(address)) return false;
+        return super.validateString("^[a-zA-Z\\s]*$", name);
+    }
+    *
+    * */
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -118,7 +127,17 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(name);
         return matcher.matches();
     }
+
     // data coupling
+    // template method: ko nen tao mot doi tuong Pattern trung gian, nguoi dung se cam thay phuc tap
+    /*
+    *
+    public boolean validateAddress(String address) {
+        if (Objects.isNull(address)) return false;
+        return super.validateString("^[a-zA-Z\\s]*$", address);
+    }
+    *
+    * */
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -126,8 +145,8 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
     }
-     //logical cohesion: validate function in name and address is similar but written in 2 
-    //different function -> abstract class validate 
-    
-    // coincidental cohesion: validate nen dat trong lop khac 
+     //logical cohesion: validate function in name and address is similar but written in 2
+    //different function -> abstract class validate
+
+    // coincidental cohesion: validate nen dat trong lop khac
 }
