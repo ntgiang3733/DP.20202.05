@@ -5,7 +5,6 @@ import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.shipping.ADeliveryInfo;
-import entity.shipping.DeliveryInfo;
 import entity.order.OrderItem;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;

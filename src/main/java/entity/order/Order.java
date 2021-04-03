@@ -4,7 +4,6 @@ import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.shipping.ADeliveryInfo;
-import entity.shipping.DeliveryInfo;
 import views.screen.ViewsConfig;
 
 import java.util.ArrayList;
@@ -12,7 +11,7 @@ import java.util.Collections;
 import java.util.List;
 
 //  factory method: Co the co them RushOder
-public class Order extends AOder {
+public class Order {
 
     private int shippingFees;
     private int subtotal;
@@ -27,7 +26,7 @@ public class Order extends AOder {
     }
 
   //stamp coupling: truyen doi tuong Cart
-    protected Order(Cart cart) {
+    public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
         for (Object object : SessionInformation.getInstance().getCartInstance().getListMedia()) {
             CartItem cartItem = (CartItem) object;

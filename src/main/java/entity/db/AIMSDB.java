@@ -6,9 +6,22 @@ import java.sql.SQLException;
 import java.util.logging.Logger;
 
 import java.sql.Connection;
+
+import controller.AuthenticationController;
 import utils.*;
 
+// singleton: do nghiep vu quy dinh
 public class AIMSDB {
+
+    private static AIMSDB instance;
+
+    public static AIMSDB getInstance() {
+        if(instance == null) {
+            instance = new AIMSDB();
+        }
+        return instance;
+    }
+    private AIMSDB(){}
 
 	private static Logger LOGGER = Utils.getLogger(Connection.class.getName());
 	private static Connection connect;
@@ -22,7 +35,7 @@ public class AIMSDB {
             LOGGER.info("Connect database successfully");
         } catch (Exception e) {
             LOGGER.info(e.getMessage());
-        } 
+        }
         return connect;
     }
 

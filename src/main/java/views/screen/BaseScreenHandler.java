@@ -69,4 +69,11 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 		this.homeScreenHandler = HomeScreenHandler;
 	}
 
+	public void requestToViewScreen(String title){
+		setPreviousScreen(this);
+		setHomeScreenHandler(homeScreenHandler);
+		setBController(getBController());
+		setScreenTitle(title);
+	}
+
 }
