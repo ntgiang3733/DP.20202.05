@@ -1,9 +1,8 @@
 package controller;
 
 import common.exception.InvalidDeliveryInfoException;
+import entity.cart.Cart;
 import entity.invoice.Invoice;
-import entity.order.OderEnum;
-import entity.order.OderFactory;
 import entity.order.Order;
 import entity.shipping.ADeliveryInfo;
 import entity.shipping.DistanceCalculatorFactory;
@@ -18,11 +17,25 @@ import java.util.regex.Pattern;
 
 /**
  * This class controls the flow of place order usecase in our AIMS project
+ *
  * @author nguyenlm
  */
 //SOLID: Vi phạm nguyên lý SRC vì class vừa thực hiện các nhiệm vụ liên quan đến order,
 // vừa thực hiện các nhiệm vụ về validate
+// singleton
 public class PlaceOrderController extends BaseController {
+
+    private static PlaceOrderController instance;
+
+    public static PlaceOrderController getInstance() {
+        if (instance == null) {
+            instance = new PlaceOrderController();
+        }
+        return instance;
+    }
+
+    private PlaceOrderController() {
+    }
 
     /**
      * Just for logging purpose
@@ -31,23 +44,28 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method checks the availability of product when user click PlaceOrder button
+     *
      * @throws SQLException
      */
+    //common coupling: dung bien toan cuc cartInstance
     public void placeOrder() throws SQLException {
-        SessionInformation.getInstance().getCartInstance().checkAvailabilityOfProduct();//common coupling: dung bien toan cuc cartInstance
+        SessionInformation.getInstance().getCartInstance().checkAvailabilityOfProduct();
     }
 
     /**
      * This method creates the new Order based on the Cart
+     *
      * @return Order
      * @throws SQLException
      */
+    //common coupling: dung bien toan cuc cartInstance
     public Order createOrder() throws SQLException {
-        return OderFactory.getOder(OderEnum.normalOder, SessionInformation.getInstance().getCartInstance());//common coupling: dung bien toan cuc cartInstance
+        return new Order(SessionInformation.getInstance().getCartInstance());
     }
 
     /**
      * This method creates the new Invoice based on order
+     *
      * @param order
      * @return Invoice
      */
@@ -58,6 +76,7 @@ public class PlaceOrderController extends BaseController {
 
     /**
      * This method takes responsibility for processing the shipping info from user
+     *
      * @param info
      * @throws InterruptedException
      * @throws IOException
@@ -83,18 +102,19 @@ public class PlaceOrderController extends BaseController {
      *  logical cohesion: cac method validate khac nhau cung xuat hien trong class
      */
     /**
-   * The method validates the info
-   * @param info
-   * @throws InterruptedException
-   * @throws IOException
-   */
+     * The method validates the info
+     *
+     * @param info
+     * @throws InterruptedException
+     * @throws IOException
+     */
     // stamp coupling
     //Coincidental Cohesion: các hàm validate và các hàm phía trên nên tách riêng
     //SOLID: vi pham nguyen li OCP vi phu thuoc vao info
     public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         if (validatePhoneNumber(info.get("phone"))
-        || validateName(info.get("name"))
-        || validateAddress(info.get("address"))) return;
+                || validateName(info.get("name"))
+                || validateAddress(info.get("address"))) return;
         else throw new InvalidDeliveryInfoException();
     }
 
@@ -111,15 +131,6 @@ public class PlaceOrderController extends BaseController {
     }
 
     // data coupling
-    // template method: ko nen tao mot doi tuong Pattern trung gian, nguoi dung se cam thay phuc tap
-     /*
-    *
-    public boolean validateName(String name) {
-        if (Objects.isNull(address)) return false;
-        return super.validateString("^[a-zA-Z\\s]*$", name);
-    }
-    *
-    * */
     public boolean validateName(String name) {
         if (Objects.isNull(name)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -129,15 +140,9 @@ public class PlaceOrderController extends BaseController {
     }
 
     // data coupling
-    // template method: ko nen tao mot doi tuong Pattern trung gian, nguoi dung se cam thay phuc tap
-    /*
-    *
-    public boolean validateAddress(String address) {
-        if (Objects.isNull(address)) return false;
-        return super.validateString("^[a-zA-Z\\s]*$", address);
-    }
-    *
-    * */
+    //logical cohesion: validate function in name and address is similar but written in 2
+    //different function -> abstract class validate
+    // coincidental cohesion: validate nen dat trong lop khac
     public boolean validateAddress(String address) {
         if (Objects.isNull(address)) return false;
         String patternString = "^[a-zA-Z\\s]*$";
@@ -145,8 +150,4 @@ public class PlaceOrderController extends BaseController {
         Matcher matcher = pattern.matcher(address);
         return matcher.matches();
     }
-     //logical cohesion: validate function in name and address is similar but written in 2
-    //different function -> abstract class validate
-
-    // coincidental cohesion: validate nen dat trong lop khac
 }

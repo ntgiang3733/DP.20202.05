@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
@@ -79,7 +80,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         } catch (IOException ex) {
             LOGGER.info(ex.getMessage());
             PopupScreen.error("Error when loading resources.");
-            super.setErrorMessage();
+            setErrorMessage();
         } catch (Exception ex) {
             LOGGER.info(ex.getMessage());
             PopupScreen.error(ex.getMessage());
@@ -262,10 +263,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     @FXML
     void redirectLoginScreen(MouseEvent event) {
         try {
-            BaseScreenHandler loginScreen = new LoginScreenHandler(this.stage, ViewsConfig.LOGIN_SCREEN_PATH);
+            BaseNextScreenHandler loginScreen = new LoginScreenHandler(this.stage, ViewsConfig.LOGIN_SCREEN_PATH);
 
             //template method
-            loginScreen.showNextScreen(this, this.authenticationController);
+            loginScreen.showScreen(null, this, this.authenticationController);
 //            loginScreen.setHomeScreenHandler(this);
 //            loginScreen.setBController(this.authenticationController);
 //            loginScreen.show();
@@ -278,4 +279,6 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             }
         }
     }
+
+
 }
