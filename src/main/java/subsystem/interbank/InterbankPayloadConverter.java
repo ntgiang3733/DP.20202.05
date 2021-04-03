@@ -1,7 +1,7 @@
 package subsystem.interbank;
 
 import common.exception.*;
-import entity.cart.Cart;
+import entity.payment.CardFactory;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 import utils.MyMap;
@@ -72,7 +72,7 @@ public class InterbankPayloadConverter {
         if (response == null)
             return null;
         MyMap transaction = (MyMap) response.get("transaction");
-        CreditCard card = new CreditCard(
+        CreditCard card = CardFactory.getCreditCard(
                 (String) transaction.get("cardCode"),
                 (String) transaction.get("owner"),
                 (String) transaction.get("dateExpired"),

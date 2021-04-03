@@ -67,7 +67,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		}
 	}
 	/**
-	 * <h3><i>Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</i></h3>
+	 * Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</br>
 	 * */
 	protected void setupFunctionality() throws Exception {
 		// fix relative image path caused by fxml
