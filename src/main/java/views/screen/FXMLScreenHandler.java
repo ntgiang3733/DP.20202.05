@@ -19,7 +19,7 @@ public class FXMLScreenHandler {
 
 	// data
 	public FXMLScreenHandler(String screenPath) throws IOException {
-		this.errorMessage.setText("");
+//		this.errorMessage.setText("Done!");
 		this.loader = new FXMLLoader(getClass().getResource(screenPath));
 		// Set this class as the controller
 		this.loader.setController(this);

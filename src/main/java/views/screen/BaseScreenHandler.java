@@ -20,11 +20,11 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
 
     private Scene scene;
-    private BaseScreenHandler prev;
+    protected BaseScreenHandler prev;
     protected final Stage stage;
     protected HomeScreenHandler homeScreenHandler;
     protected Hashtable<String, String> messages;
-    private BaseController bController;
+    protected BaseController bController;
 
     protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
         super(screenPath);
@@ -67,27 +67,6 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     //stamp coupling: truyen doi tuong HomeScreenHandler
     public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
         this.homeScreenHandler = HomeScreenHandler;
-    }
-
-    public void showNextScreen(String title) {
-        setPreviousScreen(this);
-        setHomeScreenHandler(homeScreenHandler);
-        setScreenTitle(title);
-        show();
-    }
-
-    public void showNextScreen(String title, BaseController controller) {
-        setPreviousScreen(this);
-        setHomeScreenHandler(homeScreenHandler);
-        setScreenTitle(title);
-        setBController(controller);
-        show();
-    }
-
-    public void showNextScreen(HomeScreenHandler homeScreenHandler, BaseController controller) {
-        setHomeScreenHandler(homeScreenHandler);
-        setBController(controller);
-        show();
     }
 
 }

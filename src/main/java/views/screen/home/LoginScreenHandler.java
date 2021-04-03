@@ -5,6 +5,7 @@ import common.exception.ViewCartException;
 import common.interfaces.Observable;
 import common.interfaces.Observer;
 import controller.AuthenticationController;
+import controller.BaseController;
 import controller.HomeController;
 import controller.ViewCartController;
 import entity.cart.Cart;
@@ -20,6 +21,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
@@ -34,7 +36,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 
-public class LoginScreenHandler extends BaseScreenHandler{
+public class LoginScreenHandler extends BaseNextScreenHandler {
 
     public static Logger LOGGER = Utils.getLogger(LoginScreenHandler.class.getName());
 
@@ -44,7 +46,7 @@ public class LoginScreenHandler extends BaseScreenHandler{
     @FXML
     private PasswordField password;
 
-    public LoginScreenHandler(Stage stage, String screenPath) throws IOException{
+    public LoginScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         try {
             setupData(null);
@@ -52,16 +54,22 @@ public class LoginScreenHandler extends BaseScreenHandler{
         } catch (IOException ex) {
             LOGGER.info(ex.getMessage());
             PopupScreen.error("Error when loading resources.");
-            super.setErrorMessage();
+            setErrorMessage();
         } catch (Exception ex) {
             LOGGER.info(ex.getMessage());
             PopupScreen.error(ex.getMessage());
         }
     }
 
+    @Override
+    protected void setTitleScreenToShow() {
+
+    }
+
     public AuthenticationController getBController() {
         return (AuthenticationController) super.getBController();
     }
+
 
     protected void setupData(Object dto) throws Exception {
     }

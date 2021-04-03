@@ -5,31 +5,28 @@ import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.shipping.ADeliveryInfo;
-import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.invoice.InvoiceScreenHandler;
 import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ShippingScreenHandler extends BaseScreenHandler {
+public class ShippingScreenHandler extends BaseNextScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(ShippingScreenHandler.class.getName());
 
@@ -61,7 +58,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		} catch (IOException ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error("Error when loading resources.");
-			super.setErrorMessage();
+			setErrorMessage();
 		} catch (Exception ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error(ex.getMessage());
@@ -96,10 +93,10 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
-		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
+		BaseNextScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
 
 		// template method
-		InvoiceScreenHandler.showNextScreen("Invoice Screen", getBController());
+		InvoiceScreenHandler.showScreen(this, homeScreenHandler, getBController());
 //		InvoiceScreenHandler.setPreviousScreen(this);
 //		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
 //		InvoiceScreenHandler.setBController(getBController());
@@ -131,7 +128,14 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		return (PlaceOrderController) super.getBController();
 	}
 
+	@Override
+	protected void setTitleScreenToShow() {
+		setScreenTitle("Shipping Screen");
+	}
+
 	public void notifyError(){
 		// TODO: implement later on if we need
 	}
+
+
 }

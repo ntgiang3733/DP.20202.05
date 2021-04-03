@@ -24,10 +24,8 @@ public abstract class ADeliveryInfo {
      */
     //SOLID: vi pham nguyen li OCP vi phu thuoc truc tiep vao DistanceCalculator
     // stamp coupling
-    public int calculateShippingFee(Order order) {
-        int distance = distanceCalculator.calculateDistance(address, province);
-        return (int) (distance * 1.2);
-    }
+    // template method
+    public abstract int calculateShippingFee(Order order);
 
     public String getName() {
         return name;

@@ -12,7 +12,7 @@ public class MediaDAOFactory {
             case book:
                 return BookDAO.getInstance();
             default:
-                return MediaDAO.getInstance();
+                return null;
         }
     }
 
