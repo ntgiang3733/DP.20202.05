@@ -90,18 +90,20 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
-
 		// validate delivery info and prepare order info
 		preprocessDeliveryInfo();
 
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
 		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
-		InvoiceScreenHandler.setPreviousScreen(this);
-		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
-		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
-		InvoiceScreenHandler.setBController(getBController());
-		InvoiceScreenHandler.show();
+
+		// template method
+		InvoiceScreenHandler.showNextScreen("Invoice Screen", getBController());
+//		InvoiceScreenHandler.setPreviousScreen(this);
+//		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
+//		InvoiceScreenHandler.setBController(getBController());
+//		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
+//		InvoiceScreenHandler.show();
 	}
 
 	public void preprocessDeliveryInfo() throws IOException, InterruptedException {
@@ -131,5 +133,4 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	public void notifyError(){
 		// TODO: implement later on if we need
 	}
-
 }

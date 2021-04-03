@@ -99,6 +99,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 	}
 
 	 // stamp coupling: truyen doi tuong BaseScreenHandler
+	// template method
 	public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
 		setPreviousScreen(prevScreen);
 		setScreenTitle("Cart Screen");
@@ -108,7 +109,9 @@ public class CartScreenHandler extends BaseScreenHandler {
 	}
 
 	/**
-	 * <h3><i>Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</i></h3>*/
+	 * Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</br>
+	 * Template method
+	 * */
 	public void requestToPlaceOrder() throws SQLException, IOException {
 		try {
 			// create placeOrderController and process the order
@@ -119,7 +122,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 			}
 
 			placeOrderController.placeOrder();
-			
+
 			// display available media
 			displayCartWithMediaAvailability();
 
@@ -129,11 +132,14 @@ public class CartScreenHandler extends BaseScreenHandler {
 			// display shipping form
 			ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
 					this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
-			shippingScreenHandler.setPreviousScreen(this);
-			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
-			shippingScreenHandler.setScreenTitle("Shipping Screen");
-			shippingScreenHandler.setBController(placeOrderController);
-			shippingScreenHandler.show();
+
+			//Template method
+			shippingScreenHandler.showNextScreen("Shipping Screen",placeOrderController);
+//			shippingScreenHandler.setPreviousScreen(this);
+//			shippingScreenHandler.setHomeScreenHandler(homeScreenHandler);
+//			shippingScreenHandler.setScreenTitle("Shipping Screen");
+//			shippingScreenHandler.setBController(placeOrderController);
+//			shippingScreenHandler.show();
 
 		} catch (MediaNotAvailableException e) {
 			// if some media are not available then display cart and break usecase Place Order
@@ -158,7 +164,7 @@ public class CartScreenHandler extends BaseScreenHandler {
 		labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
 		labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
 	}
-	
+
 	private void displayCartWithMediaAvailability(){
 		// clear all old cartMedia
 		vboxCart.getChildren().clear();

@@ -87,9 +87,12 @@ public class PaymentScreenHandler extends BaseScreenHandler {
 				expirationDate.getText(), securityCode.getText());
 
 		BaseScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
-		resultScreen.setPreviousScreen(this);
-		resultScreen.setHomeScreenHandler(homeScreenHandler);
-		resultScreen.setScreenTitle("Result Screen");
-		resultScreen.show();
+
+		// template method
+		resultScreen.showNextScreen("Result Screen");
+//		resultScreen.setPreviousScreen(this);
+//		resultScreen.setHomeScreenHandler(homeScreenHandler);
+//		resultScreen.setScreenTitle("Result Screen");
+//		resultScreen.show();
 	}
 }

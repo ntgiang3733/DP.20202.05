@@ -16,57 +16,78 @@ import views.screen.popup.PopupScreen;
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
-	private Scene scene;
-	private BaseScreenHandler prev;
-	protected final Stage stage;
-	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
-	private BaseController bController;
+    private Scene scene;
+    private BaseScreenHandler prev;
+    protected final Stage stage;
+    protected HomeScreenHandler homeScreenHandler;
+    protected Hashtable<String, String> messages;
+    private BaseController bController;
 
-	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-		super(screenPath);
-		this.stage = stage;
-	}
+    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(screenPath);
+        this.stage = stage;
+    }
 
-	public void setPreviousScreen(BaseScreenHandler prev) {
-		this.prev = prev;
-	}
+    public void setPreviousScreen(BaseScreenHandler prev) {
+        this.prev = prev;
+    }
 
-	public BaseScreenHandler getPreviousScreen() {
-		return this.prev;
-	}
+    public BaseScreenHandler getPreviousScreen() {
+        return this.prev;
+    }
 
-	public void show() {
-		if (this.scene == null) {
-			this.scene = new Scene(this.content);
-		}
-		this.stage.setScene(this.scene);
-		this.stage.show();
-	}
+    public void show() {
+        if (this.scene == null) {
+            this.scene = new Scene(this.content);
+        }
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 
-	public void setScreenTitle(String string) {
-		this.stage.setTitle(string);
-	}
+    public void setScreenTitle(String string) {
+        this.stage.setTitle(string);
+    }
 
-	public void setBController(BaseController bController){
-		this.bController = bController;
-	}
+    public void setBController(BaseController bController) {
+        this.bController = bController;
+    }
 
-	public BaseController getBController(){
-		return this.bController;
-	}
+    public BaseController getBController() {
+        return this.bController;
+    }
 
 
-	public void forward(Hashtable messages) {
-		this.messages = messages;
-	}
+    public void forward(Hashtable messages) {
+        this.messages = messages;
+    }
 
-	//stamp coupling: truyen doi tuong HomeScreenHandler
-	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
-		this.homeScreenHandler = HomeScreenHandler;
-	}
+    //stamp coupling: truyen doi tuong HomeScreenHandler
+    public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
+        this.homeScreenHandler = HomeScreenHandler;
+    }
+
+    public void showNextScreen(String title) {
+        setPreviousScreen(this);
+        setHomeScreenHandler(homeScreenHandler);
+        setScreenTitle(title);
+        show();
+    }
+
+    public void showNextScreen(String title, BaseController controller) {
+        setPreviousScreen(this);
+        setHomeScreenHandler(homeScreenHandler);
+        setScreenTitle(title);
+        setBController(controller);
+        show();
+    }
+
+    public void showNextScreen(HomeScreenHandler homeScreenHandler, BaseController controller) {
+        setHomeScreenHandler(homeScreenHandler);
+        setBController(controller);
+        show();
+    }
 
 }
