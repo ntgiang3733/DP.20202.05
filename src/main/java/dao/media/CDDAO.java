@@ -12,18 +12,29 @@ import java.util.Date;
  * @author
  */
 public class CDDAO extends MediaDAO {
+    private static CDDAO instance;
+
+    public static CDDAO getInstance() {
+        if (instance == null) {
+            instance = new CDDAO();
+        }
+        return instance;
+    }
+
+    private CDDAO() {
+    }
 
     // coupling: data -> chi phu thuoc mot so tham so
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
+        String sql = "SELECT * FROM " +
                 "aims.CD " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = CD.id " +
                 "where Media.id = " + id + ";";
 
         ResultSet res = AIMSDB.getConnection().createStatement().executeQuery(sql);
-        if(res.next()) {
+        if (res.next()) {
 
             // from media table
             String title = "";

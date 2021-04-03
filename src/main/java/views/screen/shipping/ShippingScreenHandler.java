@@ -61,6 +61,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		} catch (IOException ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error("Error when loading resources.");
+			super.setErrorMessage();
 		} catch (Exception ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error(ex.getMessage());
@@ -85,7 +86,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 	}
 
 	/**
-     * <h3><i>Procedural cohesion : submitDeliveryInfo() sau do den preprocessDeliveryInfo() </i></h3>
+     * Procedural cohesion : submitDeliveryInfo() sau do den preprocessDeliveryInfo() </br>
      * */
 
 	@FXML

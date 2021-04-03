@@ -32,6 +32,7 @@ public class ResultScreenHandler extends BaseScreenHandler {
 		} catch (IOException ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error("Error when loading resources.");
+			super.setErrorMessage();
 		} catch (Exception ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error(ex.getMessage());
@@ -58,11 +59,11 @@ public class ResultScreenHandler extends BaseScreenHandler {
 
 	@FXML
 	private Button okButton;
-	
+
 	@FXML
 	private Label messageLabel;
 
-	
+
 	@FXML
 	void confirmPayment(MouseEvent event) throws IOException { // stamp coupling: truyen doi tuong MouseEvent
 		homeScreenHandler.show();

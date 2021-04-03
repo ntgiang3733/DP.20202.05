@@ -12,17 +12,28 @@ import java.util.Date;
  * @author
  */
 public class DVDDAO extends MediaDAO {
+    private static DVDDAO instance;
+
+    public static DVDDAO getInstance() {
+        if (instance == null) {
+            instance = new DVDDAO();
+        }
+        return instance;
+    }
+
+    private DVDDAO() {
+    }
 
     // coupling: data -> chi phu thuoc mot so tham so
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
+        String sql = "SELECT * FROM " +
                 "aims.DVD " +
                 "INNER JOIN aims.Media " +
                 "ON Media.id = DVD.id " +
                 "where Media.id = " + id + ";";
         ResultSet res = AIMSDB.getConnection().createStatement().executeQuery(sql);
-        if(res.next()) {
+        if (res.next()) {
 
             // from media table
             String title = "";
