@@ -1,6 +1,7 @@
 package entity.media;
 
-import dao.media.MediaDAO;
+import dao.media.MediaDaoEnum;
+import dao.media.MediaDAOFactory;
 import entity.db.AIMSDB;
 import utils.Utils;
 
@@ -30,7 +31,7 @@ public class Media {
     public Media() throws SQLException{
         stm = AIMSDB.getConnection().createStatement();
     }
-    
+
     // coupling: data -> chi phu thuoc mot so tham so
     public Media (int id, String title, String category, int price, int quantity, String type) throws SQLException{
         this.id = id;
@@ -48,12 +49,12 @@ public class Media {
     }
 
     public int getQuantity() throws SQLException {
-        int updated_quantity = new MediaDAO().getMediaById(id).quantity;
+        int updated_quantity = MediaDAOFactory.getMediaDao(MediaDaoEnum.media).getMediaById(id).quantity;
         this.quantity = updated_quantity;
         return updated_quantity;
     }
 
-    // getter and setter 
+    // getter and setter
     public int getId() {
         return this.id;
     }

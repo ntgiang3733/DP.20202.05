@@ -14,6 +14,15 @@ import java.util.List;
  */
 public class MediaDAO {
 
+    private static MediaDAO instance;
+    public static MediaDAO getInstance(){
+        if(instance == null){
+            instance = new MediaDAO();
+        }
+        return instance;
+    }
+    protected MediaDAO() {}
+
     public List getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
