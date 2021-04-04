@@ -4,31 +4,29 @@ import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
-import entity.shipping.DeliveryInfo;
+import entity.shipping.ADeliveryInfo;
 import entity.shipping.ShippingConfigs;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.invoice.InvoiceScreenHandler;
 import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
-public class ShippingScreenHandler extends BaseScreenHandler {
+public class ShippingScreenHandler extends BaseNextScreenHandler {
 
 	private static final Logger LOGGER = Utils.getLogger(ShippingScreenHandler.class.getName());
 
@@ -60,6 +58,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		} catch (IOException ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error("Error when loading resources.");
+			setErrorMessage();
 		} catch (Exception ex) {
 			LOGGER.info(ex.getMessage());
 			PopupScreen.error(ex.getMessage());
@@ -82,25 +81,27 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		});
 
 	}
-	
+
 	/**
-     * <h3><i>Procedural cohesion : submitDeliveryInfo() sau do den preprocessDeliveryInfo() </i></h3>
+     * Procedural cohesion : submitDeliveryInfo() sau do den preprocessDeliveryInfo() </br>
      * */
 
 	@FXML
 	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
-
 		// validate delivery info and prepare order info
 		preprocessDeliveryInfo();
-		
+
 		// create invoice screen
 		Invoice invoice = getBController().createInvoice(order);
-		BaseScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
-		InvoiceScreenHandler.setPreviousScreen(this);
-		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
-		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
-		InvoiceScreenHandler.setBController(getBController());
-		InvoiceScreenHandler.show();
+		BaseNextScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
+
+		// template method
+		InvoiceScreenHandler.showScreen(this, homeScreenHandler, getBController());
+//		InvoiceScreenHandler.setPreviousScreen(this);
+//		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
+//		InvoiceScreenHandler.setBController(getBController());
+//		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
+//		InvoiceScreenHandler.show();
 	}
 
 	public void preprocessDeliveryInfo() throws IOException, InterruptedException {
@@ -111,7 +112,7 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		messages.put("address", address.getText());
 		messages.put("instructions", instructions.getText());
 		messages.put("province", province.getValue());
-		DeliveryInfo deliveryInfo;
+		ADeliveryInfo deliveryInfo;
 		try {
 			// process and validate delivery info
 			deliveryInfo = getBController().processDeliveryInfo(messages);
@@ -127,8 +128,14 @@ public class ShippingScreenHandler extends BaseScreenHandler {
 		return (PlaceOrderController) super.getBController();
 	}
 
+	@Override
+	protected void setTitleScreenToShow() {
+		setScreenTitle("Shipping Screen");
+	}
+
 	public void notifyError(){
 		// TODO: implement later on if we need
 	}
+
 
 }

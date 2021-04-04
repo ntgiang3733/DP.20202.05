@@ -13,6 +13,14 @@ import java.util.Date;
  * @author
  */
 public class BookDAO extends MediaDAO {
+    private static BookDAO instance;
+    public static BookDAO getInstance(){
+        if(instance == null){
+            instance = new BookDAO();
+        }
+        return instance;
+    }
+    private BookDAO() {}
 
     // coupling: data -> chi phu thuoc mot so tham so
     @Override
