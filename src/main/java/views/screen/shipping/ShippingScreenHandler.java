@@ -87,7 +87,8 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
      * */
 
 	@FXML
-	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
+	// cleancode: loai bo phuong thuc ko su dung
+/*	void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
 		// validate delivery info and prepare order info
 		preprocessDeliveryInfo();
 
@@ -102,7 +103,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
 //		InvoiceScreenHandler.setBController(getBController());
 //		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
 //		InvoiceScreenHandler.show();
-	}
+	}*/
 
 	public void preprocessDeliveryInfo() throws IOException, InterruptedException {
 		// add info to messages
@@ -133,9 +134,10 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
 		setScreenTitle("Shipping Screen");
 	}
 
-	public void notifyError(){
-		// TODO: implement later on if we need
-	}
+	// cleancode: loai bo phuong thuc ko su dung
+//	public void notifyError(){
+//		// TODO: implement later on if we need
+//	}
 
 
 }

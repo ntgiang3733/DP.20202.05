@@ -32,13 +32,15 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     }
 
     public void setPreviousScreen(BaseScreenHandler prev) {
+
         this.prev = prev;
     }
-
+    // cleancode: loai bo phuong thuc ko su dung
+    /*
     public BaseScreenHandler getPreviousScreen() {
         return this.prev;
     }
-
+*/
     public void show() {
         if (this.scene == null) {
             this.scene = new Scene(this.content);
@@ -59,10 +61,10 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
         return this.bController;
     }
 
-
-    public void forward(Hashtable messages) {
+    // cleancode: loai bo phuong thuc ko su dung
+   /* public void forward(Hashtable messages) {
         this.messages = messages;
-    }
+    }*/
 
     //stamp coupling: truyen doi tuong HomeScreenHandler
     public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {

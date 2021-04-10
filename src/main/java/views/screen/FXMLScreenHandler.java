@@ -30,9 +30,10 @@ public class FXMLScreenHandler {
 		return this.content;
 	}
 
-	public FXMLLoader getLoader() {
+	// cleancode: loai bo phuong thuc ko su dung
+/*	public FXMLLoader getLoader() {
 		return this.loader;
-	}
+	}*/
 
 	public void setImage(ImageView imv, String path){
 		File file = new File(path);

@@ -1,7 +1,7 @@
 package entity.user;
 
 public class User {
-    
+
     private int id;
     private String name;
     private String email;
@@ -19,7 +19,7 @@ public class User {
     public User cloneInformation() {
         return new User(this.id, this.name, this.email, this.address, this.phone);
     }
-    
+
     // override toString method
     @Override
     public String toString() {
@@ -36,17 +36,20 @@ public class User {
         return this.name;
     }
 
-    public void setusername(String name) {
-        this.name = name;
-    }
+    // cleancode: loai bo phuong thuc ko su dung
+//    public void setusername(String name) {
+//        this.name = name;
+//    }
 
-    public String getEmail() {
-        return this.email;
-    }
+    // cleancode: loai bo phuong thuc ko su dung
+//    public String getEmail() {
+//        return this.email;
+//    }
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    // cleancode: loai bo phuong thuc ko su dung
+//    public void setEmail(String email) {
+//        this.email = email;
+//    }
 
     public String getAddress() {
         return this.address;
@@ -63,5 +66,5 @@ public class User {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-    
+
 }

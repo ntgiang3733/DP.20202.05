@@ -3,19 +3,17 @@ package entity.media;
 import dao.media.MediaDaoEnum;
 import dao.media.MediaDAOFactory;
 import entity.db.AIMSDB;
-import utils.Utils;
-
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Logger;
 
 /**
  * The general media class, for another media it can be done by inheriting this class
- * @author nguyenlm
+ *
  */
 public class Media {
 
-    private static Logger LOGGER = Utils.getLogger(Media.class.getName());
+    // cleancode: bo phuong thuc ko su dung
+//    private static Logger LOGGER = Utils.getLogger(Media.class.getName());
 
     protected Statement stm;
     protected int id;
@@ -60,10 +58,11 @@ public class Media {
     }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    private Media setId(int id){
-        this.id = id;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    private Media setId(int id){
+//        this.id = id;
+//        return this;
+//    }
 
     public String getTitle() {
         return this.title;
@@ -75,15 +74,17 @@ public class Media {
         return this;
     }
 
-    public String getCategory() {
-        return this.category;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getCategory() {
+//        return this.category;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public Media setCategory(String category) {
-        this.category = category;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Media setCategory(String category) {
+//        this.category = category;
+//        return this;
+//    }
 
     public int getPrice() {
         return this.price;
@@ -100,10 +101,11 @@ public class Media {
     }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public Media setMediaURL(String url){
-        this.imageURL = url;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Media setMediaURL(String url){
+//        this.imageURL = url;
+//        return this;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
     public Media setQuantity(int quantity) {
@@ -119,5 +121,10 @@ public class Media {
     public Media setType(String type) {
         this.type = type;
         return this;
+    }
+
+    // cleancode: tranh truy cap qua sau vao ung dung
+    public boolean includeTitle(String text){
+        return this.getTitle().toLowerCase().startsWith(text.toLowerCase());
     }
 }

@@ -93,7 +93,6 @@ public class CartScreenHandler extends BaseNextScreenHandler {
                 exp.printStackTrace();
                 throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
             }
-
         });
     }
 
@@ -163,7 +162,9 @@ public class CartScreenHandler extends BaseNextScreenHandler {
     void updateCartAmount() {
         // calculate subtotal and amount
         int subtotal = getBController().getCartSubtotal();
-        int vat = (int) ((ViewsConfig.PERCENT_VAT / 100) * subtotal);
+        // cleancode: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
+//        int vat = (int) ((ViewsConfig.PERCENT_VAT / 100) * subtotal);
+        int vat = (int) ((ViewsConfig.PERCENT_VAT) * subtotal);
         int amount = subtotal + vat;
         LOGGER.info("amount" + amount);
 

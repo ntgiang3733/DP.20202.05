@@ -75,7 +75,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
         try {
-            setupData(null);
+            setupData();
             setupFunctionality();
         } catch (IOException ex) {
             LOGGER.info(ex.getMessage());
@@ -87,16 +87,19 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    public Label getNumMediaCartLabel() {
-        return this.numMediaInCart;
-    }
+    // cleancode: loai bo phuong thuc ko su dung
+//    public Label getNumMediaCartLabel() {
+//        return this.numMediaInCart;
+//    }
 
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
 
     // stamp coupling
-    protected void setupData(Object dto) throws Exception {
+    // cleancode: loai bo tham so ko su dung
+//    protected void setupData(Object dto) throws Exception {
+        protected void setupData() throws Exception {
         setBController(new HomeController());
         this.authenticationController = AuthenticationController.getInstance();
         try {
@@ -149,7 +152,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             });
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListCartMedia().size()) + " media");
         super.show();
     }
 
@@ -203,7 +206,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+                // cleancode: tranh truy cap qua sau vao doi tuong
+//                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+                if (media.getMedia().includeTitle(text)) {
                     filteredItems.add(media);
                 }
             });
@@ -236,7 +241,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             if (mediaInCart != null) {
                 mediaInCart.setQuantity(mediaInCart.getQuantity() + 1);
             } else {
-                CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
+                // cleancode: xoa phuong thuc khong su dung
+                // old: CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
+                CartItem cartItem = new CartItem(media, requestQuantity, media.getPrice());
                 cart.addCartMedia(cartItem);
                 LOGGER.info("Added " + cartItem.getQuantity() + " " + media.getTitle() + " to cart");
             }

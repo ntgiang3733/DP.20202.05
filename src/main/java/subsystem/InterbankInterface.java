@@ -43,7 +43,8 @@ public interface InterbankInterface {
 	 *                               something goes wrong
 	 */
 	//stamp coupling
-	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
-			throws PaymentException, UnrecognizedException;
+	// cleancode: loai bo phuong thuc ko su dung
+//	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
+//			throws PaymentException, UnrecognizedException;
 
 }

@@ -66,9 +66,10 @@ public class ResultScreenHandler extends BaseNextScreenHandler {
 
 
     @FXML
-    void confirmPayment(MouseEvent event) throws IOException { // stamp coupling: truyen doi tuong MouseEvent
+        // cleancode: loai bo phuong thuc ko su dung
+    /*void confirmPayment(MouseEvent event) throws IOException { // stamp coupling: truyen doi tuong MouseEvent
         homeScreenHandler.show();
-    }
+    }*/
 
     @Override
     protected void setTitleScreenToShow() {

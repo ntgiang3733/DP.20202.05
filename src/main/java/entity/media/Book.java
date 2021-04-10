@@ -18,9 +18,10 @@ public class Book extends Media {
     String language;
     String bookCategory;
 
-    public Book() throws SQLException{
-
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Book() throws SQLException{
+//
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
     public Book(int id, String title, String category, int price, int quantity, String type, String author,
@@ -50,46 +51,56 @@ public class Book extends Media {
         this.author = author;
         return this;
     }
-
-    public String getCoverType() {
-        return this.coverType;
-    }
-
-    // coupling: data -> chi phu thuoc mot so tham so
-    public Book setCoverType(String coverType) {
-        this.coverType = coverType;
-        return this;
-    }
-
-    public String getPublisher() {
-        return this.publisher;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getCoverType() {
+//        return this.coverType;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public Book setPublisher(String publisher) {
-        this.publisher = publisher;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Book setCoverType(String coverType) {
+//        this.coverType = coverType;
+//        return this;
+//    }
 
-    public Date getPublishDate() {
-        return this.publishDate;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getPublisher() {
+//        return this.publisher;
+//    }
+
+    // coupling: data -> chi phu thuoc mot so tham so
+    // cleancode: bo phuong thuc ko su dung
+//    public Book setPublisher(String publisher) {
+//        this.publisher = publisher;
+//        return this;
+//    }
+
+    // cleancode: bo phuong thuc ko su dung
+//    public Date getPublishDate() {
+//        return this.publishDate;
+//    }
 
     //stamp coupling: truyen doi tuong Date
-    public Book setPublishDate(Date publishDate) {
-        this.publishDate = publishDate;
-        return this;
-    }
 
-    public int getNumOfPages() {
-        return this.numOfPages;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Book setPublishDate(Date publishDate) {
+//        this.publishDate = publishDate;
+//        return this;
+//    }
+
+
+    // cleancode: bo phuong thuc ko su dung
+//    public int getNumOfPages() {
+//        return this.numOfPages;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public Book setNumOfPages(int numOfPages) {
-        this.numOfPages = numOfPages;
-        return this;
-    }
+
+    // cleancode: bo phuong thuc ko su dung
+//    public Book setNumOfPages(int numOfPages) {
+//        this.numOfPages = numOfPages;
+//        return this;
+//    }
 
     public String getLanguage() {
         return this.language;
@@ -101,15 +112,17 @@ public class Book extends Media {
         return this;
     }
 
-    public String getBookCategory() {
-        return this.bookCategory;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getBookCategory() {
+//        return this.bookCategory;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public Book setBookCategory(String bookCategory) {
-        this.bookCategory = bookCategory;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Book setBookCategory(String bookCategory) {
+//        this.bookCategory = bookCategory;
+//        return this;
+//    }
 
     @Override
     public String toString() {

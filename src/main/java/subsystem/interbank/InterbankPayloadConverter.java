@@ -15,7 +15,6 @@ import java.util.Map;
  */
 public class InterbankPayloadConverter {
 
-
     private static InterbankPayloadConverter instance;
 
     public static InterbankPayloadConverter getInstance(){
@@ -113,7 +112,7 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // coupling: data -> chá»‰ phá»¥ thuá»™c vÃ o má»™t sá»‘ tham sá»‘
+    // coupling: data ->
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {

@@ -27,7 +27,9 @@ public class ViewsConfig {
     public static final String HOME_MEDIA_PATH = "/views/fxml/media_home.fxml";
     public static final String POPUP_PATH = "/views/fxml/popup.fxml";
 
-    public static float PERCENT_VAT = 10;
+    // cleancode: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
+//    public static float PERCENT_VAT = 10;
+    public static float PERCENT_VAT = 0.1f;
 
     public static Font REGULAR_FONT = Font.font("Segoe UI", FontWeight.NORMAL, FontPosture.REGULAR, 24);
 

@@ -29,7 +29,7 @@ public class BaseController {
      * @return List[CartMedia]
      */
     public List getListCartMedia(){
-        return SessionInformation.getInstance().getCartInstance().getListMedia();//common coupling: dung bien toan cuc cartInstance
+        return SessionInformation.getInstance().getCartInstance().getListCartMedia();//common coupling: dung bien toan cuc cartInstance
     }
 
     protected boolean validateString(String patternString, String str){

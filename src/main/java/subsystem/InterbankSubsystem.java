@@ -43,8 +43,9 @@ public class InterbankSubsystem implements InterbankInterface {
 	 *      String)
 	 */
 	//stamp coupling
-	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
-		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
-		return transaction;
-	}
+	// cleancode: loai bo phuong thuc ko su dung
+//	public PaymentTransaction refund(CreditCard card, int amount, String contents) {
+//		PaymentTransaction transaction = ctrl.refund(card, amount, contents);
+//		return transaction;
+//	}
 }

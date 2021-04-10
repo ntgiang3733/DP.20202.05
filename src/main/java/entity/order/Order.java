@@ -28,7 +28,7 @@ public class Order {
   //stamp coupling: truyen doi tuong Cart
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.getInstance().getCartInstance().getListMedia()) {
+        for (Object object : SessionInformation.getInstance().getCartInstance().getListCartMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
@@ -37,7 +37,9 @@ public class Order {
         }
         this.orderMediaList = Collections.unmodifiableList(orderItems);
         this.subtotal = cart.calSubtotal();
-        this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+        // cleancode: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
+//        old: this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+        this.tax = (int) (ViewsConfig.PERCENT_VAT) * subtotal;
     }
 
     public List getListOrderMedia() {
@@ -63,17 +65,19 @@ public class Order {
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
     }
 
-    public List getOrderMediaList() {
-        return orderMediaList;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public List getOrderMediaList() {
+//        return orderMediaList;
+//    }
 
     public int getSubtotal() {
         return subtotal;
     }
 
-    public int getTax() {
-        return tax;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public int getTax() {
+//        return tax;
+//    }
 
     public int getTotal() {
         return this.subtotal + this.tax + this.shippingFees;

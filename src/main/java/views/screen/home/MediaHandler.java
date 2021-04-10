@@ -62,6 +62,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     Media getMedia(){
         return media;
     }
+
     int getRequestQuantity() {
         return spinnerChangeNumber.getValue();
     }

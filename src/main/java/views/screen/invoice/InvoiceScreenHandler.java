@@ -110,7 +110,8 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
      * Communication cohesion
      */
     @FXML
-    void confirmInvoice(MouseEvent event) throws IOException {
+    // cleancode: loai bo phuong thuc ko su dung
+   /* void confirmInvoice(MouseEvent event) throws IOException {
         BaseNextScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
 
         // template method
@@ -121,7 +122,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
 //		paymentScreen.setScreenTitle("Payment Screen");
 //		paymentScreen.show();
         LOGGER.info("Confirmed invoice");
-    }
+    }*/
 
     @Override
     protected void setTitleScreenToShow() {

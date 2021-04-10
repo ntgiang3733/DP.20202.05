@@ -12,7 +12,7 @@ public class InterbankSubsystemController {
 	 // stamp coupling: truyen doi tuong CreditCard
 	public PaymentTransaction refund(ACard card, int amount, String contents) {
 		return null;
-	}//stamp coupling
+	}
 
 	 // stamp coupling: truyen doi tuong CreditCard
 	public PaymentTransaction payOrder(ACard card, int amount, String contents) {

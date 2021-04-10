@@ -23,10 +23,12 @@ public class MediaDAO {
     }
     protected MediaDAO() {}
 
-    public List getAllMedia() throws SQLException {
+    public List<Media> getAllMedia() throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery("select * from Media");
-        ArrayList medium = new ArrayList<>();
+        // cleancode: kieu du lieu ko ro rang
+//        ArrayList medium = new ArrayList<>();
+        ArrayList<Media> medium = new ArrayList<>();
         while (res.next()) {
             Media media = new Media(
                     res.getInt("id"),
@@ -65,7 +67,8 @@ public class MediaDAO {
      * SOLID: LSP vi neu cac doi tuong BookDAO, CDDAO, DVDDAO dung chuc nang updateMediaFieldById se bi loi
      * SOLID: OCP neu value khong phai la mot Stirng, thi phuong thuc toString() cua value se duoc goi. Neu khong muon dung phuong thuc toString mac dinh thi can phai sua code o phan nay de co the chay dung
      * */
-    public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
+    // cleancode: loai bo phuong thuc ko su dung
+   /* public void updateMediaFieldById(String tbname, int id, String field, Object value) throws SQLException {
         Statement stm = AIMSDB.getConnection().createStatement();
         if (value instanceof String){
             value = "\"" + value + "\"";
@@ -73,5 +76,5 @@ public class MediaDAO {
         stm.executeUpdate(" update Media set" + " "
                 + field + "=" + value + " "
                 + "where id=" + id + ";");
-    }
+    }*/
 }
