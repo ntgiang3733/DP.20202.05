@@ -17,6 +17,8 @@ import java.util.Objects;
  * @author
  */
 //SOLID: vi pham nguyen li LSP vi class nay khong dung den cac method trong BaseController
+	// singleton
+	//
 public class AuthenticationController extends BaseController {
 
 
@@ -66,8 +68,8 @@ public class AuthenticationController extends BaseController {
 		}
 	}
 
-    
-    
+
+
     public void logout() {
         SessionInformation.getInstance().setMainUser(null);//common coupling: dung bien toan cuc mainUser
         SessionInformation.getInstance().setExpiredTime(null);//common coupling: dung bien toan cuc expiredTime

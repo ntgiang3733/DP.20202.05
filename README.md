@@ -44,4 +44,5 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 - manhvd   - Software Engeneering Student - k61
 - hieudm   - ICT - k61
 
-# Report: [link](https://docs.google.com/document/d/1Qwyu55cJ5IbRX727-MpSSpOZVuM7tI3UsF2TJf6ac4s/edit)
+
+# Report: [link](https://docs.google.com/document/d/1Qwyu55cJ5IbRX727-MpSSpOZVuM7tI3UsF2TJf6ac4s/edit?usp=sharing)

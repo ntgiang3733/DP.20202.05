@@ -2,21 +2,22 @@ package subsystem;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
+import entity.payment.ACard;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
 
 /**
  * The {@code InterbankInterface} class is used to communicate with the
  * {@link InterbankSubsystem InterbankSubsystem} to make transaction
- * 
+ *
  * @author hieud
- * 
+ *
  */
 public interface InterbankInterface {
 
 	/**
 	 * Pay order, and then return the payment transaction
-	 * 
+	 *
 	 * @param card     - the credit card used for payment
 	 * @param amount   - the amount to pay
 	 * @param contents - the transaction contents
@@ -26,12 +27,12 @@ public interface InterbankInterface {
 	 * @throws UnrecognizedException if responded with an unknown error code or
 	 *                               something goes wrong
 	 */
-	public abstract PaymentTransaction payOrder(CreditCard card, int amount, String contents)
+	public abstract PaymentTransaction payOrder(ACard card, int amount, String contents)
 			throws PaymentException, UnrecognizedException;
 
 	/**
 	 * Refund, and then return the payment transaction
-	 * 
+	 *
 	 * @param card     - the credit card which would be refunded to
 	 * @param amount   - the amount to refund
 	 * @param contents - the transaction contents
@@ -42,7 +43,8 @@ public interface InterbankInterface {
 	 *                               something goes wrong
 	 */
 	//stamp coupling
-	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
-			throws PaymentException, UnrecognizedException;
+	// cleancode: loai bo phuong thuc ko su dung
+//	public abstract PaymentTransaction refund(CreditCard card, int amount, String contents)
+//			throws PaymentException, UnrecognizedException;
 
 }

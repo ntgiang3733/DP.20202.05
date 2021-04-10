@@ -3,22 +3,23 @@ package entity.order;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
-import entity.shipping.DeliveryInfo;
+import entity.shipping.ADeliveryInfo;
 import views.screen.ViewsConfig;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+//  factory method: Co the co them RushOder
 public class Order {
 
     private int shippingFees;
     private int subtotal;
     private int tax;
     private List orderMediaList;
-    protected DeliveryInfo deliveryInfo;
+    protected ADeliveryInfo deliveryInfo;
 
-    public Order() {
+    protected Order() {
         this.shippingFees = 0;
         this.subtotal = 0;
         this.tax = 0;
@@ -27,7 +28,7 @@ public class Order {
   //stamp coupling: truyen doi tuong Cart
     public Order(Cart cart) {
         List<OrderItem> orderItems = new ArrayList<>();
-        for (Object object : SessionInformation.getInstance().getCartInstance().getListMedia()) {
+        for (Object object : SessionInformation.getInstance().getCartInstance().getListCartMedia()) {
             CartItem cartItem = (CartItem) object;
             OrderItem orderItem = new OrderItem(cartItem.getMedia(),
                     cartItem.getQuantity(),
@@ -36,7 +37,9 @@ public class Order {
         }
         this.orderMediaList = Collections.unmodifiableList(orderItems);
         this.subtotal = cart.calSubtotal();
-        this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+        // cleancode: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
+//        old: this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
+        this.tax = (int) (ViewsConfig.PERCENT_VAT) * subtotal;
     }
 
     public List getListOrderMedia() {
@@ -48,7 +51,7 @@ public class Order {
         return this.shippingFees;
     }
 
-    public DeliveryInfo getDeliveryInfo() {
+    public ADeliveryInfo getDeliveryInfo() {
         return deliveryInfo;
     }
 
@@ -57,22 +60,24 @@ public class Order {
      * Communication cohesion: viec tinh shippingFees khong lien quan toi phuong thuc setDeliveryInfo, chung chi lien quan toi du lieu
      * SOLID: SRP vi chuc nang setDeliveryInfo khong nen thay doi shippingFees
      * */
-    public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
+    public void setDeliveryInfo(ADeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
     }
 
-    public List getOrderMediaList() {
-        return orderMediaList;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public List getOrderMediaList() {
+//        return orderMediaList;
+//    }
 
     public int getSubtotal() {
         return subtotal;
     }
 
-    public int getTax() {
-        return tax;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public int getTax() {
+//        return tax;
+//    }
 
     public int getTotal() {
         return this.subtotal + this.tax + this.shippingFees;
