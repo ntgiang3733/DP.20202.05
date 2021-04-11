@@ -7,6 +7,7 @@ import entity.order.Order;
 import entity.shipping.ADeliveryInfo;
 import entity.shipping.DistanceCalculatorFactory;
 import entity.shipping.DeliveryInfo;
+import utils.Utils;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -120,7 +121,9 @@ public class PlaceOrderController extends BaseController {
 
     // data coupling
     public boolean validatePhoneNumber(String phoneNumber) {
-        if (phoneNumber.length() != 10) return false;
+        // cleancode: ko su dung hang so
+        // if (phoneNumber.length() != 10) return false;
+        if (phoneNumber.length() != Utils.PHONE_NUMBER_LENGTH) return false;
         if (!phoneNumber.startsWith("0")) return false;
         try {
             Integer.parseInt(phoneNumber);

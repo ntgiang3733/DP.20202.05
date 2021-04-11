@@ -99,7 +99,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     // stamp coupling
     // cleancode: loai bo tham so ko su dung
 //    protected void setupData(Object dto) throws Exception {
-        protected void setupData() throws Exception {
+    protected void setupData() throws Exception {
         setBController(new HomeController());
         this.authenticationController = AuthenticationController.getInstance();
         try {
@@ -178,7 +178,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
+                // cleancode: ko su dung hang so
+//                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
+                while (vBox.getChildren().size() < Utils.SIZE_OF_HOME_ITEM && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
                     vBox.getChildren().add(media.getContent());
                     mediaItems.remove(media);

@@ -25,4 +25,6 @@ public class Utils {
 		return Logger.getLogger(className);
 	}
 
+	public static int PHONE_NUMBER_LENGTH = 10;
+	public static int SIZE_OF_HOME_ITEM = 3;
 }
