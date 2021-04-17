@@ -18,6 +18,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Utils;
@@ -30,6 +31,8 @@ import views.screen.shipping.ShippingScreenHandler;
 public class CartScreenHandler extends BaseNextScreenHandler {
     private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
     PlaceOrderController placeOrderController;
+    final String bannerPath = "/LOGO.png";
+
     @FXML
     private ImageView aimsImage;
 
@@ -69,21 +72,18 @@ public class CartScreenHandler extends BaseNextScreenHandler {
         }
     }
 
-    /**
-     * Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</br>
-     */
-    protected void setupFunctionality() throws Exception {
-        // fix relative image path caused by fxml
-        File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
+    // cleancode
+    void setAimsImage() {
+        File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
         Image im = new Image(file.toURI().toString());
         aimsImage.setImage(im);
-
-        // on mouse clicked, we back to home
         aimsImage.setOnMouseClicked(e -> {
             homeScreenHandler.show();
         });
+    }
 
-        // on mouse clicked, we start processing place order use case
+    // cleancode
+    void setBtnPlaceOrder() {
         btnPlaceOrder.setOnMouseClicked(e -> {
             LOGGER.info("Place Order button clicked");
             try {
@@ -94,6 +94,41 @@ public class CartScreenHandler extends BaseNextScreenHandler {
                 throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
+    }
+
+    /**
+     * Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</br>
+     */
+    protected void setupFunctionality() throws Exception {
+        // fix relative image path caused by fxml
+        // cleancode: tach thanh cac khoi lenh
+        /*
+        // cleancode: ko su dung string magic
+//        File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
+        File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
+        Image im = new Image(file.toURI().toString());
+        aimsImage.setImage(im);
+
+        // on mouse clicked, we back to home
+        aimsImage.setOnMouseClicked(e -> {
+            homeScreenHandler.show();
+        });*/
+        setAimsImage();
+
+        // cleancode: tach thanh cac khoi lenh nho
+        /*
+        // on mouse clicked, we start processing place order use case
+        btnPlaceOrder.setOnMouseClicked(e -> {
+            LOGGER.info("Place Order button clicked");
+            try {
+                requestToPlaceOrder();
+            } catch (SQLException | IOException exp) {
+                LOGGER.severe("Cannot place the order, see the logs");
+                exp.printStackTrace();
+                throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
+            }
+        });*/
+        setBtnPlaceOrder();
     }
 
     public ViewCartController getBController() {
@@ -115,11 +150,39 @@ public class CartScreenHandler extends BaseNextScreenHandler {
         show();
     }
 
+
+    //cleancode: tao ra cac function nho
+    Order generateOrder() throws SQLException {
+        try {
+            placeOrderController = PlaceOrderController.getInstance();
+            if (placeOrderController.getListCartMedia().size() == 0) {
+                throw new PlaceOrderException("You don't have anything to place");
+            }
+            placeOrderController.placeOrder();
+
+            displayCartWithMediaAvailability();
+
+            return placeOrderController.createOrder();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    //cleancode: tao ra cac function nho
+    private void showShippingScreen(Order order) throws IOException {
+        ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
+                this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
+
+        shippingScreenHandler.showScreen(this, homeScreenHandler, placeOrderController);
+
+    }
+
     /**
      * Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</br>
      * Template method
      */
-    public void requestToPlaceOrder() throws SQLException, IOException {
+    // cleancode: gom cac doan code thanh cac function
+    /*public void requestToPlaceOrder() throws SQLException, IOException {
         try {
             // create placeOrderController and process the order
             placeOrderController = PlaceOrderController.getInstance();
@@ -152,6 +215,16 @@ public class CartScreenHandler extends BaseNextScreenHandler {
             // if some media are not available then display cart and break usecase Place Order
             displayCartWithMediaAvailability();
         }
+    }*/
+    public void requestToPlaceOrder() throws SQLException, IOException {
+        try {
+            Order order = generateOrder();
+            showShippingScreen(order);
+        } catch (PlaceOrderException e1) {
+            PopupScreen.error(e1.getMessage());
+        } catch (MediaNotAvailableException e) {
+            displayCartWithMediaAvailability();
+        }
     }
 
     public void updateCart() throws SQLException {
@@ -174,6 +247,26 @@ public class CartScreenHandler extends BaseNextScreenHandler {
         labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
     }
 
+
+    // cleancode
+    AnchorPane getContentMediaCart(CartItem cartItem) throws IOException {
+        MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH, this);
+        mediaCartScreen.setCartItem(cartItem);
+        return mediaCartScreen.getContent();
+    }
+
+    // cleancode
+    void updateVboxCard(List lstMedia) throws IOException {
+        for (Object cm : lstMedia) {
+            // display the attribute of vboxCart media
+            AnchorPane content = getContentMediaCart((CartItem) cm);
+            // add spinner
+            vboxCart.getChildren().add(content);
+        }
+    }
+
+    // cleancode: tach thanh cac function nho
+    /*
     private void displayCartWithMediaAvailability() {
         // clear all old cartMedia
         vboxCart.getChildren().clear();
@@ -193,6 +286,16 @@ public class CartScreenHandler extends BaseNextScreenHandler {
                 vboxCart.getChildren().add(mediaCartScreen.getContent());
             }
             // calculate subtotal and amount
+            updateCartAmount();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }*/
+    private void displayCartWithMediaAvailability() {
+        vboxCart.getChildren().clear();
+        List lstMedia = getBController().getListCartMedia();
+        try {
+            updateVboxCard(lstMedia);
             updateCartAmount();
         } catch (IOException e) {
             e.printStackTrace();

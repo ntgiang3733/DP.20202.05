@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
+import views.screen.ResponseMessage;
 import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 
@@ -86,17 +87,22 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
     void confirmToPayOrder() throws IOException {
         String contents = "pay order";
         PaymentController ctrl = (PaymentController) getBController();
-        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
+
+        // cleancode: tao doi tuong responseMessage
+//        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
+//                expirationDate.getText(), securityCode.getText());
+        
+        ResponseMessage response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
                 expirationDate.getText(), securityCode.getText());
 
         BaseNextScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
 
         // template method
         resultScreen.showScreen(this, homeScreenHandler, null);
-//		resultScreen.setPreviousScreen(this);
-//		resultScreen.setHomeScreenHandler(homeScreenHandler);
-//		resultScreen.setScreenTitle("Result Screen");
-//		resultScreen.show();
+		/*resultScreen.setPreviousScreen(this);
+		resultScreen.setHomeScreenHandler(homeScreenHandler);
+		resultScreen.setScreenTitle("Result Screen");
+		resultScreen.show();*/
     }
 
     @Override

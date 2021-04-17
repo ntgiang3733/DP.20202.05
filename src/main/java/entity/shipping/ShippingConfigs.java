@@ -5,6 +5,8 @@ package entity.shipping;
  */
 public class ShippingConfigs {
 
+    public static final float DISTANCE_CALCULATOR_FEE = 1.2f;
+
     public static String[] PROVINCES = {
             "Bắc Giang", "Bắc Kạn", "Cao Bằng", "Hà Giang", "Lạng Sơn", "Phú Thọ",
             "Quảng Ninh", "Thái Nguyên", "Tuyên Quang", "Yên Bái", "Điện Biên", "Hòa Bình",

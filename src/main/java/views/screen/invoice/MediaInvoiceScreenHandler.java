@@ -43,20 +43,29 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
     public MediaInvoiceScreenHandler(String screenPath) throws IOException{
         super(screenPath);
     }
-    //stamp coupling    
+    //stamp coupling
     public void setOrderItem(OrderItem orderItem) throws SQLException{
         this.orderItem = orderItem;
         setMediaInfo();
     }
 
+    // cleancode: setCorverImage
+    void setCoverImage(){
+        setImage(image, orderItem.getMedia().getImageURL());
+        image.setPreserveRatio(false);
+        image.setFitHeight(90);
+        image.setFitWidth(83);
+    }
     public void setMediaInfo() throws SQLException{
         title.setText(orderItem.getMedia().getTitle());
         price.setText(ViewsConfig.getCurrencyFormat(orderItem.getPrice()));
         numOfProd.setText(String.valueOf(orderItem.getQuantity()));
-        setImage(image, orderItem.getMedia().getImageURL());
+        setCoverImage();
+        // cleancode: tach thanh function nho
+      /*  setImage(image, orderItem.getMedia().getImageURL());
 		image.setPreserveRatio(false);
 		image.setFitHeight(90);
-		image.setFitWidth(83);
+		image.setFitWidth(83);*/
     }
 
 }

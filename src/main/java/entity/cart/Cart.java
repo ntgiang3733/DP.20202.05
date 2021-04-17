@@ -49,6 +49,8 @@ public class Cart {
         lstCartItem.clear();
     }
 
+    // cleancode: su dung ten bien co nghia
+    /*
     public int getTotalMedia() {
         int total = 0;
         for (Object obj : lstCartItem) {
@@ -56,11 +58,20 @@ public class Cart {
             total += cm.getQuantity();
         }
         return total;
+    }*/
+    public int getTotalMedia() {
+        int total = 0;
+        for (CartItem cartItem : lstCartItem) {
+            total += cartItem.getQuantity();
+        }
+        return total;
     }
 
     /**
      * Communication cohesion: phuong thuc getPrice va getQuantity co lien quan toi cm
      */
+    // cleancode: su dung ten bien co nghia
+    /*
     public int calSubtotal() {
         int total = 0;
         for (Object obj : lstCartItem) {
@@ -70,17 +81,30 @@ public class Cart {
             total += cm.getTotal();
         }
         return total;
+    }*/
+    public int calSubtotal() {
+        int total = 0;
+        for (CartItem cartItem : lstCartItem) {
+            total += cartItem.getTotal();
+        }
+        return total;
     }
 
-    public void checkAvailabilityOfProduct() throws SQLException {
+    // cleancode: su dung ten bien co nghia
+    // cleancode: bo sung phuong thuc availableQuantity
+/*    public void checkAvailabilityOfProduct() throws SQLException {
         boolean allAvailable = true;
         for (Object object : lstCartItem) {
             CartItem cartItem = (CartItem) object;
 //            int requiredQuantity = cartItem.getQuantity();
 //            int availQuantity = cartItem.getMedia().getQuantity();
 //            if (requiredQuantity > availQuantity) allAvailable = false;
-
-            // cleancode: bo sung phuong thuc availableQuantity
+        }
+        if (!allAvailable) throw new MediaNotAvailableException("Some media not available");
+    }*/
+    public void checkAvailabilityOfProduct() throws SQLException {
+        boolean allAvailable = true;
+        for (CartItem cartItem : lstCartItem) {
             allAvailable = cartItem.availableQuantity();
         }
         if (!allAvailable) throw new MediaNotAvailableException("Some media not available");

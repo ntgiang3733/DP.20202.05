@@ -8,6 +8,8 @@ import common.exception.UnrecognizedException;
 import entity.payment.*;
 import subsystem.InterbankInterface;
 import subsystem.InterbankSubsystem;
+import utils.DateTimeUtils;
+import views.screen.ResponseMessage;
 
 
 /**
@@ -40,6 +42,8 @@ public class PaymentController extends BaseController {
      *                              in the expected format
      */
     // coupling: data -> chi phu thuoc 1 tham so
+    // cleancode: dua cac cau dieu kien vao 1 function
+    /*
     private String getExpirationDate(String date) throws InvalidCardException {
         String[] strs = date.split("/");
         if (strs.length != 2) {
@@ -64,6 +68,15 @@ public class PaymentController extends BaseController {
 
         return expirationDate;
     }
+*/
+    private String getExpirationDate(String date) throws InvalidCardException {
+        try {
+            String[] strs = DateTimeUtils.getMonthYearFromString(date);
+            return DateTimeUtils.getExpiredDate(strs[0], strs[1]);
+        } catch (Exception exc) {
+            throw new InvalidCardException();
+        }
+    }
 
     /**
      * Pay order, and then return the result with a message.
@@ -81,6 +94,9 @@ public class PaymentController extends BaseController {
      */
     // coupling: data -> chi phu thuoc mot so tham so
     //SOLID: vi pham nguyen ly OCP vi them phuong thuc thanh toan phai sua payOrder
+   /*
+      // cleancode: chuyen cac cau lenh thanh 1 function
+      // cleancode: return ngay khi co the
     public Map<String, String> payOrder(int amount, String contents, String cardNumber, String cardHolderName,
                                         String expirationDate, String securityCode) {
         Map<String, String> result = new Hashtable<String, String>();
@@ -92,7 +108,6 @@ public class PaymentController extends BaseController {
                     getExpirationDate(expirationDate),
                     Integer.parseInt(securityCode));
 
-
             this.interbank = new InterbankSubsystem();
             PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
 
@@ -102,6 +117,22 @@ public class PaymentController extends BaseController {
             result.put("MESSAGE", ex.getMessage());
         }
         return result;
+    }
+*/
+    public ResponseMessage payOrder(int amount, String contents, String cardNumber, String cardHolderName,
+                                        String expirationDate, String securityCode) {
+        try {
+            this.card = (CreditCard) CardFactory.createCreditCard(
+                    cardNumber,
+                    cardHolderName,
+                    getExpirationDate(expirationDate),
+                    Integer.parseInt(securityCode));
+            this.interbank = new InterbankSubsystem();
+            PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
+            return new ResponseMessage("PAYMENT SUCCESSFUL!", "You have successfully paid the order!");
+        } catch (PaymentException | UnrecognizedException ex) {
+            return new ResponseMessage( "PAYMENT FAILED!",  ex.getMessage());
+        }
     }
 
     /**
