@@ -67,13 +67,24 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         return spinnerChangeNumber.getValue();
     }
 
-    private void setMediaInfo() throws SQLException {
-        // set the cover image of media
+
+    // cleancode: tach thanh cac function nho
+    void setCoverImage(){
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setFitHeight(160);
         mediaImage.setFitWidth(152);
         mediaImage.setImage(image);
+    }
+    private void setMediaInfo() throws SQLException {
+        // cleancode: tach thanh ham setCoverImage
+        setCoverImage();
+       /* // set the cover image of media
+        File file = new File(media.getImageURL());
+        Image image = new Image(file.toURI().toString());
+        mediaImage.setFitHeight(160);
+        mediaImage.setFitWidth(152);
+        mediaImage.setImage(image);*/
 
         mediaTitle.setText(media.getTitle());
         mediaPrice.setText(ViewsConfig.getCurrencyFormat(media.getPrice()));

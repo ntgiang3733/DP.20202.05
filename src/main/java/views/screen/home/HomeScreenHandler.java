@@ -41,6 +41,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
 
+    final int BOOK_POSITION = 0;
+    final int DVD_POSITION = 1;
+    final int CD_POSITION = 2;
+
     @FXML
     private Label numMediaInCart;
 
@@ -136,9 +140,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             }
         });
         addMediaHome(this.homeItems);
-        addMenuItem(0, "Book", splitMenuBtnSearch);
-        addMenuItem(1, "DVD", splitMenuBtnSearch);
-        addMenuItem(2, "CD", splitMenuBtnSearch);
+        // cleancode: ko su dung magic_number
+        addMenuItem(BOOK_POSITION, "Book", splitMenuBtnSearch);
+        addMenuItem(DVD_POSITION, "DVD", splitMenuBtnSearch);
+        addMenuItem(CD_POSITION, "CD", splitMenuBtnSearch);
     }
 
     @Override
@@ -190,22 +195,39 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    private void addMenuItem(int position, String text, MenuButton menuButton) {
-        MenuItem menuItem = new MenuItem();
+    // cleancode: tach thanh ham setLabelMenuItem
+    Label getLabelMenuItem(String text, MenuButton menuButton) {
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
         label.setText(text);
         label.setTextAlignment(TextAlignment.RIGHT);
+        return label;
+    }
+
+    private void addMenuItem(int position, String text, MenuButton menuButton) {
+        MenuItem menuItem = new MenuItem();
+
+        //cleancode: tach thanh ham setLabelMenuItem
+        Label label = getLabelMenuItem(text, menuButton);
+        /*
+        Label label = new Label();
+        label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
+        label.setText(text);
+        label.setTextAlignment(TextAlignment.RIGHT);
+        */
         menuItem.setGraphic(label);
         menuItem.setOnAction(e -> {
+            // cleancode: tach thanh function nho
             // empty home media
-            hboxMedia.getChildren().forEach(node -> {
+            /*hboxMedia.getChildren().forEach(node -> {
                 VBox vBox = (VBox) node;
                 vBox.getChildren().clear();
-            });
+            });*/
+            emptyHomeMedia();
 
+            // cleancode: tach thanh function nho
             // filter only media with the choosen category
-            List filteredItems = new ArrayList<>();
+           /* List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
                 // cleancode: tranh truy cap qua sau vao doi tuong
@@ -213,7 +235,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 if (media.getMedia().includeTitle(text)) {
                     filteredItems.add(media);
                 }
-            });
+            });*/
+            List filteredItems = filterHomeMediaItems(text);
 
             // fill out the home with filted media as category
             addMediaHome(filteredItems);
@@ -290,4 +313,23 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     }
 
 
+    void emptyHomeMedia() {
+        hboxMedia.getChildren().forEach(node -> {
+            VBox vBox = (VBox) node;
+            vBox.getChildren().clear();
+        });
+    }
+
+    List filterHomeMediaItems(String text) {
+        List filteredItems = new ArrayList<>();
+        homeItems.forEach(me -> {
+            MediaHandler media = (MediaHandler) me;
+            // cleancode: tranh truy cap qua sau vao doi tuong
+//                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+            if (media.getMedia().includeTitle(text)) {
+                filteredItems.add(media);
+            }
+        });
+        return filteredItems;
+    }
 }

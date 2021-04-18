@@ -12,6 +12,7 @@ import java.time.LocalDateTime;
 //Singleton: SessionInformation chi nen duoc tao mot the hien trong qua trinh chay, vi no khong thay doi trong mot phien lam viec
 public class SessionInformation {
 
+    public static final int TIME_SESSION_EXPIRED_HOUR = 24;
     private User mainUser; //
     private Cart cartInstance;
     private LocalDateTime expiredTime;
@@ -33,6 +34,10 @@ public class SessionInformation {
         return mainUser;
     }
 
+    public boolean hasMainUser(){
+        return this.mainUser != null;
+    }
+
     public void setMainUser(User mainUser) {
         this.mainUser = mainUser;
     }
@@ -47,6 +52,10 @@ public class SessionInformation {
 
     public LocalDateTime getExpiredTime() {
         return expiredTime;
+    }
+
+    public boolean isBeforeExpiredTime(LocalDateTime timestamp){
+        return this.expiredTime !=null && this.expiredTime.isBefore(LocalDateTime.now());
     }
 
     public void setExpiredTime(LocalDateTime expiredTime) {

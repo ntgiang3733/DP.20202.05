@@ -112,7 +112,9 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // coupling: data ->
+    // coupling: data
+    // cleancode: return ngay khi co the
+    /*
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {
@@ -122,6 +124,14 @@ public class InterbankPayloadConverter {
             throw new UnrecognizedException();
         }
         return response;
+    }*/
+    private MyMap convertJSONResponse(String responseText) {
+        try {
+            return MyMap.toMyMap(responseText, 0);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            throw new UnrecognizedException();
+        }
     }
 
     /**

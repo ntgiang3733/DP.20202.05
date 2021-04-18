@@ -31,8 +31,6 @@ public class Invoice {
     }
 
     // coincidental cohesion: saveInvoice() khong lien quan toi nghiep vu cua class
-    // cleancode: bo phuong thuc ko su dung
-//    public void saveInvoice(){
-//
-//    }
+    public void saveInvoice(){
+    }
 }

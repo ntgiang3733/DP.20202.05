@@ -20,16 +20,18 @@ public class BaseController {
      * @return CartMedia or null
      */
     // stamp coupling
+    //common coupling: dung bien toan cuc cartInstance
     public CartItem checkMediaInCart(Media media){
-        return SessionInformation.getInstance().getCartInstance().checkMediaInCart(media); //common coupling: dung bien toan cuc cartInstance
+        return SessionInformation.getInstance().getCartInstance().checkMediaInCart(media);
     }
 
     /**
      * This method gets the list of items in cart
      * @return List[CartMedia]
      */
+    //common coupling: dung bien toan cuc cartInstance
     public List getListCartMedia(){
-        return SessionInformation.getInstance().getCartInstance().getListCartMedia();//common coupling: dung bien toan cuc cartInstance
+        return SessionInformation.getInstance().getCartInstance().getListCartMedia();
     }
 
     protected boolean validateString(String patternString, String str){
