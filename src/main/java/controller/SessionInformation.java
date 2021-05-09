@@ -61,4 +61,8 @@ public class SessionInformation {
     public void setExpiredTime(LocalDateTime expiredTime) {
         this.expiredTime = expiredTime;
     }
+
+    public void emptyCart(){
+        this.cartInstance.emptyCart();
+    }
 }

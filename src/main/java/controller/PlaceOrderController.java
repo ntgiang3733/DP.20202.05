@@ -8,6 +8,7 @@ import entity.shipping.ADeliveryInfo;
 import entity.shipping.DistanceCalculatorFactory;
 import entity.shipping.DeliveryInfo;
 import utils.Utils;
+import views.screen.shipping.DeliveryInfoObj;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -83,16 +84,27 @@ public class PlaceOrderController extends BaseController {
      * @throws IOException
      */
     // stamp coupling
-    public ADeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+//    // cleancode: su dung DeliveryInfoObj de truyen du lieu
+//    public ADeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+//        LOGGER.info("Process Delivery Info");
+//        LOGGER.info(info.toString());
+//        validateDeliveryInfo(info);
+//        ADeliveryInfo deliveryInfo = new DeliveryInfo(
+//                String.valueOf(info.get("name")),
+//                String.valueOf(info.get("phone")),
+//                String.valueOf(info.get("province")),
+//                String.valueOf(info.get("address")),
+//                String.valueOf(info.get("instructions")),
+//                new DistanceCalculatorFactory());
+//        System.out.println(deliveryInfo.getProvince());
+//        return deliveryInfo;
+//    }
+    public ADeliveryInfo processDeliveryInfo(DeliveryInfoObj info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
         validateDeliveryInfo(info);
         ADeliveryInfo deliveryInfo = new DeliveryInfo(
-                String.valueOf(info.get("name")),
-                String.valueOf(info.get("phone")),
-                String.valueOf(info.get("province")),
-                String.valueOf(info.get("address")),
-                String.valueOf(info.get("instructions")),
+                info,
                 new DistanceCalculatorFactory());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
@@ -112,10 +124,17 @@ public class PlaceOrderController extends BaseController {
     // stamp coupling
     //Coincidental Cohesion: các hàm validate và các hàm phía trên nên tách riêng
     //SOLID: vi pham nguyen li OCP vi phu thuoc vao info
-    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
-        if (validatePhoneNumber(info.get("phone"))
-                || validateName(info.get("name"))
-                || validateAddress(info.get("address"))) return;
+    // cleancode: su dung DeliveryInfoObj de truyen du lieu
+//    public void validateDeliveryInfo(HashMap<String, String> info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+//        if (validatePhoneNumber(info.get("phone"))
+//                || validateName(info.get("name"))
+//                || validateAddress(info.get("address"))) return;
+//        else throw new InvalidDeliveryInfoException();
+//    }
+    public void validateDeliveryInfo(DeliveryInfoObj info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+        if (validatePhoneNumber(info.getPhone())
+                || validateName(info.getName())
+                || validateAddress(info.getAddress())) return;
         else throw new InvalidDeliveryInfoException();
     }
 

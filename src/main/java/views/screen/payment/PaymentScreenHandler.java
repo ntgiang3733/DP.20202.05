@@ -51,25 +51,31 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
     /**
      * <h3><i>Temporal cohesion: 2 phuong thuc setupData() va setupFunctionality() chi lien quan toi thu tu thuc hien  </i></h3>
      */
+    // cleancode: clean class: extract superclass
+//    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData(invoice);
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(invoice);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, invoice);
     }
 
     // stamp coupling: truyen doi tuong Object
+    @Override
     protected void setupData(Object dto) throws Exception {
         this.invoice = (Invoice) dto;
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
         btnConfirmPayment.setOnMouseClicked(e -> {
             try {
@@ -91,7 +97,7 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
         // cleancode: tao doi tuong responseMessage
 //        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
 //                expirationDate.getText(), securityCode.getText());
-        
+
         ResponseMessage response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
                 expirationDate.getText(), securityCode.getText());
 

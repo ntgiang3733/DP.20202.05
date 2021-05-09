@@ -76,19 +76,23 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private AuthenticationController authenticationController;
 
     //stamp coupling
+    // cleancode: clean class: extract superclass
+//    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData();
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        try {
-            setupData();
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
     }
 
     // cleancode: loai bo phuong thuc ko su dung
@@ -103,6 +107,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     // stamp coupling
     // cleancode: loai bo tham so ko su dung
 //    protected void setupData(Object dto) throws Exception {
+    @Override
     protected void setupData() throws Exception {
         setBController(new HomeController());
         this.authenticationController = AuthenticationController.getInstance();
@@ -121,6 +126,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
 
         aimsImage.setOnMouseClicked(e -> {

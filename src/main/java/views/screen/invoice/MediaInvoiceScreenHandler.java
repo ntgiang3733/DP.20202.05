@@ -56,16 +56,23 @@ public class MediaInvoiceScreenHandler extends FXMLScreenHandler{
         image.setFitHeight(90);
         image.setFitWidth(83);
     }
-    public void setMediaInfo() throws SQLException{
+
+
+    // cleancode: tach thanh function nho
+//    public void setMediaInfo() throws SQLException{
+//        title.setText(orderItem.getMedia().getTitle());
+//        price.setText(ViewsConfig.getCurrencyFormat(orderItem.getPrice()));
+//        numOfProd.setText(String.valueOf(orderItem.getQuantity()));
+//      setImage(image, orderItem.getMedia().getImageURL());
+//		image.setPreserveRatio(false);
+//		image.setFitHeight(90);
+//		image.setFitWidth(83);
+//    }
+    public void setMediaInfo() throws SQLException {
         title.setText(orderItem.getMedia().getTitle());
         price.setText(ViewsConfig.getCurrencyFormat(orderItem.getPrice()));
         numOfProd.setText(String.valueOf(orderItem.getQuantity()));
         setCoverImage();
-        // cleancode: tach thanh function nho
-      /*  setImage(image, orderItem.getMedia().getImageURL());
-		image.setPreserveRatio(false);
-		image.setFitHeight(90);
-		image.setFitWidth(83);*/
     }
 
 }

@@ -59,38 +59,66 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
     private Invoice invoice;
 
     //stamp coupling
+//    // cleancode: clean class: extract superclass
+//    public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData(invoice);
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(invoice);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, invoice);
     }
 
     //stamp coupling
+    // cleancode: tach thanh cac function nho
+    // cleancode: hide delegate
+//    @Override
+//    protected void setupData(Object dto) throws Exception {
+//        this.invoice = (Invoice) dto;
+//        Order order = invoice.getOrder();
+//        ADeliveryInfo deliveryInfo = order.getDeliveryInfo();
+//
+//        name.setText(deliveryInfo.getName());
+//        phone.setText(deliveryInfo.getPhone());
+//        province.setText(deliveryInfo.getProvince());
+//        instructions.setText(deliveryInfo.getShippingInstructions());
+//        address.setText(deliveryInfo.getAddress());
+//
+//        subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
+//        shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
+//        total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));
+//
+//        invoice.getOrder().getListOrderMedia().forEach(orderMedia -> {
+//            try {
+//                MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(ViewsConfig.INVOICE_MEDIA_SCREEN_PATH);
+//                mis.setOrderItem((OrderItem) orderMedia);
+//                vboxItems.getChildren().add(mis.getContent());
+//            } catch (IOException | SQLException e) {
+//                System.err.println("errors: " + e.getMessage());
+//                throw new ProcessInvoiceException(e.getMessage());
+//            }
+//        });
+//    }
+    @Override
     protected void setupData(Object dto) throws Exception {
         this.invoice = (Invoice) dto;
         Order order = invoice.getOrder();
         ADeliveryInfo deliveryInfo = order.getDeliveryInfo();
 
-        name.setText(deliveryInfo.getName());
-        phone.setText(deliveryInfo.getPhone());
-        province.setText(deliveryInfo.getProvince());
-        instructions.setText(deliveryInfo.getShippingInstructions());
-        address.setText(deliveryInfo.getAddress());
+        setupInvoiceInfo(deliveryInfo);
 
-        subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
-        shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
-        total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));
+        setupOrderInfo(order);
 
-        invoice.getOrder().getListOrderMedia().forEach(orderMedia -> {
+        order.getListOrderMedia().forEach(orderMedia -> {
             try {
                 MediaInvoiceScreenHandler mis = new MediaInvoiceScreenHandler(ViewsConfig.INVOICE_MEDIA_SCREEN_PATH);
                 mis.setOrderItem((OrderItem) orderMedia);
@@ -102,6 +130,20 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
         });
     }
 
+    private void setupOrderInfo(Order order) {
+        subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
+        shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
+        total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));
+    }
+
+    private void setupInvoiceInfo(ADeliveryInfo deliveryInfo) {
+        name.setText(deliveryInfo.getName());
+        phone.setText(deliveryInfo.getPhone());
+        province.setText(deliveryInfo.getProvince());
+        instructions.setText(deliveryInfo.getShippingInstructions());
+        address.setText(deliveryInfo.getAddress());
+    }
+
     protected void setupFunctionality() throws Exception {
         return;
     }
@@ -109,17 +151,22 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
     /**
      * Communication cohesion
      */
-    @FXML
-   void confirmInvoice(MouseEvent event) throws IOException {
-        BaseNextScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
 
-        // template method
-        paymentScreen.showScreen(this, homeScreenHandler, new PaymentController());
+    // design pattern: template method
+//    @FXML
+//   void confirmInvoice(MouseEvent event) throws IOException {
+//        BaseNextScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
 //		paymentScreen.setPreviousScreen(this);
 //		paymentScreen.setHomeScreenHandler(homeScreenHandler);
 //		paymentScreen.setBController(new PaymentController());
 //		paymentScreen.setScreenTitle("Payment Screen");
 //		paymentScreen.show();
+//        LOGGER.info("Confirmed invoice");
+//    }
+    @FXML
+    void confirmInvoice(MouseEvent event) throws IOException {
+        BaseNextScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
+        paymentScreen.showScreen(this, homeScreenHandler, new PaymentController());
         LOGGER.info("Confirmed invoice");
     }
 

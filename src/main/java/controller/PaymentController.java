@@ -135,10 +135,14 @@ public class PaymentController extends BaseController {
         }
     }
 
-    /**
-     * coincidental cohesion: phuong thuc empty card khong lien quan toi lop PaymentController
-     */
+    // cleancode: interface: hide delegate: chuyen phuong thuc empty card vao SessionInformation
+//    /**
+//     * coincidental cohesion: phuong thuc empty card khong lien quan toi lop PaymentController
+//     */
+//    public void emptyCart() {
+//        SessionInformation.getInstance().getCartInstance().emptyCart();//common coupling: dung bien toan cuc cartInstance
+//    }
     public void emptyCart() {
-        SessionInformation.getInstance().getCartInstance().emptyCart();//common coupling: dung bien toan cuc cartInstance
+        SessionInformation.getInstance().emptyCart();
     }
 }

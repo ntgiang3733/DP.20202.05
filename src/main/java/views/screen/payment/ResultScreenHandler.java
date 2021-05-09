@@ -26,19 +26,23 @@ public class ResultScreenHandler extends BaseNextScreenHandler {
     private String message;
 
     // stamp coupling: truyen doi tuong Stage, cau truc Map<String, String>
+    // cleancode: extract superclass
+//    public ResultScreenHandler(Stage stage, String screenPath, ResponseMessage response) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData(response);
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public ResultScreenHandler(Stage stage, String screenPath, ResponseMessage response) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(response);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, response);
     }
 
     // stamp coupling: truyen doi tuong Object
@@ -49,12 +53,14 @@ public class ResultScreenHandler extends BaseNextScreenHandler {
         resultLabel.setText(response.get("RESULT"));
         messageLabel.setText(response.get("MESSAGE"));
     }*/
+    @Override
     protected void setupData(Object dto) throws Exception {
         ResponseMessage response = (ResponseMessage) dto;
         resultLabel.setText(response.getResult());
         messageLabel.setText(response.getMessage());
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
         return;
     }

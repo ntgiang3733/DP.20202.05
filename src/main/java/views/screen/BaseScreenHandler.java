@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import entity.order.Order;
+import entity.shipping.ShippingConfigs;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,7 +18,7 @@ import views.screen.popup.PopupScreen;
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-    private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    protected static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
     private Scene scene;
@@ -26,10 +28,29 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     protected Hashtable<String, String> messages;
     protected BaseController bController;
 
+//    // cleancode: clean class: extract superclass
+//    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(screenPath);
+//        this.stage = stage;
+//    }
     protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
         super(screenPath);
         this.stage = stage;
+        try {
+            setupData();
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+            setErrorMessage();
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
     }
+
+    protected abstract void setupData() throws Exception;
+    protected abstract void setupFunctionality() throws Exception;
 
     public void setPreviousScreen(BaseScreenHandler prev) {
 

@@ -2,6 +2,8 @@ package entity.invoice;
 
 import entity.order.Order;
 
+import java.util.List;
+
 public class Invoice {
 
     private Order order;
@@ -33,4 +35,9 @@ public class Invoice {
     // coincidental cohesion: saveInvoice() khong lien quan toi nghiep vu cua class
     public void saveInvoice(){
     }
+
+    public List getListOrderMedia() {
+        return this.order.getListOrderMedia();
+    }
+
 }

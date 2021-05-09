@@ -46,37 +46,43 @@ public class LoginScreenHandler extends BaseNextScreenHandler {
     @FXML
     private PasswordField password;
 
+    // cleancode: clean class: extract superclass
+//    public LoginScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData(null);
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public LoginScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, null);
     }
+
 
     @Override
     protected void setTitleScreenToShow() {
 
     }
 
-    public AuthenticationController getBController() {
-        return (AuthenticationController) super.getBController();
-    }
-
-
+    @Override
     protected void setupData(Object dto) throws Exception {
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
     }
 
+    public AuthenticationController getBController() {
+        return (AuthenticationController) super.getBController();
+    }
+    
     @FXML
     void login(MouseEvent event) throws IOException, InterruptedException, SQLException {
         try {

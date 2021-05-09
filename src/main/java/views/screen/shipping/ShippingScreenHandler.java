@@ -51,28 +51,34 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
     private Order order;
 
     //stamp coupling
+    // cleancode: clean class: extract superclass
+//    public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData(order);
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(order);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+        super(stage, screenPath, order);
     }
 
     //stamp coupling
+    @Override
     protected void setupData(Object dto) throws Exception {
         this.order = (Order) dto;
         this.province.getItems().addAll(ShippingConfigs.PROVINCES);
         this.province.getSelectionModel().select(ShippingConfigs.RUSH_SUPPORT_PROVINCES_INDEX[0]);
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
         final BooleanProperty firstTime = new SimpleBooleanProperty(true); // Variable to store the focus on stage load
         name.focusedProperty().addListener((observable, oldValue, newValue) -> {
@@ -106,18 +112,33 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
 //		InvoiceScreenHandler.show();
     }
 
+    // cleancode: tao ra mot doi tuong message rieng
+//    public void preprocessDeliveryInfo() throws IOException, InterruptedException {
+//        // add info to messages
+//        HashMap<String, String> messages = new HashMap<>();
+//        messages.put("name", name.getText());
+//        messages.put("phone", phone.getText());
+//        messages.put("address", address.getText());
+//        messages.put("instructions", instructions.getText());
+//        messages.put("province", province.getValue());
+//        ADeliveryInfo deliveryInfo;
+//        try {
+//            // process and validate delivery info
+//            deliveryInfo = getBController().processDeliveryInfo(messages);
+//        } catch (InvalidDeliveryInfoException e) {
+//            // TODO: implement pop up screen
+//            throw new InvalidDeliveryInfoException(e.getMessage());
+//        }
+//
+//        order.setDeliveryInfo(deliveryInfo);
+//    }
     public void preprocessDeliveryInfo() throws IOException, InterruptedException {
         // add info to messages
-        HashMap<String, String> messages = new HashMap<>();
-        messages.put("name", name.getText());
-        messages.put("phone", phone.getText());
-        messages.put("address", address.getText());
-        messages.put("instructions", instructions.getText());
-        messages.put("province", province.getValue());
+        DeliveryInfoObj message = new DeliveryInfoObj(name.getText(), phone.getText(), address.getText(), instructions.getText(), province.getValue());
         ADeliveryInfo deliveryInfo;
         try {
             // process and validate delivery info
-            deliveryInfo = getBController().processDeliveryInfo(messages);
+            deliveryInfo = getBController().processDeliveryInfo(message);
         } catch (InvalidDeliveryInfoException e) {
             // TODO: implement pop up screen
             throw new InvalidDeliveryInfoException(e.getMessage());

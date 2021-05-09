@@ -58,21 +58,30 @@ public class CartScreenHandler extends BaseNextScreenHandler {
     private Button btnPlaceOrder;
 
     // stamp coupling: truyen doi tuong Stage
+    // cleancode: clean class: extract superclass
+//    public CartScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
     public CartScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        try {
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
     }
 
-    // cleancode
+    @Override
+    protected void setupData(Object dto) throws Exception {
+
+    }
+
+    // cleancode: tach method
     void setAimsImage() {
         File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
         Image im = new Image(file.toURI().toString());
@@ -82,7 +91,7 @@ public class CartScreenHandler extends BaseNextScreenHandler {
         });
     }
 
-    // cleancode
+    // cleancode: tach method
     void setBtnPlaceOrder() {
         btnPlaceOrder.setOnMouseClicked(e -> {
             LOGGER.info("Place Order button clicked");
