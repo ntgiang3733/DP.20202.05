@@ -87,7 +87,7 @@ public class CartScreenHandler extends BaseNextScreenHandler {
         Image im = new Image(file.toURI().toString());
         aimsImage.setImage(im);
         aimsImage.setOnMouseClicked(e -> {
-            homeScreenHandler.show();
+            showHomeScreen();
         });
     }
 
