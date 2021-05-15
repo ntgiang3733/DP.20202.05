@@ -4,7 +4,8 @@ import common.exception.InvalidDeliveryInfoException;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
-import entity.shipping.ADeliveryInfo;
+import entity.shipping.CalculatorShippingFee;
+import entity.shipping.DeliveryInfo;
 import entity.shipping.ShippingConfigs;
 import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.SimpleBooleanProperty;
@@ -16,14 +17,11 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseNextScreenHandler;
-import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.invoice.InvoiceScreenHandler;
-import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.HashMap;
 import java.util.logging.Logger;
 
 public class ShippingScreenHandler extends BaseNextScreenHandler {
@@ -121,7 +119,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
 //        messages.put("address", address.getText());
 //        messages.put("instructions", instructions.getText());
 //        messages.put("province", province.getValue());
-//        ADeliveryInfo deliveryInfo;
+//        DeliveryInfo deliveryInfo;
 //        try {
 //            // process and validate delivery info
 //            deliveryInfo = getBController().processDeliveryInfo(messages);
@@ -135,10 +133,12 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
     public void preprocessDeliveryInfo() throws IOException, InterruptedException {
         // add info to messages
         DeliveryInfoObj message = new DeliveryInfoObj(name.getText(), phone.getText(), address.getText(), instructions.getText(), province.getValue());
-        ADeliveryInfo deliveryInfo;
+        DeliveryInfo deliveryInfo;
         try {
             // process and validate delivery info
             deliveryInfo = getBController().processDeliveryInfo(message);
+            //  design pattern: strategy
+            deliveryInfo.setCalShip(new CalculatorShippingFee());
         } catch (InvalidDeliveryInfoException e) {
             // TODO: implement pop up screen
             throw new InvalidDeliveryInfoException(e.getMessage());

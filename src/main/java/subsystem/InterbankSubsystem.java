@@ -2,6 +2,7 @@ package subsystem;
 
 import common.exception.PaymentException;
 import common.exception.UnrecognizedException;
+import controller.PlaceOrderController;
 import entity.payment.ACard;
 import entity.payment.CreditCard;
 import entity.payment.PaymentTransaction;
@@ -14,8 +15,22 @@ import subsystem.interbank.InterbankSubsystemController;
  * @author hieud
  *
  */
+// design pattern: singleton
 public class InterbankSubsystem implements InterbankInterface {
 
+
+	private static InterbankSubsystem instance;
+
+	public static InterbankSubsystem getInstance() {
+		if (instance == null) {
+			instance = new InterbankSubsystem();
+		}
+		return instance;
+	}
+
+	private InterbankSubsystem() {
+		this.ctrl = new InterbankSubsystemController();
+	}
 	/**
 	 * Represent the controller of the subsystem
 	 */
@@ -25,9 +40,9 @@ public class InterbankSubsystem implements InterbankInterface {
 	 * Initializes a newly created {@code InterbankSubsystem} object so that it
 	 * represents an Interbank subsystem.
 	 */
-	public InterbankSubsystem() {
-		this.ctrl = new InterbankSubsystemController();
-	}
+//	public InterbankSubsystem() {
+//		this.ctrl = new InterbankSubsystemController();
+//	}
 
 	/**
 	 * @see InterbankInterface#payOrder(entity.payment.ACard, int,

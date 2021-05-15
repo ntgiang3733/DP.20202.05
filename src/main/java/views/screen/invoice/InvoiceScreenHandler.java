@@ -4,8 +4,8 @@ import common.exception.ProcessInvoiceException;
 import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.Order;
-import entity.shipping.ADeliveryInfo;
 import entity.order.OrderItem;
+import entity.shipping.DeliveryInfo;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
@@ -13,10 +13,8 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseNextScreenHandler;
-import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.payment.PaymentScreenHandler;
-import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -85,7 +83,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
 //    protected void setupData(Object dto) throws Exception {
 //        this.invoice = (Invoice) dto;
 //        Order order = invoice.getOrder();
-//        ADeliveryInfo deliveryInfo = order.getDeliveryInfo();
+//        DeliveryInfo deliveryInfo = order.getDeliveryInfo();
 //
 //        name.setText(deliveryInfo.getName());
 //        phone.setText(deliveryInfo.getPhone());
@@ -112,7 +110,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
     protected void setupData(Object dto) throws Exception {
         this.invoice = (Invoice) dto;
         Order order = invoice.getOrder();
-        ADeliveryInfo deliveryInfo = order.getDeliveryInfo();
+        DeliveryInfo deliveryInfo = order.getDeliveryInfo();
 
         setupInvoiceInfo(deliveryInfo);
 
@@ -136,7 +134,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
         total.setText(ViewsConfig.getCurrencyFormat(order.getTotal()));
     }
 
-    private void setupInvoiceInfo(ADeliveryInfo deliveryInfo) {
+    private void setupInvoiceInfo(DeliveryInfo deliveryInfo) {
         name.setText(deliveryInfo.getName());
         phone.setText(deliveryInfo.getPhone());
         province.setText(deliveryInfo.getProvince());

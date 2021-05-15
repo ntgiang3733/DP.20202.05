@@ -1,12 +1,11 @@
 package controller;
 
 import common.exception.InvalidDeliveryInfoException;
-import entity.cart.Cart;
 import entity.invoice.Invoice;
 import entity.order.Order;
-import entity.shipping.ADeliveryInfo;
-import entity.shipping.DistanceCalculatorFactory;
+import entity.shipping.CalculatorShippingFee;
 import entity.shipping.DeliveryInfo;
+import org.example.DistanceCalculator;
 import utils.Utils;
 import views.screen.shipping.DeliveryInfoObj;
 
@@ -85,11 +84,11 @@ public class PlaceOrderController extends BaseController {
      */
     // stamp coupling
 //    // cleancode: su dung DeliveryInfoObj de truyen du lieu
-//    public ADeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+//    public DeliveryInfo processDeliveryInfo(HashMap info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
 //        LOGGER.info("Process Delivery Info");
 //        LOGGER.info(info.toString());
 //        validateDeliveryInfo(info);
-//        ADeliveryInfo deliveryInfo = new DeliveryInfo(
+//        DeliveryInfo deliveryInfo = new DeliveryInfo(
 //                String.valueOf(info.get("name")),
 //                String.valueOf(info.get("phone")),
 //                String.valueOf(info.get("province")),
@@ -99,13 +98,13 @@ public class PlaceOrderController extends BaseController {
 //        System.out.println(deliveryInfo.getProvince());
 //        return deliveryInfo;
 //    }
-    public ADeliveryInfo processDeliveryInfo(DeliveryInfoObj info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
+    public DeliveryInfo processDeliveryInfo(DeliveryInfoObj info) throws InterruptedException, IOException, InvalidDeliveryInfoException {
         LOGGER.info("Process Delivery Info");
         LOGGER.info(info.toString());
         validateDeliveryInfo(info);
-        ADeliveryInfo deliveryInfo = new DeliveryInfo(
+        DeliveryInfo deliveryInfo = new DeliveryInfo(
                 info,
-                new DistanceCalculatorFactory());
+                new DistanceCalculator());
         System.out.println(deliveryInfo.getProvince());
         return deliveryInfo;
     }

@@ -127,7 +127,7 @@ public class PaymentController extends BaseController {
                     cardHolderName,
                     getExpirationDate(expirationDate),
                     Integer.parseInt(securityCode));
-            this.interbank = new InterbankSubsystem();
+            this.interbank = InterbankSubsystem.getInstance();
             PaymentTransaction transaction = interbank.payOrder(card, amount, contents);
             return new ResponseMessage("PAYMENT SUCCESSFUL!", "You have successfully paid the order!");
         } catch (PaymentException | UnrecognizedException ex) {

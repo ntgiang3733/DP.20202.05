@@ -3,7 +3,7 @@ package entity.order;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
-import entity.shipping.ADeliveryInfo;
+import entity.shipping.DeliveryInfo;
 import views.screen.ViewsConfig;
 
 import java.util.ArrayList;
@@ -17,7 +17,7 @@ public class Order {
     private int subtotal;
     private int tax;
     private List orderMediaList;
-    protected ADeliveryInfo deliveryInfo;
+    protected DeliveryInfo deliveryInfo;
 
     protected Order() {
         this.shippingFees = 0;
@@ -51,7 +51,7 @@ public class Order {
         return this.shippingFees;
     }
 
-    public ADeliveryInfo getDeliveryInfo() {
+    public DeliveryInfo getDeliveryInfo() {
         return deliveryInfo;
     }
 
@@ -60,7 +60,7 @@ public class Order {
      * Communication cohesion: viec tinh shippingFees khong lien quan toi phuong thuc setDeliveryInfo, chung chi lien quan toi du lieu
      * SOLID: SRP vi chuc nang setDeliveryInfo khong nen thay doi shippingFees
      * */
-    public void setDeliveryInfo(ADeliveryInfo deliveryInfo) {
+    public void setDeliveryInfo(DeliveryInfo deliveryInfo) {
         this.deliveryInfo = deliveryInfo;
         this.shippingFees = deliveryInfo.calculateShippingFee(this);
     }
