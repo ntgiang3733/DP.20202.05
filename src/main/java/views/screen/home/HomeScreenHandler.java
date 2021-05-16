@@ -30,6 +30,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.text.TextAlignment;
 import javafx.stage.Stage;
 import utils.Utils;
+import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
@@ -39,6 +40,10 @@ import views.screen.popup.PopupScreen;
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     public static Logger LOGGER = Utils.getLogger(HomeScreenHandler.class.getName());
+
+    final int BOOK_POSITION = 0;
+    final int DVD_POSITION = 1;
+    final int CD_POSITION = 2;
 
     @FXML
     private Label numMediaInCart;
@@ -69,47 +74,59 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 
     private List homeItems;
     private AuthenticationController authenticationController;
+
     //stamp coupling
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException{
+    // cleancode: clean class: extract superclass
+//    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(stage, screenPath);
+//        try {
+//            setupData();
+//            setupFunctionality();
+//        } catch (IOException ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error("Error when loading resources.");
+//            setErrorMessage();
+//        } catch (Exception ex) {
+//            LOGGER.info(ex.getMessage());
+//            PopupScreen.error(ex.getMessage());
+//        }
+//    }
+    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
         super(stage, screenPath);
-        try {
-            setupData(null);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
     }
 
-    public Label getNumMediaCartLabel(){
-        return this.numMediaInCart;
-    }
+    // cleancode: loai bo phuong thuc ko su dung
+//    public Label getNumMediaCartLabel() {
+//        return this.numMediaInCart;
+//    }
 
     public HomeController getBController() {
         return (HomeController) super.getBController();
     }
+
     // stamp coupling
-    protected void setupData(Object dto) throws Exception {
+    // cleancode: loai bo tham so ko su dung
+//    protected void setupData(Object dto) throws Exception {
+    @Override
+    protected void setupData() throws Exception {
         setBController(new HomeController());
         this.authenticationController = AuthenticationController.getInstance();
-        try{
+        try {
             List medium = getBController().getAllMedia();
             this.homeItems = new ArrayList<>();
             for (Object object : medium) {
-                Media media = (Media)object;
+                Media media = (Media) object;
                 MediaHandler m = new MediaHandler(ViewsConfig.HOME_MEDIA_PATH, media);
                 m.attach(this);
                 this.homeItems.add(m);
             }
-        } catch (SQLException | IOException e){
+        } catch (SQLException | IOException e) {
             LOGGER.info("Errors occured: " + e.getMessage());
             e.printStackTrace();
         }
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
 
         aimsImage.setOnMouseClicked(e -> {
@@ -129,9 +146,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             }
         });
         addMediaHome(this.homeItems);
-        addMenuItem(0, "Book", splitMenuBtnSearch);
-        addMenuItem(1, "DVD", splitMenuBtnSearch);
-        addMenuItem(2, "CD", splitMenuBtnSearch);
+        // cleancode: ko su dung magic_number
+        addMenuItem(BOOK_POSITION, "Book", splitMenuBtnSearch);
+        addMenuItem(DVD_POSITION, "DVD", splitMenuBtnSearch);
+        addMenuItem(CD_POSITION, "CD", splitMenuBtnSearch);
     }
 
     @Override
@@ -141,10 +159,11 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             btnLogin.setOnMouseClicked(event -> redirectLoginScreen(event));
         } else {
             btnLogin.setText("User");
-            btnLogin.setOnMouseClicked(event -> {});
+            btnLogin.setOnMouseClicked(event -> {
+            });
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListMedia().size()) + " media");
+        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListCartMedia().size()) + " media");
         super.show();
     }
 
@@ -158,18 +177,21 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         Image img2 = new Image(file2.toURI().toString());
         cartImage.setImage(img2);
     }
+
     //stamp coupling
-    public void addMediaHome(List items){
-        ArrayList mediaItems = (ArrayList)((ArrayList) items).clone();
+    public void addMediaHome(List items) {
+        ArrayList mediaItems = (ArrayList) ((ArrayList) items).clone();
         hboxMedia.getChildren().forEach(node -> {
             VBox vBox = (VBox) node;
             vBox.getChildren().clear();
         });
-        while(!mediaItems.isEmpty()){
+        while (!mediaItems.isEmpty()) {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                while(vBox.getChildren().size()<3 && !mediaItems.isEmpty()){
+                // cleancode: ko su dung hang so
+//                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
+                while (vBox.getChildren().size() < Utils.SIZE_OF_HOME_ITEM && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
                     vBox.getChildren().add(media.getContent());
                     mediaItems.remove(media);
@@ -179,28 +201,48 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    private void addMenuItem(int position, String text, MenuButton menuButton){
-        MenuItem menuItem = new MenuItem();
+    // cleancode: tach thanh ham setLabelMenuItem
+    Label getLabelMenuItem(String text, MenuButton menuButton) {
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
         label.setText(text);
         label.setTextAlignment(TextAlignment.RIGHT);
+        return label;
+    }
+
+    private void addMenuItem(int position, String text, MenuButton menuButton) {
+        MenuItem menuItem = new MenuItem();
+
+        //cleancode: tach thanh ham setLabelMenuItem
+        Label label = getLabelMenuItem(text, menuButton);
+        /*
+        Label label = new Label();
+        label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
+        label.setText(text);
+        label.setTextAlignment(TextAlignment.RIGHT);
+        */
         menuItem.setGraphic(label);
         menuItem.setOnAction(e -> {
+            // cleancode: tach thanh function nho
             // empty home media
-            hboxMedia.getChildren().forEach(node -> {
+            /*hboxMedia.getChildren().forEach(node -> {
                 VBox vBox = (VBox) node;
                 vBox.getChildren().clear();
-            });
+            });*/
+            emptyHomeMedia();
 
+            // cleancode: tach thanh function nho
             // filter only media with the choosen category
-            List filteredItems = new ArrayList<>();
+           /* List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())){
+                // cleancode: tranh truy cap qua sau vao doi tuong
+//                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+                if (media.getMedia().includeTitle(text)) {
                     filteredItems.add(media);
                 }
-            });
+            });*/
+            List filteredItems = filterHomeMediaItems(text);
 
             // fill out the home with filted media as category
             addMediaHome(filteredItems);
@@ -216,7 +258,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     public void update(Observable observable) {
         if (observable instanceof MediaHandler) update((MediaHandler) observable);
     }
-  //stamp coupling
+
+    //stamp coupling
     private void update(MediaHandler mediaHandler) {
         int requestQuantity = mediaHandler.getRequestQuantity();
         Media media = mediaHandler.getMedia();
@@ -229,7 +272,9 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             if (mediaInCart != null) {
                 mediaInCart.setQuantity(mediaInCart.getQuantity() + 1);
             } else {
-                CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
+                // cleancode: xoa phuong thuc khong su dung
+                // old: CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
+                CartItem cartItem = new CartItem(media, requestQuantity, media.getPrice());
                 cart.addCartMedia(cartItem);
                 LOGGER.info("Added " + cartItem.getQuantity() + " " + media.getTitle() + " to cart");
             }
@@ -256,10 +301,13 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     @FXML
     void redirectLoginScreen(MouseEvent event) {
         try {
-            BaseScreenHandler loginScreen = new LoginScreenHandler(this.stage, ViewsConfig.LOGIN_SCREEN_PATH);
-            loginScreen.setHomeScreenHandler(this);
-            loginScreen.setBController(this.authenticationController);
-            loginScreen.show();
+            BaseNextScreenHandler loginScreen = new LoginScreenHandler(this.stage, ViewsConfig.LOGIN_SCREEN_PATH);
+
+            //template method
+            loginScreen.showScreen(null, this, this.authenticationController);
+//            loginScreen.setHomeScreenHandler(this);
+//            loginScreen.setBController(this.authenticationController);
+//            loginScreen.show();
         } catch (Exception ex) {
             try {
                 PopupScreen.error("Cant trigger Login");
@@ -268,5 +316,26 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 ex.printStackTrace();
             }
         }
+    }
+
+
+    void emptyHomeMedia() {
+        hboxMedia.getChildren().forEach(node -> {
+            VBox vBox = (VBox) node;
+            vBox.getChildren().clear();
+        });
+    }
+
+    List filterHomeMediaItems(String text) {
+        List filteredItems = new ArrayList<>();
+        homeItems.forEach(me -> {
+            MediaHandler media = (MediaHandler) me;
+            // cleancode: tranh truy cap qua sau vao doi tuong
+//                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
+            if (media.getMedia().includeTitle(text)) {
+                filteredItems.add(media);
+            }
+        });
+        return filteredItems;
     }
 }

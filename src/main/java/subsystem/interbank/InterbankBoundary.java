@@ -19,6 +19,8 @@ public class InterbankBoundary {
 	private InterbankBoundary(){}
 
 	// coupling: data -> chi phu thuoc mot so tham so
+	// cleancode: return ngay khi co the
+	/*
 	String query(String url, String data) {
 		String response = null;
 		try {
@@ -28,6 +30,13 @@ public class InterbankBoundary {
 			throw new UnrecognizedException();
 		}
 		return response;
+	}*/
+	String query(String url, String data) {
+		try {
+			return ApplicationProgrammingInterface.post(url, data);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			throw new UnrecognizedException();
+		}
 	}
-
 }

@@ -1,9 +1,7 @@
 package entity.media;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 public class DVD extends Media {
 
@@ -15,9 +13,10 @@ public class DVD extends Media {
     Date releasedDate;
     String filmType;
 
-    public DVD() throws SQLException{
+    // cleancode: bo phuong thuc ko su dung
+    /*public DVD() throws SQLException{
 
-    }
+    }*/
 
 	// coupling: data -> chi phu thuoc mot so tham so
     public DVD(int id, String title, String category, int price, int quantity, String type, String discType,
@@ -32,25 +31,31 @@ public class DVD extends Media {
         this.filmType = filmType;
     }
 
+    // cleancode: bo phuong thuc ko su dung
+/*
     public String getDiscType() {
         return this.discType;
     }
+*/
 
 	// coupling: data -> chi phu thuoc mot so tham so
-    public DVD setDiscType(String discType) {
-        this.discType = discType;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public DVD setDiscType(String discType) {
+//        this.discType = discType;
+//        return this;
+//    }
 
-    public String getDirector() {
-        return this.director;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getDirector() {
+//        return this.director;
+//    }
 
 	// coupling: data -> chi phu thuoc mot so tham so
-    public DVD setDirector(String director) {
-        this.director = director;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public DVD setDirector(String director) {
+//        this.director = director;
+//        return this;
+//    }
 
     public int getRuntime() {
         return this.runtime;
@@ -62,46 +67,54 @@ public class DVD extends Media {
         return this;
     }
 
-    public String getStudio() {
-        return this.studio;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getStudio() {
+//        return this.studio;
+//    }
 
 	// coupling: data -> chi phu thuoc mot so tham so
-    public DVD setStudio(String studio) {
-        this.studio = studio;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public DVD setStudio(String studio) {
+//        this.studio = studio;
+//        return this;
+//    }
 
-    public String getSubtitles() {
-        return this.subtitles;
-    }
-    
+    // cleancode: bo phuong thuc ko su dung
+//    public String getSubtitles() {
+//        return this.subtitles;
+//    }
+
 	// coupling: data -> chi phu thuoc mot so tham so
-    public DVD setSubtitles(String subtitles) {
-        this.subtitles = subtitles;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public DVD setSubtitles(String subtitles) {
+//        this.subtitles = subtitles;
+//        return this;
+//    }
 
-    public Date getReleasedDate() {
-        return this.releasedDate;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Date getReleasedDate() {
+//        return this.releasedDate;
+//    }
 
   //stamp coupling: truyen doi tuong Date
-    public DVD setReleasedDate(Date releasedDate) {
-        this.releasedDate = releasedDate;
-        return this;
-    }
+  // cleancode: bo phuong thuc ko su dung
+//    public DVD setReleasedDate(Date releasedDate) {
+//        this.releasedDate = releasedDate;
+//        return this;
+//    }
 
-    public String getFilmType() {
-        return this.filmType;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getFilmType() {
+//        return this.filmType;
+//    }
 
-    
+
 	// coupling: data -> chi phu thuoc mot so tham so
-    public DVD setFilmType(String filmType) {
-        this.filmType = filmType;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public DVD setFilmType(String filmType) {
+//        this.filmType = filmType;
+//        return this;
+//    }
 
     @Override
     public String toString() {

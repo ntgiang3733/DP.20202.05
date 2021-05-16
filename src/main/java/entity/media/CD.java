@@ -1,9 +1,7 @@
 package entity.media;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Date;
-import java.util.List;
 
 public class CD extends Media {
 
@@ -12,9 +10,10 @@ public class CD extends Media {
     String musicType;
     Date releasedDate;
 
-    public CD() throws SQLException{
-
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public CD() throws SQLException{
+//
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
     public CD(int id, String title, String category, int price, int quantity, String type, String artist,
@@ -36,35 +35,43 @@ public class CD extends Media {
         return this;
     }
 
-    public String getRecordLabel() {
-        return this.recordLabel;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getRecordLabel() {
+//        return this.recordLabel;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public CD setRecordLabel(String recordLabel) {
-        this.recordLabel = recordLabel;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public CD setRecordLabel(String recordLabel) {
+//        this.recordLabel = recordLabel;
+//        return this;
+//    }
 
-    public String getMusicType() {
-        return this.musicType;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public String getMusicType() {
+//        return this.musicType;
+//    }
 
     // coupling: data -> chi phu thuoc mot so tham so
-    public CD setMusicType(String musicType) {
-        this.musicType = musicType;
-        return this;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public CD setMusicType(String musicType) {
+//        this.musicType = musicType;
+//        return this;
+//    }
 
-    public Date getReleasedDate() {
-        return this.releasedDate;
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Date getReleasedDate() {
+//        return this.releasedDate;
+//    }
 
     //stamp coupling: truyen doi tuong Date
+    // cleancode: bo phuong thuc ko su dung
+/*
     public CD setReleasedDate(Date releasedDate) {
         this.releasedDate = releasedDate;
         return this;
     }
+*/
 
     @Override
     public String toString() {

@@ -7,6 +7,8 @@ import java.util.logging.Logger;
 
 import controller.AuthenticationController;
 import controller.BaseController;
+import entity.order.Order;
+import entity.shipping.ShippingConfigs;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
@@ -16,57 +18,82 @@ import views.screen.popup.PopupScreen;
 
 public abstract class BaseScreenHandler extends FXMLScreenHandler {
 
-	private static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
+    protected static final Logger LOGGER = Utils.getLogger(BaseScreenHandler.class.getName());
 
 
-	private Scene scene;
-	private BaseScreenHandler prev;
-	protected final Stage stage;
-	protected HomeScreenHandler homeScreenHandler;
-	protected Hashtable<String, String> messages;
-	private BaseController bController;
+    private Scene scene;
+    protected BaseScreenHandler prev;
+    protected final Stage stage;
+    protected HomeScreenHandler homeScreenHandler;
+    protected Hashtable<String, String> messages;
+    protected BaseController bController;
 
-	protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
-		super(screenPath);
-		this.stage = stage;
-	}
+//    // cleancode: clean class: extract superclass
+//    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+//        super(screenPath);
+//        this.stage = stage;
+//    }
+    protected BaseScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(screenPath);
+        this.stage = stage;
+        try {
+            setupData();
+            setupFunctionality();
+        } catch (IOException ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error("Error when loading resources.");
+            setErrorMessage();
+        } catch (Exception ex) {
+            LOGGER.info(ex.getMessage());
+            PopupScreen.error(ex.getMessage());
+        }
+    }
 
-	public void setPreviousScreen(BaseScreenHandler prev) {
-		this.prev = prev;
-	}
+    protected abstract void setupData() throws Exception;
+    protected abstract void setupFunctionality() throws Exception;
 
-	public BaseScreenHandler getPreviousScreen() {
-		return this.prev;
-	}
+    public void setPreviousScreen(BaseScreenHandler prev) {
 
-	public void show() {
-		if (this.scene == null) {
-			this.scene = new Scene(this.content);
-		}
-		this.stage.setScene(this.scene);
-		this.stage.show();
-	}
+        this.prev = prev;
+    }
+    // cleancode: loai bo phuong thuc ko su dung
+    /*
+    public BaseScreenHandler getPreviousScreen() {
+        return this.prev;
+    }
+*/
+    public void show() {
+        if (this.scene == null) {
+            this.scene = new Scene(this.content);
+        }
+        this.stage.setScene(this.scene);
+        this.stage.show();
+    }
 
-	public void setScreenTitle(String string) {
-		this.stage.setTitle(string);
-	}
+    public void setScreenTitle(String string) {
+        this.stage.setTitle(string);
+    }
 
-	public void setBController(BaseController bController){
-		this.bController = bController;
-	}
+    public void setBController(BaseController bController) {
+        this.bController = bController;
+    }
 
-	public BaseController getBController(){
-		return this.bController;
-	}
+    public BaseController getBController() {
+        return this.bController;
+    }
 
+    // cleancode: loai bo phuong thuc ko su dung
+   /* public void forward(Hashtable messages) {
+        this.messages = messages;
+    }*/
 
-	public void forward(Hashtable messages) {
-		this.messages = messages;
-	}
+    //stamp coupling: truyen doi tuong HomeScreenHandler
+    public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
+        this.homeScreenHandler = HomeScreenHandler;
+    }
 
-	//stamp coupling: truyen doi tuong HomeScreenHandler
-	public void setHomeScreenHandler(HomeScreenHandler HomeScreenHandler) {
-		this.homeScreenHandler = HomeScreenHandler;
-	}
+    public void showHomeScreen(){
+        this.homeScreenHandler.show();
+    }
 
 }

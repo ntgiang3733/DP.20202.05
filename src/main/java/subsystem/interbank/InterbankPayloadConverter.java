@@ -1,9 +1,7 @@
 package subsystem.interbank;
 
 import common.exception.*;
-import entity.cart.Cart;
-import entity.payment.CreditCard;
-import entity.payment.PaymentTransaction;
+import entity.payment.*;
 import utils.MyMap;
 
 import java.text.DateFormat;
@@ -16,7 +14,6 @@ import java.util.Map;
  * singleton: day la mot class chi co cac method ho tro, nen dung singleton de toi uu bo nho
  */
 public class InterbankPayloadConverter {
-
 
     private static InterbankPayloadConverter instance;
 
@@ -38,7 +35,7 @@ public class InterbankPayloadConverter {
      * @return {@link Map}
      */
 	 // stamp coupling: truyen doi tuong CreditCard
-    String convertToRequestPayload(CreditCard card, int amount, String contents) {
+    String convertToRequestPayload(ACard card, int amount, String contents) {
         Map<String, Object> transaction = new MyMap();
 
         try {
@@ -72,7 +69,7 @@ public class InterbankPayloadConverter {
         if (response == null)
             return null;
         MyMap transaction = (MyMap) response.get("transaction");
-        CreditCard card = new CreditCard(
+        ACard card = CardFactory.createCreditCard(
                 (String) transaction.get("cardCode"),
                 (String) transaction.get("owner"),
                 (String) transaction.get("dateExpired"),
@@ -115,7 +112,9 @@ public class InterbankPayloadConverter {
      * @param responseText
      * @return
      */
-    // coupling: data -> chá»‰ phá»¥ thuá»™c vÃ o má»™t sá»‘ tham sá»‘
+    // coupling: data
+    // cleancode: return ngay khi co the
+    /*
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;
         try {
@@ -125,6 +124,14 @@ public class InterbankPayloadConverter {
             throw new UnrecognizedException();
         }
         return response;
+    }*/
+    private MyMap convertJSONResponse(String responseText) {
+        try {
+            return MyMap.toMyMap(responseText, 0);
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+            throw new UnrecognizedException();
+        }
     }
 
     /**

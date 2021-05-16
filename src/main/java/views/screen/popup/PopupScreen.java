@@ -79,10 +79,13 @@ public class PopupScreen extends BaseScreenHandler {
         delay.play();
     }
 
-    // stamp coupling: truyen doi tuong Object
-    protected void setupData(Object dto) throws Exception {
+    @Override
+    protected void setupData() throws Exception {
+
     }
 
+    @Override
     protected void setupFunctionality() throws Exception {
     }
+
 }

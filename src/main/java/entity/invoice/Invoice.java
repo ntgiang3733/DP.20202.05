@@ -2,14 +2,18 @@ package entity.invoice;
 
 import entity.order.Order;
 
+import java.util.List;
+
 public class Invoice {
 
     private Order order;
     private int amount;
-    
-    public Invoice(){
 
-    }
+    // cleancode: bo phuong thuc ko su dung
+//    public Invoice(){
+//
+//    }
+
     // stamp coupling
     public Invoice(Order order){
         this.order = order;
@@ -30,6 +34,10 @@ public class Invoice {
 
     // coincidental cohesion: saveInvoice() khong lien quan toi nghiep vu cua class
     public void saveInvoice(){
-        
     }
+
+    public List getListOrderMedia() {
+        return this.order.getListOrderMedia();
+    }
+
 }

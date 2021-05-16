@@ -62,26 +62,49 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     Media getMedia(){
         return media;
     }
+
     int getRequestQuantity() {
         return spinnerChangeNumber.getValue();
     }
 
-    private void setMediaInfo() throws SQLException {
-        // set the cover image of media
+
+    // cleancode: tach thanh cac function nho
+    void setCoverImage(){
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setFitHeight(160);
         mediaImage.setFitWidth(152);
         mediaImage.setImage(image);
 
+        setImage(mediaImage, media.getImageURL());
+    }
+
+    // cleancode: tach thanh ham setCoverImage
+//    private void setMediaInfo() throws SQLException {
+//       // set the cover image of media
+//        File file = new File(media.getImageURL());
+//        Image image = new Image(file.toURI().toString());
+//        mediaImage.setFitHeight(160);
+//        mediaImage.setFitWidth(152);
+//        mediaImage.setImage(image);
+//
+//        mediaTitle.setText(media.getTitle());
+//        mediaPrice.setText(ViewsConfig.getCurrencyFormat(media.getPrice()));
+//        mediaAvail.setText(Integer.toString(media.getQuantity()));
+//        spinnerChangeNumber.setValueFactory(
+//            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+//        );
+//
+//        setImage(mediaImage, media.getImageURL());
+//    }
+    private void setMediaInfo() throws SQLException {
+        setCoverImage();
         mediaTitle.setText(media.getTitle());
         mediaPrice.setText(ViewsConfig.getCurrencyFormat(media.getPrice()));
         mediaAvail.setText(Integer.toString(media.getQuantity()));
         spinnerChangeNumber.setValueFactory(
-            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
         );
-
-        setImage(mediaImage, media.getImageURL());
     }
 
     @Override

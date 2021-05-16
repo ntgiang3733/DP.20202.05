@@ -1,12 +1,7 @@
 package entity.media;
 
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.Date;
-import java.util.List;
-
-import entity.db.AIMSDB;
 
 public class Book extends Media {
 
@@ -50,7 +45,6 @@ public class Book extends Media {
         this.author = author;
         return this;
     }
-
     public String getCoverType() {
         return this.coverType;
     }
