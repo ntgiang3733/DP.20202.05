@@ -8,8 +8,16 @@ public class DeliveryInfo extends ADeliveryInfo {
 //    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculatorFactory distanceCalculator) {
 //        super(name, phone, province, address, shippingInstructions, distanceCalculator);
 //  }
+
+    private CalShippingFeeStrategy calShippingFeeStrategy;
+
+    public void setCalShippingFeeStrategy(CalShippingFeeStrategy calShippingFeeStrategy) {
+        this.calShippingFeeStrategy = calShippingFeeStrategy;
+    }
+
     public DeliveryInfo(DeliveryInfoObj infoObj, DistanceCalculatorFactory distanceCalculator) {
         super(infoObj.getName(), infoObj.getPhone(), infoObj.getProvince(), infoObj.getAddress(), infoObj.getInstructions(), distanceCalculator);
+
     }
 
     // cleancode: ko su dung magic_number
@@ -22,6 +30,9 @@ public class DeliveryInfo extends ADeliveryInfo {
     @Override
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
-        return (int) (distance * ShippingConfigs.DISTANCE_CALCULATOR_FEE);
+        if(calShippingFeeStrategy == null) {
+            this.calShippingFeeStrategy = ShippingFeeStrategy();
+        }
+        return (int) (this.calShippingFeeStrategy.calShippingFee(distance));
     }
 }
