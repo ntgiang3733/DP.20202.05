@@ -7,8 +7,6 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
-import java.util.ResourceBundle;
 import java.util.logging.Logger;
 
 import common.exception.MediaNotAvailableException;
@@ -20,7 +18,6 @@ import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.media.Media;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -72,7 +69,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     @FXML
     private SplitMenuButton splitMenuBtnSearch;
 
-    private List homeItems;
+    private List<MediaHandler> homeItems;
     private AuthenticationController authenticationController;
 
     //stamp coupling

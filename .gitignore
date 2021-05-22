@@ -4,4 +4,4 @@
 target
 /bin/
 /.idea/
-astah-uml/*.lock
+bao-cao/**.lock
