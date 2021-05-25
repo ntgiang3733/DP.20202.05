@@ -9,51 +9,16 @@ import java.io.IOException;
 
 public abstract class BaseNextScreenHandler extends BaseScreenHandler {
 
-    protected BaseNextScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData();
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
+    protected BaseNextScreenHandler(Stage stage, String screenPath, Object dto) throws IOException {
+        super(stage, screenPath, dto);
     }
 
-    protected BaseNextScreenHandler(Stage stage, String screenPath,
-                                    Object dto) throws IOException {
-        super(stage, screenPath);
-        try {
-            setupData(dto);
-            setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources.");
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
-        }
-    }
-
-    protected abstract void setupData(Object dto) throws Exception;
-
-    abstract protected void setTitleScreenToShow();
-
-    @Override
-    protected void setupData() throws Exception {
-    }
+    abstract public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController);
 
     // template method
-    public void showScreen(BaseNextScreenHandler previousScreen, HomeScreenHandler homeScreenHandler, BaseController bController) {
-        setTitleScreenToShow();
-        super.setPreviousScreen(previousScreen);
+    public void showScreen(BaseScreenHandler previousScreen, HomeScreenHandler homeScreenHandler, BaseController bController) {
         super.setHomeScreenHandler(homeScreenHandler);
-        super.setBController(bController);
+        requestToShowScreen( previousScreen,  bController);
         super.show();
     }
 }

@@ -1,17 +1,7 @@
 package views.screen.home;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.logging.Logger;
-
-import common.exception.MediaNotAvailableException;
 import common.interfaces.Observable;
 import common.interfaces.Observer;
-import entity.cart.Cart;
-import entity.cart.CartItem;
 import entity.media.Media;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -23,33 +13,33 @@ import javafx.scene.image.ImageView;
 import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
-import views.screen.popup.PopupScreen;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Logger;
 
 public class MediaHandler extends FXMLScreenHandler implements Observable {
 
+    private static final Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+    private final Media media;
+    private final List<Observer> observerList;
     @FXML
     protected ImageView mediaImage;
-
     @FXML
     protected Label mediaTitle;
-
     @FXML
     protected Label mediaPrice;
-
     @FXML
     protected Label mediaAvail;
-
     @FXML
     protected Spinner<Integer> spinnerChangeNumber;
-
     @FXML
     protected Button addToCartBtn;
 
-    private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
-    private Media media;
-    private List<Observer> observerList;
-
-    public MediaHandler(String screenPath, Media media) throws SQLException, IOException{
+    public MediaHandler(String screenPath, Media media) throws SQLException, IOException {
         super(screenPath);
         this.media = media;
         this.observerList = new ArrayList<>();
@@ -59,7 +49,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         setMediaInfo();
     }
 
-    Media getMedia(){
+    Media getMedia() {
         return media;
     }
 
@@ -68,8 +58,8 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     }
 
 
-    // cleancode: tach thanh cac function nho
-    void setCoverImage(){
+    // clean code: tach thanh cac function nho
+    void setCoverImage() {
         File file = new File(media.getImageURL());
         Image image = new Image(file.toURI().toString());
         mediaImage.setFitHeight(160);
@@ -79,7 +69,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         setImage(mediaImage, media.getImageURL());
     }
 
-    // cleancode: tach thanh ham setCoverImage
+    // clean code: tach thanh ham setCoverImage
 //    private void setMediaInfo() throws SQLException {
 //       // set the cover image of media
 //        File file = new File(media.getImageURL());
@@ -103,7 +93,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
         mediaPrice.setText(ViewsConfig.getCurrencyFormat(media.getPrice()));
         mediaAvail.setText(Integer.toString(media.getQuantity()));
         spinnerChangeNumber.setValueFactory(
-                new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
+            new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 1)
         );
     }
 

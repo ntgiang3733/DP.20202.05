@@ -1,17 +1,11 @@
 package views.screen.cart;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Logger;
-
 import common.exception.MediaNotAvailableException;
 import common.exception.PlaceOrderException;
 import common.exception.ViewCartException;
 import common.interfaces.Observable;
 import common.interfaces.Observer;
+import controller.BaseController;
 import controller.PlaceOrderController;
 import controller.ViewCartController;
 import entity.cart.CartItem;
@@ -31,37 +25,41 @@ import views.screen.ViewsConfig;
 import views.screen.popup.PopupScreen;
 import views.screen.shipping.ShippingScreenHandler;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
+
 public class CartScreenHandler extends BaseNextScreenHandler implements Observer {
-  private static Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
-  PlaceOrderController placeOrderController;
-  final String bannerPath = "/LOGO.png";
+    private static final Logger LOGGER = Utils.getLogger(CartScreenHandler.class.getName());
+    final String bannerPath = "/LOGO.png";
+    PlaceOrderController placeOrderController;
+    @FXML
+    VBox vboxCart;
+    @FXML
+    private ImageView aimsImage;
+    @FXML
+    private Label pageTitle;
+    @FXML
+    private Label shippingFees;
 
-  @FXML
-  private ImageView aimsImage;
+    @FXML
+    private Label labelAmount;
 
-  @FXML
-  private Label pageTitle;
+    @FXML
+    private Label labelSubtotal;
 
-  @FXML
-  VBox vboxCart;
+    @FXML
+    private Label labelVAT;
 
-  @FXML
-  private Label shippingFees;
+    @FXML
+    private Button btnPlaceOrder;
 
-  @FXML
-  private Label labelAmount;
-
-  @FXML
-  private Label labelSubtotal;
-
-  @FXML
-  private Label labelVAT;
-
-  @FXML
-  private Button btnPlaceOrder;
-
-  // stamp coupling: truyen doi tuong Stage
-  // cleancode: clean class: extract superclass
+    // stamp coupling: truyen doi tuong Stage
+    // clean code: clean class: extract superclass
+    // design pattern: template method
 //    public CartScreenHandler(Stage stage, String screenPath) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -75,47 +73,59 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-  public CartScreenHandler(Stage stage, String screenPath) throws IOException {
-    super(stage, screenPath);
-  }
+    public CartScreenHandler(Stage stage, String screenPath) throws IOException {
+        super(stage, screenPath, null);
+    }
 
-  @Override
-  protected void setupData(Object dto) throws Exception {
+    @Override
+    protected void setupData(Object dto) throws Exception {
+        return;
+    }
 
-  }
+    @Override
+    public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
+        try {
+            setPreviousScreen(previousScreen);
+            setScreenTitle("Cart Screen");
+            getBController().checkAvailabilityOfProduct();
+            displayCartWithMediaAvailability();
+        } catch (SQLException e1) {
+            throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+        }
+    }
 
-  // cleancode: tach method
-  void setAimsImage() {
-    File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
-    Image im = new Image(file.toURI().toString());
-    aimsImage.setImage(im);
-    aimsImage.setOnMouseClicked(e -> {
-      showHomeScreen();
-    });
-  }
+    // clean code: tach method
+    void setAimsImage() {
+        File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
+        Image im = new Image(file.toURI().toString());
+        aimsImage.setImage(im);
+        aimsImage.setOnMouseClicked(e -> {
+            showHomeScreen();
+        });
+    }
 
-  // cleancode: tach method
-  void setBtnPlaceOrder() {
-    btnPlaceOrder.setOnMouseClicked(e -> {
-      LOGGER.info("Place Order button clicked");
-      try {
-        requestToPlaceOrder();
-      } catch (SQLException | IOException exp) {
-        LOGGER.severe("Cannot place the order, see the logs");
-        exp.printStackTrace();
-        throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
-      }
-    });
-  }
+    // clean code: tach method
+    void setBtnPlaceOrder() {
+        btnPlaceOrder.setOnMouseClicked(e -> {
+            LOGGER.info("Place Order button clicked");
+            try {
+                requestToPlaceOrder();
+            } catch (SQLException | IOException exp) {
+                LOGGER.severe("Cannot place the order, see the logs");
+                exp.printStackTrace();
+                throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
+            }
+        });
+    }
 
-  /**
-   * Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</br>
-   */
-  protected void setupFunctionality() throws Exception {
-    // fix relative image path caused by fxml
-    // cleancode: tach thanh cac khoi lenh
+    /**
+     * Temporal cohesion: cac cong viec btnPlaceOrder.setOnMouseClicked  va  aimsImage.setOnMouseClicked khong lien quan toi nhau</br>
+     */
+    protected void setupFunctionality() throws Exception {
+        // fix relative image path caused by fxml
+        // clean code: tach thanh cac khoi lenh
         /*
-        // cleancode: ko su dung string magic
+        // clean code: ko su dung string magic
 //        File file = new File(ViewsConfig.IMAGE_PATH + "/Logo.png");
         File file = new File(ViewsConfig.IMAGE_PATH + bannerPath);
         Image im = new Image(file.toURI().toString());
@@ -125,9 +135,9 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
         aimsImage.setOnMouseClicked(e -> {
             homeScreenHandler.show();
         });*/
-    setAimsImage();
+        setAimsImage();
 
-    // cleancode: tach thanh cac khoi lenh nho
+        // clean code: tach thanh cac khoi lenh nho
         /*
         // on mouse clicked, we start processing place order use case
         btnPlaceOrder.setOnMouseClicked(e -> {
@@ -140,60 +150,53 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
                 throw new PlaceOrderException(Arrays.toString(exp.getStackTrace()).replaceAll(", ", "\n"));
             }
         });*/
-    setBtnPlaceOrder();
-  }
-
-  public ViewCartController getBController() {
-    return (ViewCartController) super.getBController();
-  }
-
-  @Override
-  protected void setTitleScreenToShow() {
-    setScreenTitle("Cart Screen");
-  }
-
-  // stamp coupling: truyen doi tuong BaseScreenHandler
-  // template method
-  public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
-    setPreviousScreen(prevScreen);
-    setScreenTitle("Cart Screen");
-    getBController().checkAvailabilityOfProduct();
-    displayCartWithMediaAvailability();
-    show();
-  }
-
-
-  //cleancode: tao ra cac function nho
-  Order generateOrder() throws SQLException {
-    try {
-      placeOrderController = PlaceOrderController.getInstance();
-      if (placeOrderController.getListCartMedia().size() == 0) {
-        throw new PlaceOrderException("You don't have anything to place");
-      }
-      placeOrderController.placeOrder();
-
-      displayCartWithMediaAvailability();
-
-      return placeOrderController.createOrder();
-    } catch (Exception e) {
-      throw e;
+        setBtnPlaceOrder();
     }
-  }
 
-  //cleancode: tao ra cac function nho
-  private void showShippingScreen(Order order) throws IOException {
-    ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
-        this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
+    public ViewCartController getBController() {
+        return (ViewCartController) super.getBController();
+    }
 
-    shippingScreenHandler.showScreen(this, homeScreenHandler, placeOrderController);
+    // stamp coupling: truyen doi tuong BaseScreenHandler
+    // template method
+//    public void requestToViewCart(BaseScreenHandler prevScreen) throws SQLException {
+//        setPreviousScreen(prevScreen);
+//        setScreenTitle("Cart Screen");
+//        getBController().checkAvailabilityOfProduct();
+//        displayCartWithMediaAvailability();
+//        show();
+//    }
 
-  }
 
-  /**
-   * Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</br>
-   * Template method
-   */
-  // cleancode: gom cac doan code thanh cac function
+    //clean code: tao ra cac function nho
+    Order generateOrder() throws SQLException {
+        try {
+            placeOrderController = PlaceOrderController.getInstance();
+            if (placeOrderController.getListCartMedia().size() == 0) {
+                throw new PlaceOrderException("You don't have anything to place");
+            }
+            placeOrderController.placeOrder();
+
+            displayCartWithMediaAvailability();
+
+            return placeOrderController.createOrder();
+        } catch (Exception e) {
+            throw e;
+        }
+    }
+
+    //clean code: tao ra cac function nho
+    private void showShippingScreen(Order order) throws IOException {
+        ShippingScreenHandler shippingScreenHandler = new ShippingScreenHandler(
+            this.stage, ViewsConfig.SHIPPING_SCREEN_PATH, order);
+        shippingScreenHandler.showScreen(this, homeScreenHandler, placeOrderController);
+    }
+
+    /**
+     * Communication cohesion: cac phuong thuc lien quan toi doi tuong shippingScreenHandler</br>
+     * Template method
+     */
+    // clean code: gom cac doan code thanh cac function
     /*public void requestToPlaceOrder() throws SQLException, IOException {
         try {
             // create placeOrderController and process the order
@@ -228,60 +231,60 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
             displayCartWithMediaAvailability();
         }
     }*/
-  public void requestToPlaceOrder() throws SQLException, IOException {
-    try {
-      Order order = generateOrder();
-      showShippingScreen(order);
-    } catch (PlaceOrderException e1) {
-      PopupScreen.error(e1.getMessage());
-    } catch (MediaNotAvailableException e) {
-      displayCartWithMediaAvailability();
+    public void requestToPlaceOrder() throws SQLException, IOException {
+        try {
+            Order order = generateOrder();
+            showShippingScreen(order);
+        } catch (PlaceOrderException e1) {
+            PopupScreen.error(e1.getMessage());
+        } catch (MediaNotAvailableException e) {
+            displayCartWithMediaAvailability();
+        }
     }
-  }
 
-  public void updateCart() throws SQLException {
-    getBController().checkAvailabilityOfProduct();
-    displayCartWithMediaAvailability();
-  }
+    public void updateCart() throws SQLException {
+        getBController().checkAvailabilityOfProduct();
+        displayCartWithMediaAvailability();
+    }
 
-  void updateCartAmount() {
-    // calculate subtotal and amount
-    int subtotal = getBController().getCartSubtotal();
-    // cleancode: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
+    void updateCartAmount() {
+        // calculate subtotal and amount
+        int subtotal = getBController().getCartSubtotal();
+        // clean code: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
 //        int vat = (int) ((ViewsConfig.PERCENT_VAT / 100) * subtotal);
-    int vat = (int) ((ViewsConfig.PERCENT_VAT) * subtotal);
-    int amount = subtotal + vat;
-    LOGGER.info("amount" + amount);
+        int vat = (int) ((ViewsConfig.PERCENT_VAT) * subtotal);
+        int amount = subtotal + vat;
+        LOGGER.info("amount" + amount);
 
-    // update subtotal and amount of Cart
-    labelSubtotal.setText(ViewsConfig.getCurrencyFormat(subtotal));
-    labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
-    labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
-  }
-
-
-  // cleancode
-  AnchorPane getContentMediaCart(CartItem cartItem) throws IOException {
-    MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH);
-    mediaCartScreen.setCartItem(cartItem);
-
-    // design pattern: Observable
-    mediaCartScreen.attach(this);
-
-    return mediaCartScreen.getContent();
-  }
-
-  // cleancode
-  void updateVboxCard(List lstMedia) throws IOException {
-    for (Object cm : lstMedia) {
-      // display the attribute of vboxCart media
-      AnchorPane content = getContentMediaCart((CartItem) cm);
-      // add spinner
-      vboxCart.getChildren().add(content);
+        // update subtotal and amount of Cart
+        labelSubtotal.setText(ViewsConfig.getCurrencyFormat(subtotal));
+        labelVAT.setText(ViewsConfig.getCurrencyFormat(vat));
+        labelAmount.setText(ViewsConfig.getCurrencyFormat(amount));
     }
-  }
 
-  // cleancode: tach thanh cac function nho
+
+    // clean code
+    AnchorPane getContentMediaCart(CartItem cartItem) throws IOException {
+        MediaHandler mediaCartScreen = new MediaHandler(ViewsConfig.CART_MEDIA_PATH);
+        mediaCartScreen.setCartItem(cartItem);
+
+        // design pattern: Observable
+        mediaCartScreen.attach(this);
+
+        return mediaCartScreen.getContent();
+    }
+
+    // clean code
+    void updateVboxCard(List lstMedia) throws IOException {
+        for (Object cm : lstMedia) {
+            // display the attribute of vboxCart media
+            AnchorPane content = getContentMediaCart((CartItem) cm);
+            // add spinner
+            vboxCart.getChildren().add(content);
+        }
+    }
+
+    // clean code: tach thanh cac function nho
     /*
     private void displayCartWithMediaAvailability() {
         // clear all old cartMedia
@@ -307,30 +310,30 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
             e.printStackTrace();
         }
     }*/
-  private void displayCartWithMediaAvailability() {
-    vboxCart.getChildren().clear();
-    List lstMedia = getBController().getListCartMedia();
-    try {
-      updateVboxCard(lstMedia);
-      updateCartAmount();
-    } catch (IOException e) {
-      e.printStackTrace();
+    private void displayCartWithMediaAvailability() {
+        vboxCart.getChildren().clear();
+        List lstMedia = getBController().getListCartMedia();
+        try {
+            updateVboxCard(lstMedia);
+            updateCartAmount();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
-  }
 
 
-  @Override
-  public void update(Observable observable) {
-    if (observable instanceof MediaHandler) update((MediaHandler) observable);
-  }
-
-  private void update(MediaHandler mediaHandler) {
-    try {
-      this.updateCart();
-      this.updateCartAmount();
-    } catch (SQLException exp) {
-      exp.printStackTrace();
-      throw new ViewCartException();
+    @Override
+    public void update(Observable observable) {
+        if (observable instanceof MediaHandler) update((MediaHandler) observable);
     }
-  }
+
+    private void update(MediaHandler mediaHandler) {
+        try {
+            this.updateCart();
+            this.updateCartAmount();
+        } catch (SQLException exp) {
+            exp.printStackTrace();
+            throw new ViewCartException();
+        }
+    }
 }

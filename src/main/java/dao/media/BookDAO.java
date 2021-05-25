@@ -14,25 +14,28 @@ import java.util.Date;
  */
 public class BookDAO extends MediaDAO {
     private static BookDAO instance;
-    public static BookDAO getInstance(){
-        if(instance == null){
+
+    private BookDAO() {
+    }
+
+    public static BookDAO getInstance() {
+        if (instance == null) {
             instance = new BookDAO();
         }
         return instance;
     }
-    private BookDAO() {}
 
     // coupling: data -> chi phu thuoc mot so tham so
     @Override
     public Media getMediaById(int id) throws SQLException {
-        String sql = "SELECT * FROM "+
-                "aims.Book " +
-                "INNER JOIN aims.Media " +
-                "ON Media.id = Book.id " +
-                "where Media.id = " + id + ";";
+        String sql = "SELECT * FROM " +
+            "aims.Book " +
+            "INNER JOIN aims.Media " +
+            "ON Media.id = Book.id " +
+            "where Media.id = " + id + ";";
         Statement stm = AIMSDB.getConnection().createStatement();
         ResultSet res = stm.executeQuery(sql);
-        if(res.next()) {
+        if (res.next()) {
 
             // from Media table
             String title = "";
@@ -51,7 +54,7 @@ public class BookDAO extends MediaDAO {
             String bookCategory = res.getString("bookCategory");
 
             return new Book(id, title, category, price, quantity, type,
-                    author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
+                author, coverType, publisher, publishDate, numOfPages, language, bookCategory);
 
         } else {
             throw new SQLException();

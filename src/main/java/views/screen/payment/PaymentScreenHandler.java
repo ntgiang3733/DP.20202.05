@@ -1,5 +1,6 @@
 package views.screen.payment;
 
+import controller.BaseController;
 import controller.PaymentController;
 import entity.invoice.Invoice;
 import javafx.fxml.FXML;
@@ -13,10 +14,8 @@ import views.screen.BaseNextScreenHandler;
 import views.screen.BaseScreenHandler;
 import views.screen.ResponseMessage;
 import views.screen.ViewsConfig;
-import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
-import java.util.Map;
 import java.util.logging.Logger;
 
 public class PaymentScreenHandler extends BaseNextScreenHandler {
@@ -51,7 +50,7 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
     /**
      * <h3><i>Temporal cohesion: 2 phuong thuc setupData() va setupFunctionality() chi lien quan toi thu tu thuc hien  </i></h3>
      */
-    // cleancode: clean class: extract superclass
+    // clean code: clean class: extract superclass
 //    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -76,6 +75,13 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
     }
 
     @Override
+    public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
+        setPreviousScreen(previousScreen);
+        setBController(bController);
+        setScreenTitle("Payment Screen");
+    }
+
+    @Override
     protected void setupFunctionality() throws Exception {
         btnConfirmPayment.setOnMouseClicked(e -> {
             try {
@@ -94,25 +100,20 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
         String contents = "pay order";
         PaymentController ctrl = (PaymentController) getBController();
 
-        // cleancode: tao doi tuong responseMessage
+        // clean code: tao doi tuong responseMessage
 //        Map<String, String> response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
 //                expirationDate.getText(), securityCode.getText());
 
         ResponseMessage response = ctrl.payOrder(invoice.getAmount(), contents, cardNumber.getText(), holderName.getText(),
-                expirationDate.getText(), securityCode.getText());
+            expirationDate.getText(), securityCode.getText());
 
         BaseNextScreenHandler resultScreen = new ResultScreenHandler(this.stage, ViewsConfig.RESULT_SCREEN_PATH, response);
 
         // template method
-        resultScreen.showScreen(this, homeScreenHandler, null);
 		/*resultScreen.setPreviousScreen(this);
 		resultScreen.setHomeScreenHandler(homeScreenHandler);
 		resultScreen.setScreenTitle("Result Screen");
 		resultScreen.show();*/
-    }
-
-    @Override
-    protected void setTitleScreenToShow() {
-        setScreenTitle("Payment Screen");
+        resultScreen.showScreen(this, homeScreenHandler, null);
     }
 }

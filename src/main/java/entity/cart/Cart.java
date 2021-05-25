@@ -1,11 +1,11 @@
 package entity.cart;
 
+import common.exception.MediaNotAvailableException;
+import entity.media.Media;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import common.exception.MediaNotAvailableException;
-import entity.media.Media;
 
 /**
  * singleton: Cart can la duy nhat, do do can ap dung singleton
@@ -13,18 +13,17 @@ import entity.media.Media;
 public class Cart {
 
     private static Cart instance;
+    private final List<CartItem> lstCartItem;
+
+    private Cart() {
+        lstCartItem = new ArrayList<>();
+    }
 
     public static Cart getInstance() {
         if (instance == null) {
             instance = new Cart();
         }
         return instance;
-    }
-
-    private List<CartItem> lstCartItem;
-
-    private Cart() {
-        lstCartItem = new ArrayList<>();
     }
 
     // stamp coupling
@@ -37,7 +36,7 @@ public class Cart {
         lstCartItem.remove(cm);
     }
 
-    // cleancode: dat ten ham sai y nghia
+    // clean code: dat ten ham sai y nghia
 //    public List getListMedia() {
 //        return lstCartItem;
 //    }
@@ -49,7 +48,7 @@ public class Cart {
         lstCartItem.clear();
     }
 
-    // cleancode: su dung ten bien co nghia
+    // clean code: su dung ten bien co nghia
     /*
     public int getTotalMedia() {
         int total = 0;
@@ -70,14 +69,14 @@ public class Cart {
     /**
      * Communication cohesion: phuong thuc getPrice va getQuantity co lien quan toi cm
      */
-    // cleancode: su dung ten bien co nghia
+    // clean code: su dung ten bien co nghia
     /*
     public int calSubtotal() {
         int total = 0;
         for (Object obj : lstCartItem) {
             CartItem cm = (CartItem) obj;
 //            total += cm.getPrice()*cm.getQuantity();
-            // cleancode: bo sung phuong thuc getTotal()
+            // clean code: bo sung phuong thuc getTotal()
             total += cm.getTotal();
         }
         return total;
@@ -90,8 +89,8 @@ public class Cart {
         return total;
     }
 
-    // cleancode: su dung ten bien co nghia
-    // cleancode: bo sung phuong thuc availableQuantity
+    // clean code: su dung ten bien co nghia
+    // clean code: bo sung phuong thuc availableQuantity
 /*    public void checkAvailabilityOfProduct() throws SQLException {
         boolean allAvailable = true;
         for (Object object : lstCartItem) {

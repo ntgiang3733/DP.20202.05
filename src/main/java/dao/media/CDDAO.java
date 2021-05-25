@@ -14,6 +14,9 @@ import java.util.Date;
 public class CDDAO extends MediaDAO {
     private static CDDAO instance;
 
+    private CDDAO() {
+    }
+
     public static CDDAO getInstance() {
         if (instance == null) {
             instance = new CDDAO();
@@ -21,17 +24,14 @@ public class CDDAO extends MediaDAO {
         return instance;
     }
 
-    private CDDAO() {
-    }
-
     // coupling: data -> chi phu thuoc mot so tham so
     @Override
     public Media getMediaById(int id) throws SQLException {
         String sql = "SELECT * FROM " +
-                "aims.CD " +
-                "INNER JOIN aims.Media " +
-                "ON Media.id = CD.id " +
-                "where Media.id = " + id + ";";
+            "aims.CD " +
+            "INNER JOIN aims.Media " +
+            "ON Media.id = CD.id " +
+            "where Media.id = " + id + ";";
 
         ResultSet res = AIMSDB.getConnection().createStatement().executeQuery(sql);
         if (res.next()) {
@@ -50,7 +50,7 @@ public class CDDAO extends MediaDAO {
             Date releasedDate = res.getDate("releasedDate");
 
             return new CD(id, title, category, price, quantity, type,
-                    artist, recordLabel, musicType, releasedDate);
+                artist, recordLabel, musicType, releasedDate);
 
         } else {
             throw new SQLException();

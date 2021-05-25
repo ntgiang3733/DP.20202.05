@@ -1,19 +1,9 @@
 package views.screen.cart;
 
-import java.io.File;
-import java.io.IOException;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Logger;
-
 import common.exception.MediaUpdateException;
-import common.exception.ViewCartException;
 import common.interfaces.Observable;
 import common.interfaces.Observer;
 import controller.SessionInformation;
-import entity.cart.Cart;
 import entity.cart.CartItem;
 import javafx.fxml.FXML;
 import javafx.geometry.Pos;
@@ -29,9 +19,16 @@ import utils.Utils;
 import views.screen.FXMLScreenHandler;
 import views.screen.ViewsConfig;
 
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.logging.Logger;
+
 public class MediaHandler extends FXMLScreenHandler implements Observable {
 
-  private static Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
+  private static final Logger LOGGER = Utils.getLogger(MediaHandler.class.getName());
 
   @FXML
   protected HBox hboxMedia;
@@ -82,7 +79,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     setMediaInfo();
   }
 
-  // cleancode: tach thanh cac function nho
+  // clean code: tach thanh cac function nho
   void setImageView() {
     File file = new File(cartItem.getMedia().getImageURL());
     Image im = new Image(file.toURI().toString());
@@ -95,9 +92,9 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
   void setDeleteButton() {
     btnDelete.setFont(ViewsConfig.REGULAR_FONT);
     btnDelete.setOnMouseClicked(e -> {
-        SessionInformation.getInstance().getCartInstance().removeCartMedia(cartItem); // update user cart
-        notifyObservers();
-        LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
+      SessionInformation.getInstance().getCartInstance().removeCartMedia(cartItem); // update user cart
+      notifyObservers();
+      LOGGER.info("Deleted " + cartItem.getMedia().getTitle() + " from the cart");
     });
   }
 
@@ -105,7 +102,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
     title.setText(cartItem.getMedia().getTitle());
     price.setText(ViewsConfig.getCurrencyFormat(cartItem.getPrice()));
 
-    // cleancode: tach thanh cac function
+    // clean code: tach thanh cac function
     setImageView();
 		/*File file = new File(cartItem.getMedia().getImageURL());
 		Image im = new Image(file.toURI().toString());
@@ -115,7 +112,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 		image.setFitWidth(92);*/
 
     // add delete button
-    // cleancode: tach thanh funtion setDeleteButton
+    // clean code: tach thanh funtion setDeleteButton
     setDeleteButton();
 		/*btnDelete.setFont(ViewsConfig.REGULAR_FONT);
 		btnDelete.setOnMouseClicked(e -> {
@@ -168,7 +165,7 @@ public class MediaHandler extends FXMLScreenHandler implements Observable {
 //    }
   private void initializeSpinner() {
     SpinnerValueFactory<Integer> valueFactory = //
-        new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartItem.getQuantity());
+      new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 100, cartItem.getQuantity());
     spinner = new Spinner<Integer>(valueFactory);
     spinner.setOnMouseClicked(e -> {
       try {

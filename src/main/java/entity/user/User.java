@@ -36,17 +36,17 @@ public class User {
         return this.name;
     }
 
-    // cleancode: loai bo phuong thuc ko su dung
+    // clean code: loai bo phuong thuc ko su dung
 //    public void setusername(String name) {
 //        this.name = name;
 //    }
 
-    // cleancode: loai bo phuong thuc ko su dung
+    // clean code: loai bo phuong thuc ko su dung
 //    public String getEmail() {
 //        return this.email;
 //    }
 
-    // cleancode: loai bo phuong thuc ko su dung
+    // clean code: loai bo phuong thuc ko su dung
 //    public void setEmail(String email) {
 //        this.email = email;
 //    }

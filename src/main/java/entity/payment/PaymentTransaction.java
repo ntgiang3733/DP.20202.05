@@ -1,12 +1,12 @@
 package entity.payment;
 
 public class PaymentTransaction {
-    private String errorCode;
-    private ACard card;
-    private String transactionId;
-    private String transactionContent;
-    private int amount;
-    private String createdAt;
+    private final String errorCode;
+    private final ACard card;
+    private final String transactionId;
+    private final String transactionContent;
+    private final int amount;
+    private final String createdAt;
 
     // stamp coupling: truyen doi tuong CreditCard
 

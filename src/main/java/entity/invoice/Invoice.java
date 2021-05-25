@@ -6,16 +6,16 @@ import java.util.List;
 
 public class Invoice {
 
-    private Order order;
+    private final Order order;
     private int amount;
 
-    // cleancode: bo phuong thuc ko su dung
+    // clean code: bo phuong thuc ko su dung
 //    public Invoice(){
 //
 //    }
 
     // stamp coupling
-    public Invoice(Order order){
+    public Invoice(Order order) {
         this.order = order;
         this.amount = order.getTotal();
     }
@@ -23,17 +23,18 @@ public class Invoice {
     public Order getOrder() {
         return order;
     }
-    // data coupling
-    public void setAmount(int amount) {
-        this.amount = amount;
-    } //data
 
     public int getAmount() {
         return amount;
     }
 
+    // data coupling
+    public void setAmount(int amount) {
+        this.amount = amount;
+    } //data
+
     // coincidental cohesion: saveInvoice() khong lien quan toi nghiep vu cua class
-    public void saveInvoice(){
+    public void saveInvoice() {
     }
 
     public List getListOrderMedia() {

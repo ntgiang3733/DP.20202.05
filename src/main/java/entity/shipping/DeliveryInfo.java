@@ -14,7 +14,7 @@ public class DeliveryInfo {
 
     protected CalculatorShippingStrategy behaviorCalShip;
 
-    // cleancode: su dung DeliveryInfo de truyen du lieu
+    // clean code: su dung DeliveryInfo de truyen du lieu
 //    public DeliveryInfo(String name, String phone, String province, String address, String shippingInstructions, DistanceCalculatorFactory distanceCalculator) {
 //        super(name, phone, province, address, shippingInstructions, distanceCalculator);
 //  }
@@ -66,7 +66,7 @@ public class DeliveryInfo {
         this.behaviorCalShip = behaviorCalShip;
     }
 
-    // cleancode: ko su dung magic_number
+    // clean code: ko su dung magic_number
 
     /**
      * SOLID: OCP vi: khi thay doi thu vien DistanceCalculator, thì phuong thuc calculateDistance cung bi thay doi theo, do vay can viet lai phuong thuc calculateShippingFee <br>

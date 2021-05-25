@@ -1,6 +1,7 @@
 package views.screen.shipping;
 
 import common.exception.InvalidDeliveryInfoException;
+import controller.BaseController;
 import controller.PlaceOrderController;
 import entity.invoice.Invoice;
 import entity.order.Order;
@@ -17,6 +18,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseNextScreenHandler;
+import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.invoice.InvoiceScreenHandler;
 
@@ -49,7 +51,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
     private Order order;
 
     //stamp coupling
-    // cleancode: clean class: extract superclass
+    // clean code: clean class: extract superclass
 //    public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -74,6 +76,13 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
         this.order = (Order) dto;
         this.province.getItems().addAll(ShippingConfigs.PROVINCES);
         this.province.getSelectionModel().select(ShippingConfigs.RUSH_SUPPORT_PROVINCES_INDEX[0]);
+    }
+
+    @Override
+    public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
+        setPreviousScreen(previousScreen);
+        setScreenTitle("Shipping Screen");
+        setBController(bController);
     }
 
     @Override
@@ -102,15 +111,15 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
         BaseNextScreenHandler InvoiceScreenHandler = new InvoiceScreenHandler(this.stage, ViewsConfig.INVOICE_SCREEN_PATH, invoice);
 
         // template method
-        InvoiceScreenHandler.showScreen(this, homeScreenHandler, getBController());
 //		InvoiceScreenHandler.setPreviousScreen(this);
 //		InvoiceScreenHandler.setHomeScreenHandler(homeScreenHandler);
 //		InvoiceScreenHandler.setBController(getBController());
 //		InvoiceScreenHandler.setScreenTitle("Invoice Screen");
 //		InvoiceScreenHandler.show();
+        InvoiceScreenHandler.showScreen(this, homeScreenHandler, getBController());
     }
 
-    // cleancode: tao ra mot doi tuong message rieng
+    // clean code: tao ra mot doi tuong message rieng
 //    public void preprocessDeliveryInfo() throws IOException, InterruptedException {
 //        // add info to messages
 //        HashMap<String, String> messages = new HashMap<>();
@@ -151,12 +160,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
         return (PlaceOrderController) super.getBController();
     }
 
-    @Override
-    protected void setTitleScreenToShow() {
-        setScreenTitle("Shipping Screen");
-    }
-
-    // cleancode: loai bo phuong thuc ko su dung
+    // clean code: loai bo phuong thuc ko su dung
 //	public void notifyError(){
 //		// TODO: implement later on if we need
 //	}

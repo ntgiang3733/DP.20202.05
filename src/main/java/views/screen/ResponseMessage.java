@@ -1,28 +1,28 @@
 package views.screen;
 
-// cleancode: Tao doi tuong response de khong phai truyen qua hashmap
+// clean code: Tao doi tuong response de khong phai truyen qua hashmap
 public class ResponseMessage {
-    private String result;
-    private String message;
+  private String result;
+  private String message;
 
-    public ResponseMessage(String result, String message) {
-        this.message = message;
-        this.result = result;
-    }
+  public ResponseMessage(String result, String message) {
+    this.message = message;
+    this.result = result;
+  }
 
-    public String getResult() {
-        return result;
-    }
+  public String getResult() {
+    return result;
+  }
 
-    public void setResult(String result) {
-        this.result = result;
-    }
+  public void setResult(String result) {
+    this.result = result;
+  }
 
-    public String getMessage() {
-        return message;
-    }
+  public String getMessage() {
+    return message;
+  }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
+  public void setMessage(String message) {
+    this.message = message;
+  }
 }

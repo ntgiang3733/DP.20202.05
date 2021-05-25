@@ -10,14 +10,14 @@ public class CartItem {
     private int quantity;
     private int price;
 
-    // cleancode: xoa phuong thuc khong su dung
+    // clean code: xoa phuong thuc khong su dung
 //   old: public CartItem(){
 //
 //    }
 
     //stamp coupling: truyen doi tuong Media, Cart
 
-    // cleancode: xoa phuong thuc khong su dung
+    // clean code: xoa phuong thuc khong su dung
     // old: public CartItem(Media media, Cart cart, int quantity, int price) {
     public CartItem(Media media, int quantity, int price) {
         this.media = media;
@@ -52,12 +52,12 @@ public class CartItem {
         this.price = price;
     }
 
-    // cleancode: bo sung phuong thuc get Total
-    public int getTotal(){
+    // clean code: bo sung phuong thuc get Total
+    public int getTotal() {
         return this.getPrice() * this.getQuantity();
     }
 
-    //cleancode:them phuong thuc availableQuantity
+    //clean code:them phuong thuc availableQuantity
     public boolean availableQuantity() throws SQLException {
         return this.getMedia().getQuantity() > this.getQuantity();
     }

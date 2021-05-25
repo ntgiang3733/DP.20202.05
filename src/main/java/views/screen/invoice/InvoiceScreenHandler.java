@@ -1,6 +1,7 @@
 package views.screen.invoice;
 
 import common.exception.ProcessInvoiceException;
+import controller.BaseController;
 import controller.PaymentController;
 import entity.invoice.Invoice;
 import entity.order.Order;
@@ -13,6 +14,7 @@ import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseNextScreenHandler;
+import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.payment.PaymentScreenHandler;
 
@@ -22,7 +24,7 @@ import java.util.logging.Logger;
 
 public class InvoiceScreenHandler extends BaseNextScreenHandler {
 
-    private static Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
+    private static final Logger LOGGER = Utils.getLogger(InvoiceScreenHandler.class.getName());
 
     @FXML
     private Label pageTitle;
@@ -57,7 +59,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
     private Invoice invoice;
 
     //stamp coupling
-//    // cleancode: clean class: extract superclass
+//    // clean code: clean class: extract superclass
 //    public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -77,8 +79,8 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
     }
 
     //stamp coupling
-    // cleancode: tach thanh cac function nho
-    // cleancode: hide delegate
+    // clean code: tach thanh cac function nho
+    // clean code: hide delegate
 //    @Override
 //    protected void setupData(Object dto) throws Exception {
 //        this.invoice = (Invoice) dto;
@@ -128,6 +130,13 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
         });
     }
 
+    @Override
+    public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
+        setPreviousScreen(previousScreen);
+        setBController(bController);
+        setScreenTitle("Invoice Screen");
+    }
+
     private void setupOrderInfo(Order order) {
         subtotal.setText(ViewsConfig.getCurrencyFormat(order.getSubtotal()));
         shippingFees.setText(ViewsConfig.getCurrencyFormat(order.getShippingFees()));
@@ -166,11 +175,6 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
         BaseNextScreenHandler paymentScreen = new PaymentScreenHandler(this.stage, ViewsConfig.PAYMENT_SCREEN_PATH, invoice);
         paymentScreen.showScreen(this, homeScreenHandler, new PaymentController());
         LOGGER.info("Confirmed invoice");
-    }
-
-    @Override
-    protected void setTitleScreenToShow() {
-        setScreenTitle("Invoice Screen");
     }
 
 }

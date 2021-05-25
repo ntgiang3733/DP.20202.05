@@ -1,19 +1,13 @@
 package views.screen.home;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.logging.Logger;
-
 import common.exception.MediaNotAvailableException;
 import common.exception.ViewCartException;
 import common.interfaces.Observable;
 import common.interfaces.Observer;
-import controller.*;
+import controller.AuthenticationController;
+import controller.HomeController;
+import controller.SessionInformation;
+import controller.ViewCartController;
 import entity.cart.Cart;
 import entity.cart.CartItem;
 import entity.media.Media;
@@ -32,6 +26,14 @@ import views.screen.BaseScreenHandler;
 import views.screen.ViewsConfig;
 import views.screen.cart.CartScreenHandler;
 import views.screen.popup.PopupScreen;
+
+import java.io.File;
+import java.io.IOException;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.logging.Logger;
 
 //Temporal cohesion: class chứa quá nhiều hàm thực hiện các chức năng khác nhau
 public class HomeScreenHandler extends BaseScreenHandler implements Observer {
@@ -73,7 +75,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private AuthenticationController authenticationController;
 
     //stamp coupling
-    // cleancode: clean class: extract superclass
+    // clean code: clean class: extract superclass
 //    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -89,10 +91,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 //        }
 //    }
     public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
+        super(stage, screenPath, null);
     }
 
-    // cleancode: loai bo phuong thuc ko su dung
+    // clean code: loai bo phuong thuc ko su dung
 //    public Label getNumMediaCartLabel() {
 //        return this.numMediaInCart;
 //    }
@@ -102,10 +104,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     }
 
     // stamp coupling
-    // cleancode: loai bo tham so ko su dung
+    // clean code: loai bo tham so ko su dung
 //    protected void setupData(Object dto) throws Exception {
     @Override
-    protected void setupData() throws Exception {
+    protected void setupData(Object dto) throws Exception {
         setBController(new HomeController());
         this.authenticationController = AuthenticationController.getInstance();
         try {
@@ -135,15 +137,16 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             try {
                 LOGGER.info("User clicked to view cart");
                 cartScreen = new CartScreenHandler(this.stage, ViewsConfig.CART_SCREEN_PATH);
-                cartScreen.setHomeScreenHandler(this);
-                cartScreen.setBController(new ViewCartController());
-                cartScreen.requestToViewCart(this);
-            } catch (IOException | SQLException e1) {
+//                cartScreen.setHomeScreenHandler(this);
+//                cartScreen.setBController(new ViewCartController());
+//                cartScreen.requestToViewCart(this);
+                cartScreen.showScreen(this, this, new ViewCartController());
+            } catch (IOException e1) {
                 throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
         addMediaHome(this.homeItems);
-        // cleancode: ko su dung magic_number
+        // clean code: ko su dung magic_number
         addMenuItem(BOOK_POSITION, "Book", splitMenuBtnSearch);
         addMenuItem(DVD_POSITION, "DVD", splitMenuBtnSearch);
         addMenuItem(CD_POSITION, "CD", splitMenuBtnSearch);
@@ -160,7 +163,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             });
         }
 
-        numMediaInCart.setText(String.valueOf(SessionInformation.getInstance().getCartInstance().getListCartMedia().size()) + " media");
+        numMediaInCart.setText(SessionInformation.getInstance().getCartInstance().getListCartMedia().size() + " media");
         super.show();
     }
 
@@ -186,7 +189,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             hboxMedia.getChildren().forEach(node -> {
                 int vid = hboxMedia.getChildren().indexOf(node);
                 VBox vBox = (VBox) node;
-                // cleancode: ko su dung hang so
+                // clean code: ko su dung hang so
 //                while (vBox.getChildren().size() < 3 && !mediaItems.isEmpty()) {
                 while (vBox.getChildren().size() < Utils.SIZE_OF_HOME_ITEM && !mediaItems.isEmpty()) {
                     MediaHandler media = (MediaHandler) mediaItems.get(0);
@@ -198,7 +201,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         }
     }
 
-    // cleancode: tach thanh ham setLabelMenuItem
+    // clean code: tach thanh ham setLabelMenuItem
     Label getLabelMenuItem(String text, MenuButton menuButton) {
         Label label = new Label();
         label.prefWidthProperty().bind(menuButton.widthProperty().subtract(31));
@@ -210,7 +213,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     private void addMenuItem(int position, String text, MenuButton menuButton) {
         MenuItem menuItem = new MenuItem();
 
-        //cleancode: tach thanh ham setLabelMenuItem
+        //clean code: tach thanh ham setLabelMenuItem
         Label label = getLabelMenuItem(text, menuButton);
         /*
         Label label = new Label();
@@ -220,7 +223,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
         */
         menuItem.setGraphic(label);
         menuItem.setOnAction(e -> {
-            // cleancode: tach thanh function nho
+            // clean code: tach thanh function nho
             // empty home media
             /*hboxMedia.getChildren().forEach(node -> {
                 VBox vBox = (VBox) node;
@@ -228,12 +231,12 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             });*/
             emptyHomeMedia();
 
-            // cleancode: tach thanh function nho
+            // clean code: tach thanh function nho
             // filter only media with the choosen category
            /* List filteredItems = new ArrayList<>();
             homeItems.forEach(me -> {
                 MediaHandler media = (MediaHandler) me;
-                // cleancode: tranh truy cap qua sau vao doi tuong
+                // clean code: tranh truy cap qua sau vao doi tuong
 //                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
                 if (media.getMedia().includeTitle(text)) {
                     filteredItems.add(media);
@@ -269,7 +272,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             if (mediaInCart != null) {
                 mediaInCart.setQuantity(mediaInCart.getQuantity() + 1);
             } else {
-                // cleancode: xoa phuong thuc khong su dung
+                // clean code: xoa phuong thuc khong su dung
                 // old: CartItem cartItem = new CartItem(media, cart, requestQuantity, media.getPrice());
                 CartItem cartItem = new CartItem(media, requestQuantity, media.getPrice());
                 cart.addCartMedia(cartItem);
@@ -301,10 +304,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             BaseNextScreenHandler loginScreen = new LoginScreenHandler(this.stage, ViewsConfig.LOGIN_SCREEN_PATH);
 
             //template method
-            loginScreen.showScreen(null, this, this.authenticationController);
 //            loginScreen.setHomeScreenHandler(this);
 //            loginScreen.setBController(this.authenticationController);
 //            loginScreen.show();
+            loginScreen.showScreen(null, this, this.authenticationController);
         } catch (Exception ex) {
             try {
                 PopupScreen.error("Cant trigger Login");
@@ -326,8 +329,8 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
     List filterHomeMediaItems(String text) {
         List filteredItems = new ArrayList<>();
         homeItems.forEach(me -> {
-            MediaHandler media = (MediaHandler) me;
-            // cleancode: tranh truy cap qua sau vao doi tuong
+            MediaHandler media = me;
+            // clean code: tranh truy cap qua sau vao doi tuong
 //                if (media.getMedia().getTitle().toLowerCase().startsWith(text.toLowerCase())) {
             if (media.getMedia().includeTitle(text)) {
                 filteredItems.add(media);

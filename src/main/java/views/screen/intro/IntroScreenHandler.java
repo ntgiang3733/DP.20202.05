@@ -1,28 +1,25 @@
 package views.screen.intro;
 
-import java.io.File;
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
-import java.util.logging.Logger;
-
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.BaseScreenHandler;
-import views.screen.popup.PopupScreen;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.logging.Logger;
 
 public class IntroScreenHandler extends BaseScreenHandler {
 
-    private static final Logger LOGGER = Utils.getLogger(IntroScreenHandler.class.getName());
+  private static final Logger LOGGER = Utils.getLogger(IntroScreenHandler.class.getName());
 
 
-    @FXML
-    ImageView logo;
-    // cleancode: clean class: extract superclass
+  @FXML
+  ImageView logo;
+
+  // clean code: clean class: extract superclass
 //    public IntroScreenHandler(Stage stage, String screenPath) throws IOException {
 //        super(stage, screenPath);
 //        try {
@@ -37,20 +34,21 @@ public class IntroScreenHandler extends BaseScreenHandler {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public IntroScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath);
-    }
+  public IntroScreenHandler(Stage stage, String screenPath) throws IOException {
+    super(stage, screenPath, null);
+  }
 
-    //stamp coupling: truyen doi tuong Object
+  //stamp coupling: truyen doi tuong Object
 
-    @Override
-    protected void setupData() throws Exception {
-    }
+  @Override
+  protected void setupData(Object dto) throws Exception {
+      return;
+  }
 
-    @Override
-    protected void setupFunctionality() throws Exception {
-        File file = new File("src/main/resources/assets/images/Logo.png");
-        Image image = new Image(file.toURI().toString());
-        logo.setImage(image);
-    }
+  @Override
+  protected void setupFunctionality() throws Exception {
+    File file = new File("src/main/resources/assets/images/Logo.png");
+    Image image = new Image(file.toURI().toString());
+    logo.setImage(image);
+  }
 }

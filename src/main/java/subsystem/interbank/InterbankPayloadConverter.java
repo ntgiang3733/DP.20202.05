@@ -113,7 +113,7 @@ public class InterbankPayloadConverter {
      * @return
      */
     // coupling: data
-    // cleancode: return ngay khi co the
+    // clean code: return ngay khi co the
     /*
     private MyMap convertJSONResponse(String responseText) {
         MyMap response = null;

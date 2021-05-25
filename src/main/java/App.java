@@ -24,16 +24,16 @@ public class App extends Application {
     private FadeTransition fadeOut;
     private BaseScreenHandler introScreen;
 
-    // cleancode: tach thanh cac function nho
+    // clean code: tach thanh cac function nho
 
-    // cleancode: tach thanh cac function nho
+    // clean code: tach thanh cac function nho
     void initIntroScreen(Stage primaryStage) throws IOException {
         // initialize the scene
         introScreen = new IntroScreenHandler(primaryStage, ViewsConfig.INTRO_SCREEN_PATH);
         introScreen.show();
     }
 
-    // cleancode: tach thanh cac function nho
+    // clean code: tach thanh cac function nho
     void initFaceIn() {
         fadeIn = new FadeTransition(Duration.seconds(TIME_TIMEOUT_FADE_IN), introScreen.getContent());
         fadeIn.setFromValue(0);
@@ -44,7 +44,7 @@ public class App extends Application {
         });
     }
 
-    // cleancode: tach thanh cac function nho
+    // clean code: tach thanh cac function nho
     void initFadeOut(Stage primaryStage) {
         fadeOut = new FadeTransition(Duration.seconds(1), introScreen.getContent());
         fadeOut.setFromValue(1);
@@ -69,13 +69,13 @@ public class App extends Application {
     public void start(Stage primaryStage) {
         try {
 
-            // cleancode: tach thanh cac function nho
+            // clean code: tach thanh cac function nho
             initIntroScreen(primaryStage);
 			/*// initialize the scene
 			BaseScreenHandler introScreen = new IntroScreenHandler(primaryStage, ViewsConfig.INTRO_SCREEN_PATH);
 			introScreen.show();*/
 
-            // cleancode: tach thanh cac function nho
+            // clean code: tach thanh cac function nho
             initFaceIn();
 			/*
 			// Load splash screen with fade in effect
@@ -84,7 +84,7 @@ public class App extends Application {
 			fadeIn.setToValue(1);
 			fadeIn.setCycleCount(1);*/
 
-            // cleancode: tach thanh cac function nho
+            // clean code: tach thanh cac function nho
             initFadeOut(primaryStage);
             // Finish splash with fade out effect
 			/*FadeTransition fadeOut = new FadeTransition(Duration.seconds(1), introScreen.getContent());
@@ -94,13 +94,13 @@ public class App extends Application {
 
             // After fade in, start fade out
             fadeIn.play();
-            // cleancode
+            // clean code
 			/*
 			fadeIn.setOnFinished((e) -> {
 				fadeOut.play();
 			});*/
 
-            //cleancode
+            //clean code
             // After fade out, load actual content
             /*fadeOut.setOnFinished((e) -> {
                 try {
