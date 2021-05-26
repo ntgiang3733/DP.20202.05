@@ -105,6 +105,8 @@ public class PlaceOrderController extends BaseController {
     DeliveryInfo deliveryInfo = new DeliveryInfo(
         info,
         new DistanceCalculator());
+      //  design pattern: strategy
+      deliveryInfo.setCalShip(new CalculatorShippingFee());
     System.out.println(deliveryInfo.getProvince());
     return deliveryInfo;
   }

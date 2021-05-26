@@ -146,8 +146,6 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
         try {
             // process and validate delivery info
             deliveryInfo = getBController().processDeliveryInfo(message);
-            //  design pattern: strategy
-            deliveryInfo.setCalShip(new CalculatorShippingFee());
         } catch (InvalidDeliveryInfoException e) {
             // TODO: implement pop up screen
             throw new InvalidDeliveryInfoException(e.getMessage());
