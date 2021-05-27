@@ -35,13 +35,6 @@ public class DeliveryInfo {
         this.distanceCalculator = distanceCalculator;
     }
 
-    // dung design pattern strategy
-    public DeliveryInfo(DeliveryInfoObj infoObj, DistanceCalculator distanceCalculator, CalculatorShippingStrategy behaviorCalShip) {
-        this(infoObj, distanceCalculator);
-        this.behaviorCalShip = behaviorCalShip;
-    }
-
-
     public String getName() {
         return name;
     }
