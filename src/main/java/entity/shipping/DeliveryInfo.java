@@ -10,7 +10,9 @@ public class DeliveryInfo {
     protected String province;
     protected String address;
     protected String shippingInstructions;
-    protected DistanceCalculator distanceCalculator;//SOLID: Vi phạm nguyên lý LSP vì sau này cần thay đổi thư viện tính khoảng cách
+    //    protected DistanceCalculator distanceCalculator;//SOLID: Vi phạm nguyên lý LSP vì sau này cần thay đổi thư viện tính khoảng cách
+    // design pattern: adapter
+    protected DistanceAdapter distanceCalculator;
 
     protected CalculatorShippingStrategy behaviorCalShip;
 
@@ -26,7 +28,7 @@ public class DeliveryInfo {
 //        this.shippingInstructions = shippingInstructions;
 //        this.distanceCalculator = distanceCalculator;
 //    }
-    public DeliveryInfo(DeliveryInfoObj infoObj, DistanceCalculator distanceCalculator) {
+    public DeliveryInfo(DeliveryInfoObj infoObj, DistanceAdapter distanceCalculator) {
         this.name = infoObj.getName();
         this.phone = infoObj.getPhone();
         this.province = infoObj.getProvince();
@@ -73,9 +75,16 @@ public class DeliveryInfo {
         return (int) (distance * 1.2);
     }*/
     // design pattern: su dung strategy cho phuong thuc calculateShippingFee
+//    public int calculateShippingFee(Order order) {
+//        int distance = distanceCalculator.calculateDistance(address, province);
+////        return (int) (distance * ShippingConfigs.DISTANCE_CALCULATOR_FEE);
+//        if (this.behaviorCalShip == null)
+//            this.behaviorCalShip = new CalculatorShippingFee();
+//        return this.behaviorCalShip.calculateShippingFee(distance, order);
+//    }
+    // design pattern: ap dung adapter pattern cho distance
     public int calculateShippingFee(Order order) {
         int distance = distanceCalculator.calculateDistance(address, province);
-//        return (int) (distance * ShippingConfigs.DISTANCE_CALCULATOR_FEE);
         if (this.behaviorCalShip == null)
             this.behaviorCalShip = new CalculatorShippingFee();
         return this.behaviorCalShip.calculateShippingFee(distance, order);

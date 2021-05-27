@@ -5,6 +5,7 @@ import entity.invoice.Invoice;
 import entity.order.Order;
 import entity.shipping.CalculatorShippingFee;
 import entity.shipping.DeliveryInfo;
+import entity.shipping.DistanceAdapter;
 import org.example.DistanceCalculator;
 import utils.Utils;
 import views.screen.shipping.DeliveryInfoObj;
@@ -104,7 +105,7 @@ public class PlaceOrderController extends BaseController {
     validateDeliveryInfo(info);
     DeliveryInfo deliveryInfo = new DeliveryInfo(
         info,
-        new DistanceCalculator());
+        new DistanceAdapter());
       //  design pattern: strategy
       deliveryInfo.setCalShip(new CalculatorShippingFee());
     System.out.println(deliveryInfo.getProvince());
