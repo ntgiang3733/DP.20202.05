@@ -3,6 +3,7 @@ package entity.order;
 import controller.SessionInformation;
 import entity.cart.Cart;
 import entity.cart.CartItem;
+import entity.order.state.OrderCreated;
 import entity.shipping.DeliveryInfo;
 import views.screen.ViewsConfig;
 
@@ -18,10 +19,15 @@ public class Order {
     private final int tax;
     private List orderMediaList;
 
+    // design pattern: state
+    private OrderState state;
+
     protected Order() {
         this.shippingFees = 0;
         this.subtotal = 0;
         this.tax = 0;
+
+        this.state = new OrderCreated();
     }
 
     //stamp coupling: truyen doi tuong Cart
@@ -39,6 +45,12 @@ public class Order {
         // clean code: dat ten bien ko ro rang (percent_vat da duoc tinh theo ti le %, khong can chia 100)
 //        old: this.tax = (int) (ViewsConfig.PERCENT_VAT/100) * subtotal;
         this.tax = (int) (ViewsConfig.PERCENT_VAT) * subtotal;
+
+        this.state = new OrderCreated();
+    }
+
+    public void setState(OrderState state){
+        this.state = state;
     }
 
     public List getListOrderMedia() {
