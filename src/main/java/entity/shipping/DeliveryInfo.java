@@ -1,7 +1,6 @@
 package entity.shipping;
 
 import entity.order.Order;
-import org.example.DistanceCalculator;
 import views.screen.shipping.DeliveryInfoObj;
 
 public class DeliveryInfo {
@@ -12,7 +11,7 @@ public class DeliveryInfo {
     protected String shippingInstructions;
     //    protected DistanceCalculator distanceCalculator;//SOLID: Vi phạm nguyên lý LSP vì sau này cần thay đổi thư viện tính khoảng cách
     // design pattern: adapter
-    protected DistanceAdapter distanceCalculator;
+    protected IDistanceAdapter distanceCalculator;
 
     protected CalculatorShippingStrategy behaviorCalShip;
 
@@ -28,7 +27,7 @@ public class DeliveryInfo {
 //        this.shippingInstructions = shippingInstructions;
 //        this.distanceCalculator = distanceCalculator;
 //    }
-    public DeliveryInfo(DeliveryInfoObj infoObj, DistanceAdapter distanceCalculator) {
+    public DeliveryInfo(DeliveryInfoObj infoObj, IDistanceAdapter distanceCalculator) {
         this.name = infoObj.getName();
         this.phone = infoObj.getPhone();
         this.province = infoObj.getProvince();

@@ -64,7 +64,7 @@ public class PaymentScreenHandler extends BaseNextScreenHandler {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+    public PaymentScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException  {
         super(stage, screenPath, invoice);
     }
 

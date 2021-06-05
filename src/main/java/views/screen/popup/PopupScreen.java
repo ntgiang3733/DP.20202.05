@@ -22,7 +22,7 @@ public class PopupScreen extends BaseScreenHandler {
   Label message;
 
   // stamp coupling: truyen doi tuong Stage
-  public PopupScreen(Stage stage) throws IOException {
+  public PopupScreen(Stage stage)throws IOException  {
     super(stage, ViewsConfig.POPUP_PATH, null);
   }
 
@@ -47,7 +47,7 @@ public class PopupScreen extends BaseScreenHandler {
   }
 
   // coupling: data -> chi phu thuoc mot so tham so
-  public static void error(String message) throws IOException {
+  public static void error(String message) throws IOException  {
     popup(message, ViewsConfig.IMAGE_PATH + "/" + "tickerror.png", false)
       .show(false);
   }

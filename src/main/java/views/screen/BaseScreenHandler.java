@@ -5,7 +5,6 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import utils.Utils;
 import views.screen.home.HomeScreenHandler;
-import views.screen.popup.PopupScreen;
 
 import java.io.IOException;
 import java.util.Hashtable;
@@ -29,20 +28,19 @@ public abstract class BaseScreenHandler extends FXMLScreenHandler {
     protected BaseScreenHandler(Stage stage, String screenPath,
                                 Object dto) throws IOException {
         super(screenPath);
-        LOGGER.info("HIHI" + this.getClass().getName());
         this.stage = stage;
-        try {
+        try{
             setupData(dto);
             setupFunctionality();
-        } catch (IOException ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error("Error when loading resources." );
-            setErrorMessage();
-        } catch (Exception ex) {
-            LOGGER.info(ex.getMessage());
-            PopupScreen.error(ex.getMessage());
+        }
+        catch (IOException ex){
+            throw ex;
+        }
+        catch(Exception ex){
+            ex.printStackTrace();
         }
     }
+
 
     protected abstract void setupData(Object dto) throws Exception;
 

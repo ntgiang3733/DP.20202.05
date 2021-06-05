@@ -45,7 +45,7 @@ public class ResultScreenHandler extends BaseNextScreenHandler {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-  public ResultScreenHandler(Stage stage, String screenPath, ResponseMessage response) throws IOException {
+  public ResultScreenHandler(Stage stage, String screenPath, ResponseMessage response)throws IOException   {
     super(stage, screenPath, response);
   }
 
@@ -63,7 +63,6 @@ public class ResultScreenHandler extends BaseNextScreenHandler {
     resultLabel.setText(response.getResult());
     messageLabel.setText(response.getMessage());
   }
-
     @Override
     public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
         setPreviousScreen(previousScreen);

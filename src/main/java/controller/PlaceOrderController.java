@@ -6,7 +6,6 @@ import entity.order.Order;
 import entity.shipping.CalculatorShippingFee;
 import entity.shipping.DeliveryInfo;
 import entity.shipping.DistanceAdapter;
-import org.example.DistanceCalculator;
 import utils.Utils;
 import views.screen.shipping.DeliveryInfoObj;
 

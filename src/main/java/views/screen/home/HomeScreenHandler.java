@@ -90,7 +90,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public HomeScreenHandler(Stage stage, String screenPath) throws IOException {
+    public HomeScreenHandler(Stage stage, String screenPath) throws Exception {
         super(stage, screenPath, null);
     }
 
@@ -137,12 +137,10 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
             try {
                 LOGGER.info("User clicked to view cart");
                 cartScreen = new CartScreenHandler(this.stage, ViewsConfig.CART_SCREEN_PATH);
-//                cartScreen.setHomeScreenHandler(this);
-//                cartScreen.setBController(new ViewCartController());
-//                cartScreen.requestToViewCart(this);
                 cartScreen.showScreen(this, this, new ViewCartController());
-            } catch (IOException e1) {
-                throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
+            }
+            catch (Exception e1) {
+                throw new ViewCartException("HIHI"+Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
             }
         });
         addMediaHome(this.homeItems);

@@ -13,6 +13,10 @@ public abstract class BaseNextScreenHandler extends BaseScreenHandler {
         super(stage, screenPath, dto);
     }
 
+    protected BaseNextScreenHandler(Stage stage, String screenPath)throws IOException   {
+        super(stage, screenPath, null);
+    }
+
     abstract public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController);
 
     // template method

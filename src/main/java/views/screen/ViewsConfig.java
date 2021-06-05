@@ -20,7 +20,7 @@ public class ViewsConfig {
   public static final String RESULT_SCREEN_PATH = "/views/fxml/result.fxml";
   public static final String LOGIN_SCREEN_PATH = "/views/fxml/login.fxml";
   public static final String INTRO_SCREEN_PATH = "/views/fxml/intro.fxml";
-  public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxml";
+  public static final String CART_SCREEN_PATH = "/views/fxml/cart.fxm";
   public static final String SHIPPING_SCREEN_PATH = "/views/fxml/shipping.fxml";
   public static final String CART_MEDIA_PATH = "/views/fxml/media_cart.fxml";
   public static final String HOME_PATH = "/views/fxml/home.fxml";

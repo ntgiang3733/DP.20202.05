@@ -2,13 +2,14 @@ package entity.shipping;
 
 import org.example.DistanceCalculator;
 
-public class DistanceAdapter {
-    DistanceCalculator distanceAdaptee;
+public class DistanceAdapter implements IDistanceAdapter{
+    DistanceCalculator adaptee;
 
     public DistanceAdapter(){
-        this.distanceAdaptee = new DistanceCalculator();
+        adaptee = new DistanceCalculator();
     }
-    int calculateDistance(String address, String province) {
-        return distanceAdaptee.calculateDistance(address, province);
+
+    public int calculateDistance(String address, String province) {
+        return adaptee.calculateDistance(address, province);
     }
 }

@@ -73,8 +73,8 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public CartScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath, null);
+    public CartScreenHandler(Stage stage, String screenPath)  throws IOException{
+        super(stage, screenPath);
     }
 
     @Override
@@ -85,11 +85,13 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
     @Override
     public void requestToShowScreen(BaseScreenHandler previousScreen, BaseController bController) {
         try {
+            setBController(bController);
             setPreviousScreen(previousScreen);
             setScreenTitle("Cart Screen");
             getBController().checkAvailabilityOfProduct();
             displayCartWithMediaAvailability();
         } catch (SQLException e1) {
+            e1.printStackTrace();
             throw new ViewCartException(Arrays.toString(e1.getStackTrace()).replaceAll(", ", "\n"));
         }
     }

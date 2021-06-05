@@ -43,7 +43,7 @@ public class LoginScreenHandler extends BaseNextScreenHandler {
 //        }
 //    }
     public LoginScreenHandler(Stage stage, String screenPath) throws IOException {
-        super(stage, screenPath, null);
+        super(stage, screenPath);
     }
 
 

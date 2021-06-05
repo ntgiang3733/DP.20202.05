@@ -66,7 +66,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public ShippingScreenHandler(Stage stage, String screenPath, Order order) throws IOException {
+    public ShippingScreenHandler(Stage stage, String screenPath, Order order)throws IOException  {
         super(stage, screenPath, order);
     }
 
@@ -102,7 +102,7 @@ public class ShippingScreenHandler extends BaseNextScreenHandler {
      */
 
     @FXML
-    void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException {
+    void submitDeliveryInfo(MouseEvent event) throws IOException, InterruptedException, SQLException,Exception {
         // validate delivery info and prepare order info
         preprocessDeliveryInfo();
 

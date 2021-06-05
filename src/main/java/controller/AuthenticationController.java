@@ -65,7 +65,7 @@ public class AuthenticationController extends BaseController {
       logout();
       throw new ExpiredSessionException();
     } else
-      return sessionInformation.getMainUser().cloneInformation();// common coupling: dung bien toan cuc mainUser
+      return sessionInformation.getMainUser().cloneInformation();
   }
 
   // data coupling

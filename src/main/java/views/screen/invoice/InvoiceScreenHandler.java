@@ -74,7 +74,7 @@ public class InvoiceScreenHandler extends BaseNextScreenHandler {
 //            PopupScreen.error(ex.getMessage());
 //        }
 //    }
-    public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice) throws IOException {
+    public InvoiceScreenHandler(Stage stage, String screenPath, Invoice invoice)throws IOException {
         super(stage, screenPath, invoice);
     }
 

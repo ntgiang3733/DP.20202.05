@@ -56,7 +56,7 @@ public class App extends Application {
                 homeHandler.setScreenTitle("Home Screen");
                 homeHandler.setImage();
                 homeHandler.show();
-            } catch (IOException e1) {
+            } catch (Exception e1) {
                 e1.printStackTrace();
             }
         });
