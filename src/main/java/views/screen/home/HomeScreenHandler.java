@@ -239,7 +239,7 @@ public class HomeScreenHandler extends BaseScreenHandler implements Observer {
                 if (media.getMedia().includeTitle(text)) {
                     filteredItems.add(media);
                 }
-            });*/
+            });*/;
             List filteredItems = filterHomeMediaItems(text);
 
             // fill out the home with filted media as category
