@@ -48,3 +48,5 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 # Report: [link](https://docs.google.com/document/d/1Qwyu55cJ5IbRX727-MpSSpOZVuM7tI3UsF2TJf6ac4s/edit?usp=sharing)
 
 # Report MSword [link](https://husteduvn-my.sharepoint.com/:w:/g/personal/giang_nt173083_sis_hust_edu_vn/EZCTgyzVOR1GnV4q1WWcTqUBdS13J_oJVlJmrKVddwfpag?e=Etl74E)
+
+# Presentation [link](https://husteduvn-my.sharepoint.com/:p:/g/personal/giang_nt173083_sis_hust_edu_vn/EV-ktbh28pZCktDuTHMZI8EBr0hTKcwG5tBTbsh114HZbQ?e=cf4QOi)
