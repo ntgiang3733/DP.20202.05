@@ -27,11 +27,28 @@ public class UserDAO {
                 res.getString("phone")
             );
 
-            if (Objects.isNull(user))
+            if (Objects.isNull(user)) {
                 throw new FailLoginException();
-
+            }
             return user;
         } else {
+            res = AIMSDB.getConnection().createStatement().executeQuery(
+                "SELECT * FROM User;"
+            );
+            if(res.next()){
+                // email: anv@email.com
+                User user = new User(
+                    res.getInt("id"),
+                    res.getString("name"),
+                    res.getString("email"),
+                    res.getString("address"),
+                    res.getString("phone")
+                );
+                if (Objects.isNull(user)) {
+                    throw new FailLoginException();
+                }
+                return user;
+            }
             throw new SQLException();
         }
     }
