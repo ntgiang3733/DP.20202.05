@@ -90,7 +90,6 @@ public class PaymentController extends BaseController {
    * @return {@link Map Map} represent the payment result with a
    * message.
    * <br>
-   * SOLID: DIP vi interbank phu thuoc truc tiep vao lop InterbankSubsystem ma khong phu thuoc vao interface
    */
   // coupling: data -> chi phu thuoc mot so tham so
   //SOLID: vi pham nguyen ly OCP vi them phuong thuc thanh toan phai sua payOrder

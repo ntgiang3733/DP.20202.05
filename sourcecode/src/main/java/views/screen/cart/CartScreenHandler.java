@@ -173,8 +173,7 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
     //clean code: tao ra cac function nho
     Order generateOrder() throws SQLException {
         try {
-            placeOrderController = PlaceOrderController.getInstance();
-            if (placeOrderController.getListCartMedia().size() == 0) {
+            if (getBController().getListCartMedia().size() == 0) {
                 throw new PlaceOrderException("You don't have anything to place");
             }
             placeOrderController.placeOrder();
@@ -235,6 +234,7 @@ public class CartScreenHandler extends BaseNextScreenHandler implements Observer
     }*/
     public void requestToPlaceOrder() throws SQLException, IOException {
         try {
+            placeOrderController = PlaceOrderController.getInstance();
             Order order = generateOrder();
             showShippingScreen(order);
         } catch (PlaceOrderException e1) {

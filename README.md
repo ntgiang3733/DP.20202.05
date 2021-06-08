@@ -1,3 +1,20 @@
+
+# Report of group DP.20202.05
+
+- Link Report: [link](https://husteduvn-my.sharepoint.com/:w:/g/personal/giang_nt173083_sis_hust_edu_vn/EZCTgyzVOR1GnV4q1WWcTqUBdS13J_oJVlJmrKVddwfpag?e=JhGg0l)
+
+- Link Presentation: [link](https://husteduvn-my.sharepoint.com/:p:/g/personal/giang_nt173083_sis_hust_edu_vn/EV-ktbh28pZCktDuTHMZI8EBr0hTKcwG5tBTbsh114HZbQ?e=cf4QOi)
+
+- Link Video [link]()
+
+- Link github [link](https://github.com/ntgiang3733/DP.20202.05)
+
+
+---
+---
+---
+
+
 #  An Internet Media Store
 <p align="center">
   <img src="assets/images/aims_cover_image.png" />
@@ -43,10 +60,3 @@ Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new l
 - nguyenlm - Software Engeneering Student - k61
 - manhvd   - Software Engeneering Student - k61
 - hieudm   - ICT - k61
-
-
-# Report: [link](https://docs.google.com/document/d/1Qwyu55cJ5IbRX727-MpSSpOZVuM7tI3UsF2TJf6ac4s/edit?usp=sharing)
-
-# Report MSword [link](https://husteduvn-my.sharepoint.com/:w:/g/personal/giang_nt173083_sis_hust_edu_vn/EZCTgyzVOR1GnV4q1WWcTqUBdS13J_oJVlJmrKVddwfpag?e=Etl74E)
-
-# Presentation [link](https://husteduvn-my.sharepoint.com/:p:/g/personal/giang_nt173083_sis_hust_edu_vn/EV-ktbh28pZCktDuTHMZI8EBr0hTKcwG5tBTbsh114HZbQ?e=cf4QOi)

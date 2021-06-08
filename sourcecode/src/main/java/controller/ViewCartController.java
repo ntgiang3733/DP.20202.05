@@ -1,6 +1,9 @@
 package controller;
 
 import java.sql.SQLException;
+import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import entity.cart.Cart;
 
@@ -30,4 +33,20 @@ public class ViewCartController extends BaseController {
     return subtotal;
   }
 
+
+    /**
+     * This method gets the list of items in cart
+     *
+     * @return List[CartMedia]
+     */
+    //common coupling: dung bien toan cuc cartInstance
+    public List getListCartMedia() {
+        return SessionInformation.getInstance().getCartInstance().getListCartMedia();
+    }
+
+    protected boolean validateString(String patternString, String str) {
+        Pattern pattern = Pattern.compile(patternString);
+        Matcher matcher = pattern.matcher(str);
+        return matcher.matches();
+    }
 }
