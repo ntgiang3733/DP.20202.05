@@ -5,7 +5,7 @@
 
 - Link Presentation: [link](https://husteduvn-my.sharepoint.com/:p:/g/personal/giang_nt173083_sis_hust_edu_vn/EV-ktbh28pZCktDuTHMZI8EBr0hTKcwG5tBTbsh114HZbQ?e=cf4QOi)
 
-- Link Video [link]()
+- Link Video [link](https://husteduvn-my.sharepoint.com/personal/hieu_nvt173107_sis_hust_edu_vn/Documents/T%E1%BB%87p%20tr%C3%B2%20chuy%E1%BB%87n%20qua%20Microsoft%20Teams/DP.20202.05-video.mp4)
 
 - Link github [link](https://github.com/ntgiang3733/DP.20202.05)
 
@@ -51,7 +51,7 @@ Import `JUnit5` library under `Eclipse` -> `Project` -> `Properties` -> `Java Bu
 
 ### Add VM arguments
 Click on `Run` -> `Run Configurations...`  -> `Java Application`, create a new launch configuration for your project and add these VM arguments:
-- For Linux distro: 
+- For Linux distro:
 > `--module-path lib/linux/javafx-sdk-15 --add-modules javafx.controls,javafx.fxml`
 - For Windows:
 > `--module-path lib/win/javafx-sdk-15 --add-modules javafx.controls,javafx.fxml`
