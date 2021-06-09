@@ -10,6 +10,22 @@
 - Link github [link](https://github.com/ntgiang3733/DP.20202.05)
 
 
+### Contribution
+
+ - Subteam1: Nguyễn Trường Giang, Lê Đức Hải
+ - Subteam2: Đỗ Quang Hiếu, Nguyễn Văn Trung Hiếu
+
+
+### Assignment
+
+| Student name        | Student Id           | Assignment  |
+| ------------------- |:--------------------:| ----------- |
+| Lê Đức Hải  | 20173094 | Các vấn đề liên quan đến State pattern và Adapter pattern|
+| Đỗ Quang Hiếu | 20173108 | Các vấn đề liên quan đến Clean function/method, Template method và Factory method |
+| Nguyễn Văn Trung Hiếu | 20173107 | Các vấn đề liên quan đến Cleanclass, cleanName và Observable pettern |
+| Nguyễn Trường Giang | 20173083 | Các vấn đề liên quan đến Singleton pattern và Strategy pattern |
+| | |
+
 ---
 ---
 ---
